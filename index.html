@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Starfid</title>
+		<link rel="icon" href="data:,">
+		<meta content="notranslate" name="google">
+		<meta content="yes" name="mobile-web-app-capable">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="default" name="apple-mobile-web-app-status-bar-style">
+		<meta content="#FFFFFF" name="theme-color" media="(prefers-color-scheme: light)">
+		<meta content="#1E1E1E" name="theme-color" media="(prefers-color-scheme: dark)">
+		<meta content="width=device-width,initial-scale=1,shrink-to-fit=no" name="viewport">
+		<style>
+			:root {
+				--bg	:#FFFFFF;
+				--bCol	:#D9D9D9;
+				--dt	:#181617;
+				--dd	:#858584;
+				--hgBg	:#0063E2;
+				--hgDt	:#FAFCFE;
+				--hgDd	:#B9D2F6;
+				--fnBg	:2.3vh;
+				--fnSm	:2vh;
+			}
+			::-webkit-scrollbar {display: none;}
+			html {-webkit-tap-highlight-color: transparent;}
+			input:focus, select:focus, label:focus, textarea:focus, button:focus {outline: none;}
+			body, form, dl, dt, dd {margin:0;padding:0}
+			form {display: grid;grid-template-columns: 50vw auto;font-family:arial;overflow:hidden}
+			body{background-color:var(--bg);font-size:var(--fnSm);color:var(--dd)}
+			dt {font-size:var(--fnBg);color:var(--dt)}
+			fieldset {border:0;}
+			dt {font-weight:bolder;}
+			.group, .button, label {user-select: none;}
+			#dualSection {display:grid;grid-template-columns: 20vw auto;}
+			polygon, path, circle {
+				stroke-linejoin:round;
+				fill:transparent;
+				stroke:#0063E2;
+				stroke-width:5;
+			}
+
+			aside, #leftPart{border-right:solid 1px var(--bCol);}
+			#leftPart .task {margin-left:19.94vw;border-left:solid 1px var(--bCol);}
+			.valign, .circ {display: flex; align-items: center;}
+			.alRight, label dl dd {justify-content: right;text-align:right;}
+			label dl:nth-child(2) dt {font-weight:normal}
+
+			#navLabel {display:none}
+			input[type='checkbox'],input[type='radio'] {margin:0;padding:0;display:block;transform: scale(0.1);appearance:none;opacity:0}
+			.task {display:grid;grid-template-columns: 75% auto;}
+
+			.task {display:grid;grid-template-columns: 60% auto;border-bottom:solid 1px var(--bCol);color:var(--dd);}
+			.task > * {padding:2vh}
+			#backButton {display:none}
+
+			#rows label {border-top:solid 1px var(--bCol);}
+			#rows input:checked + label dt {color:var(--hgDt)!important;}
+			#rows input:checked + label {border-radius:1vh;color:var(--hgDd)!important;animation:listSel 0.7s forwards;}
+			.menus input:checked + label {border-radius:1vh;color:var(--dt)!important;animation:menuSel 0.7s forwards;}
+
+			.circ {
+				justify-content: center;margin-right:2vh;border-radius:6vh;min-width:6vh;height:6vh;
+				color:var(--bg);background-size: cover!important;background-repeat: no-repeat;
+				background-color: rgb(165,169,175);
+				background: linear-gradient(180deg, rgba(165,169,175,1) 50%, rgba(130,132,135,1) 100%); 
+			}
+			label dl {display:grid;grid-template-columns: auto auto;}
+			#rows label, .menus div label, #preview {cursor:pointer;display:flex;padding:1.5vh 2vh;}
+			.circ + div, label div:nth-child(2) {width:100%}
+
+			#rows input:checked + label,
+			#rows input:checked + label + input + label,
+			#rows label:first-of-type {border-top:solid 1px transparent;}
+
+			.button {height:3.2vh;cursor:pointer;color:var(--hgBg)}
+			.menus, #rows, #main {height:85.9vh;padding:2vh;overflow-y:scroll;scrollbar-width: none;}
+			#detail .button {margin-right:4vh;}
+
+			.group {cursor:pointer;padding:1vh 0 0 0;font-weight:bolder;display:block;}
+			.group + div {margin-bottom:2vh;color:var(--dt);}
+			.menus label svg{margin-right:1.1vh;height:var(--fnSm);padding-top:0.5px}
+			.group:not(:first-of-type){padding-top:2vh!important}
+			.group + input:checked + div {display:none}
+
+			#rows label:last-child {margin-bottom:6vh}
+			#main {padding:2vh;}
+			#preview {border-bottom:solid 1px var(--bCol)}
+
+			#entries > div {border-bottom:solid 1px var(--bCol);padding:2vh 2vh 2vh 2vh;display:grid;grid-template-columns: 20% auto;font-size:var(--fnBg)}
+			#entries > div label {text-align:right;margin-right:2vh;padding:0}
+
+			.wrap {width:100%;display: grid;}
+			.wrap>textarea {margin:0;padding:0 0 0 0;background-color:transparent;color:var(--dt);resize:none;overflow:hidden;}
+			.wrap::after {width:100%;padding-bottom:1vh;content: attr(data-replicated-value) " ";white-space: pre-wrap;visibility: hidden;}
+			.wrap>textarea,.wrap::after {margin: 0 0 0 0;padding:0 0 0 0;width:34.2vw;box-sizing: content-box;border: none;font: inherit;grid-area: 1 / 1 / 2 / 2;}
+
+			@keyframes listSel {from {background-color:transparent;}to {background-color:var(--hgBg);}}
+			@keyframes menuSel {from {background-color:transparent;}to {background-color:var(--bCol);}}
+			@keyframes showDet {from{left:99vw} to {left:0}}
+			@keyframes hideDet {from{left:0} to {left:100vw}}
+
+			@media (min-width:1024px) {
+				body {border-top:solid 1px var(--bCol)}
+			}
+			@media (max-width:1280px) {
+				#leftPart .task {margin-left:16.92vw;}
+				#dualSection {grid-template-columns: 17vw 32.8vw;}
+				.button {font-size:4vh;}
+			}
+			@media (max-width:1180px) {
+				#navLabel {margin-left:auto;display:flex;align-items:center}
+				#leftPart .task {display:grid;grid-template-columns: 73% auto;margin-left:0;border-left:0}
+
+				.menus {border-right:0;font-size:var(--fnBg);}
+				.menus label svg{height:var(--fnBg);padding-top:0.5px}
+				.button {margin-right:0;font-size:5vh;}
+				#detail .button {margin-right:4.5vh;}
+
+				#dualSection {grid-template-columns: 49.8vw;}
+				#navToggle + fieldset {display:none}
+				#navToggle:checked + fieldset {display:block}
+				
+				#filters {display:block}
+				#filterToggle:checked + fieldset {display:block}
+
+				label {padding:2vh;}
+				input[type='checkbox'],input[type='radio'] {display:none}
+
+				.menus .group {animation:navStart .3s forwards}
+				#entries div {grid-template-columns: 22% auto;}
+				@keyframes navStart {
+					from {padding-top:0;opacity:0.2}
+					to {padding-top:1vh;opacity:1}
+				}				
+			}
+			@media (max-width:974px) {
+				:root {
+					--hgBg:	#0063E2;
+					--hgDt:	#181617;
+					--hgDd:	#858584;
+				}
+				#detail .button {margin-right:3.8vh;}
+				.menus, #rows, #main {height:90.2vh;}
+				#rows {padding:0;width:auto}
+				#leftPart .task {margin-left:0;border-left:0;}
+				#dualSection, form, #backButton {display: block;}
+				.menus {display:none}
+				.menus label svg{padding-top:1px}
+				#navToggle:checked + fieldset {display:block}
+				#rows input:checked + label dt {color:var(--hgDt)}
+				#rows input:checked + label {border-radius:0}
+
+				@keyframes listSel {
+					from {background-color:var(--bCol);}
+					to {background-color:transparent;}
+				}
+				#rows input:checked + label:not(:first-of-type),
+				#rows input:checked + label + input + label {border-top:solid 1px var(--bCol)}
+				
+				#detail {height:100vh;display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);}
+				#entries > div {display:block;}
+				.wrap > textarea,.wrap::after {width:90vw;}
+				#main {padding:0;width:100vw}
+				#detail .task {display:block}
+				#detail .task dl {display:none}
+				#detail .task .button:last-child {margin-right:0!important}
+			}
+			@media (prefers-color-scheme: dark) {
+				body {background-color:#1E1E1E}
+				:root {
+					--bg	:#1E1E1E;
+					--bCol	:#282828;
+					--dt	:#E5E5E5;
+					--hgDt	:#E5E5E5;
+				}
+				.circ {color:var(--dt)}
+			}
+		</style>
+	</head>
+	<body ontouchstart>
+		<form action="?" method="post">
+		<section id="leftPart">
+			<header class="task">
+				<dl>
+					<dt>All Inboxes</dt>
+					<dd>36 messages, 15 unread</dd>
+				</dl>
+				<label id="navLabel" for="navToggle" class="valign">
+					<svg class="button valign" viewbox="0 0 100 100" id='three-line-decrease'>
+						<circle cx="50" cy="50" r="40"  />
+						<polygon points="25,35 75,35"/>
+						<polygon points="30,50 70,50"/>
+						<polygon points="35,65 65,65"/>
+					</svg>
+				</label>
+			</header>
+			<div id="dualSection">
+				<aside>
+					<input type="checkbox" id="navToggle">
+					<fieldset class="menus">
+						<label for="fd1" class="group">Favorites</label>
+						<input type="checkbox" id="fd1">
+						<div>
+							<input type="radio" name="path" id="b1">
+							<label for="b1">
+								<svg viewbox="0 0 100 100" id='tray'>
+									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
+									<polygon points="10,50 35,50" />
+									<polygon points="65,50 90,50" />
+									<path d="M 35 50 q 15 25 30 0" />
+								</svg> 
+								<div>Inbox</div>
+							</label>
+							<input type="radio" name="path" id="b2" checked>
+							<label for="b2">
+								<svg viewbox="0 0 100 100" id='paperplane'>
+									<polygon points="10,45 90,10 60,90 45,55" />
+									<polygon points="45,55 90,10" />
+								</svg>
+								<div>Sent</div>
+							</label>
+							<input type="radio" name="path" id="b3">
+							<label for="b3">
+								<svg viewbox="0 0 100 100" id='star'>
+									<polygon points="50,10 60,40 90,40 70,60 80,90 50,70 20,90 30,60 10,40 40,40" />
+								</svg>
+								<div>VIPs</div>
+							</label>
+							<input type="radio" name="path" id="b4">
+							<label for="b4">
+								<svg viewbox="0 0 100 100" id='timeline'>
+									<circle cx="52.5" cy="50" r="38"  />
+									<mask>
+										<rect x="10" y="40" fill="red" width="10" height="10"/>
+									</mask>
+									<polygon points="50,22 50,50" />
+									<polygon points="50,50 68,68" />
+									<polygon points="10,48 20,48 15,53" />
+								</svg>
+								<div>Remind Me</div>
+							</label>
+						</div>
+						<label for="fd2" class="group">iClouds</label>
+						<input type="checkbox" id="fd2">
+						<div>
+							<input type="radio" name="path" id="b5">
+							<label for="b5">
+								<svg viewbox="0 0 100 100" id='tray'>
+									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
+									<polygon points="10,50 35,50" />
+									<polygon points="65,50 90,50" />
+									<path d="M 35 50 q 15 25 30 0" />
+								</svg>
+								<div>Inbox</div>
+							</label>
+							<input type="radio" name="path" id="b6">
+							<label for="b6">
+								<svg viewbox="0 0 100 100" id='doc'>
+									<polygon points="20,10 50,10 80,35 80,90 20,90" />
+									<polygon points="50,10 50,35" />
+									<polygon points="50,35 80,35" />
+								</svg>
+								<div>Drafts</div>
+							</label>
+							<input type="radio" name="path" id="b7">
+							<label for="b7">
+								<svg viewbox="0 0 100 100" id='paperplane'>
+									<polygon points="10,45 90,10 60,90 45,55" />
+									<polygon points="45,55 90,10" />
+								</svg>
+								<div>Sent</div>
+							</label>
+							<input type="radio" name="path" id="b8">
+							<label for="b8">
+								<svg viewbox="0 0 100 100" id='trash'>
+									<polygon points="33,10 68,10 68,20 33,20" />
+									<polygon points="20,20 80,20 75,90 25,90" />
+									<polygon points="10,20 90,20" />
+									<polygon points="33,30 39,80" />
+									<polygon points="50,30 50,80" />
+									<polygon points="67,30 62,80" />
+								</svg>
+								<div>Trash</div>
+							</label>
+						</div>
+					</fieldset>
+				</aside>
+				<fieldset id="rows">
+					<input type="radio" name="li" id="a1">
+					<label for="a1">
+						<div class="circ">GB</div>
+						<div>
+							<dl>
+								<dt>Gary Butcher</dt>
+								<dd>12/14/21</dd>
+							</dl>
+							<dl>
+								<dt>How To Build A Sleep Routine</dt>
+								<dd>&#9825;</dd>
+							</dl>
+							<div>I thought you might find this articles interestings. Begin forwarded</div>
+						</div>
+					</label>
+					
+					<input type="radio" name="li" id="a2">
+					<label for="a2">
+						<div class="circ">AK</div>
+						<div>
+							<dl>
+								<dt>Ashley Kamin</dt>
+								<dd>12/14/21</dd>
+							</dl>
+							<dl>
+								<dt>Lebanese Family Recipes</dt>
+								<dd>&nbsp;</dd>
+							</dl>
+							<div>Hey I was thinking it would be great if we could have some more..</div>
+						</div>
+					</label>
+					
+					<input type="radio" name="li" id="a3">
+					<label for="a3">
+						<div class="circ">GA</div>
+						<div>
+							<dl>
+								<dt>Greg Apodaca</dt>
+								<dd>11/19/21</dd>
+							</dl>
+							<dl>
+								<dt>Portfolio Review</dt>
+								<dd>&#9825;</dd>
+							</dl>
+							<div>Thanks for sharing! The recipes were all delicious</div>
+						</div>
+					</label>
+					
+					<input type="radio" name="li" id="a4" checked autofocus>
+					<label for="a4">
+						<div class="circ">CA</div>
+						<div>
+							<dl>
+								<dt>Christina Ahmed</dt>
+								<dd>6/18/20</dd>
+							</dl>
+							<dl>
+								<dt>New Hiking Spot</dt>
+								<dd>&nbsp;</dd>
+							</dl>
+							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
+						</div>
+					</label>
+					
+					<input type="radio" name="li" id="a5">
+					<label for="a5">
+						<div class="circ">DE</div>
+						<div>
+							<dl>
+								<dt>Daren Estrada</dt>
+								<dd>6/18/20</dd>
+							</dl>
+							<dl>
+								<dt>The Best Vacation</dt>
+								<dd>&nbsp;</dd>
+							</dl>
+							<div>Morning! I was put in touch with Tania by a mutual friend. She had and amazing..</div>
+						</div>
+					</label>
+					
+					<input type="radio" name="li" id="a6">
+					<label for="a6">
+						<div class="circ">LY</div>
+						<div>
+							<dl>
+								<dt>Lucinda Yang</dt>
+								<dd>6/18/20</dd>
+							</dl>
+							<dl>
+								<dt>Playground Photos</dt>
+								<dd>&#9825;</dd>
+							</dl>
+							<div>I've attached Carol's resume. She's the one I was telling you about.</div>
+						</div>
+					</label>
+					
+					<input type="radio" name="li" id="a7">
+					<label for="a7">
+						<div class="circ">SP</div>
+						<div>
+							<dl>
+								<dt>Simon Pickford</dt>
+								<dd>6/18/20</dd>
+							</dl>
+							<dl>
+								<dt>Send photos please</dt>
+								<dd>&nbsp;</dd>
+							</dl>
+							<div>We're in the early stages of planning a neighborhood garden. Each family would..</div>
+						</div>
+					</label>
+					
+					<input type="radio" name="li" id="a8">
+					<label for="a8">
+						<div class="circ">GK</div>
+						<div>
+							<dl>
+								<dt>Geetika Kapoor</dt>
+								<dd>6/18/20</dd>
+							</dl>
+							<dl>
+								<dt>Fun Memories</dt>
+								<dd>&#9825;</dd>
+							</dl>
+							<div>Hey stranger. It's been a while since we've chatted, but I'd love to catch up.</div>
+						</div>
+					</label>
+					
+					<input type="radio" name="li" id="a9">
+					<label for="a9">
+						<div class="circ">RA</div>
+						<div>
+							<dl>
+								<dt>Rody Aulbuerne</dt>
+								<dd>6/18/20</dd>
+							</dl>
+							<dl>
+								<dt>New Hiking Spot</dt>
+								<dd>&nbsp;</dd>
+							</dl>
+							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
+						</div>
+					</label>
+					
+					<input type="radio" name="li" id="a10">
+					<label for="a10">
+						<div class="circ">JC</div>
+						<div>
+							<dl>
+								<dt>Jenny Court</dt>
+								<dd>6/18/20</dd>
+							</dl>
+							<dl>
+								<dt>New Hiking Spot</dt>
+								<dd>&nbsp;</dd>
+							</dl>
+							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
+						</div>
+					</label>
+					
+					<input type="radio" name="li" id="a11">
+					<label for="a11">
+						<div class="circ">HA</div>
+						<div>
+							<dl>
+								<dt>Herland Antezana</dt>
+								<dd>6/18/20</dd>
+							</dl>
+							<dl>
+								<dt>New Hiking Spot</dt>
+								<dd>&nbsp;</dd>
+							</dl>
+							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
+						</div>
+					</label>
+					
+					<input type="radio" name="li" id="a12">
+					<label for="a12">
+						<div class="circ">RR</div>
+						<div>
+							<dl>
+								<dt>Rigo Ragel</dt>
+								<dd>6/18/20</dd>
+							</dl>
+							<dl>
+								<dt>New Hiking Spot</dt>
+								<dd>&nbsp;</dd>
+							</dl>
+							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
+						</div>
+					</label>
+
+				</fieldset>
+			</div>
+		</section>
+		<section id="detail">
+			<header class="task">
+				<div class="valign">
+					<svg viewbox="0 0 100 100" class="button" id='backButton'>
+						<polygon points="50,10 10,50" />
+						<polygon points="10,50 50,90" />
+					</svg>
+					<svg viewbox="0 0 100 100" class="button" id="compose">
+						<polygon points="85,15 40,60" />
+						<polygon points="90,10 89,11" />
+						<polygon points="10,20 70,20" />
+						<polygon points="80,30 80,90" />
+						<polygon points="10,90 80,90" />
+						<polygon points="10,20 10,90" />
+					</svg>
+					<svg viewbox="0 0 100 100" class="button" id="delete">
+						<polygon points="33,10 68,10 68,20 33,20" />
+						<polygon points="20,20 80,20 75,90 25,90" />
+						<polygon points="10,20 90,20" />
+						<polygon points="33,30 39,80" />
+						<polygon points="50,30 50,80" />
+						<polygon points="67,30 62,80" />
+					</svg>
+					<svg viewbox="0 0 100 100" class="button" id="link">
+						<polygon points="51,10 51,35" />
+						<polygon points="51,10 90,50" />
+						<polygon points="90,50 51,90" />
+						<polygon points="51,65 51,90" />	
+						<path d="M 10 90 q 0 -50 41 -55" />
+						<path d="M 10 90 q 0 -27 41 -25" />
+					</svg>
+					<svg viewbox="0 0 100 100" class="button" id="send" onclick="submit('save')">
+						<polygon points="10,45 90,10 60,90 45,55" />
+						<polygon points="45,55 90,10" />
+					</svg>
+				</div>
+				<dl class="alRight">
+					<dt>Sign Out</dt>
+					<dd>John Appleseed</dd>
+				</dl>
+			</header>
+			<input type="checkbox" id="showMain" name="showMain">
+			<div id="main">
+				<label id="preview"></label>
+				<div id="entries" action="?" method="post">
+					<div>
+						<label for="f1">mobile</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f1" placeholder="home">(415) 555-9225</textarea></div>
+					</div>
+					<div>
+						<label for="f2">FaceTime</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f2" placeholder="home">When you pass by me Say hello once in a while. When you pass by me baby. Does it hurt so much to smile We promised that we'd still be friends until the very end Begging you, baby Let me down easy. Let me down easy For your love for me is gone Let me down easy Since you feel to stay is wrong</textarea></div>
+					</div>
+					<div>
+						<label for="f3">home</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f3" placeholder="Phone">sillers_chis@icloud.com</textarea></div>
+					</div>
+					<div>
+						<label for="f4">birthday</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f4" placeholder="home">May 26</textarea></div>
+					</div>
+					<div>
+						<label for="f5">homepage</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f5" placeholder="home">6109 Winthrop St.
+San Francisco CA 94113.
+United States of America</textarea></div>
+					</div>
+					<div>
+						<label for="f6">note</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f6" placeholder="home">(714) 555-8431</textarea></div>
+					</div>
+					<div>
+						<label for="f6">ringtone</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f6" placeholder="home">Opening</textarea></div>
+					</div>
+					<div>
+						<label for="f6">school</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f6" placeholder="home"></textarea></div>
+					</div>
+					<div>
+						<label for="f6">office</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f6" placeholder="home"></textarea></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		</form>
+	</body>
+</html>
+<script>
+	var 	preview	= document.querySelector('#preview'),
+		width 	= parseInt(window.innerWidth),
+		target 	= width < 975?'input':'focus',
+		submit	= () => { document.getElementsByTagName('form')[0].submit(); }
+	
+	width < 1181 && [...document.querySelectorAll('#rows label')].forEach(list => {
+		var setPrev = () => {
+			preview.innerHTML = list.innerHTML;
+		}
+		(list.previousElementSibling.nodeName.toLowerCase() == 'input') && list.previousElementSibling.checked && setPrev();
+		list.addEventListener('click', setPrev);
+	});
+	[...document.querySelectorAll('#rows input')].forEach(list => {
+		list.addEventListener(target,()=>{
+			preview.innerHTML = list.nextElementSibling.innerHTML;
+			if(width < 975){
+				document.getElementById("detail").style.cssText = "display:block;animation:showDet .3s forwards";
+				setTimeout(()=>{list.checked = false;},1000);
+			}
+		})
+	});
+	[...document.querySelectorAll('form textarea')].forEach(txt => {
+		txt.parentNode.dataset.replicatedValue = txt.value;
+		txt.addEventListener('input',()=>{
+			txt.parentNode.dataset.replicatedValue = txt.value;
+		});
+	});
+	document.getElementById("backButton").addEventListener("click", () => {
+		document.getElementById("detail").style.animation = "hideDet .3s forwards";
+		setTimeout(()=>{
+			document.getElementById("detail").style.display = 'none';
+		},500);
+	});
+	[...document.querySelectorAll('aside label:not([class])')].forEach(path => {
+		path.addEventListener('click',()=>{
+			//document.location = '?=' + (path.querySelector('div:nth-child(2)').innerHTML);
+		});
+	});
+
+	
+	setTimeout(()=>
+		document.querySelector("meta[name=viewport]").setAttribute("content", "height=" + parseInt(screen.height/*window.innerHeight*/) + "px, width=device-width, initial-scale=1.0")
+	,300);
+</script>
