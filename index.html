@@ -16,9 +16,7 @@
 				--bCol	:#D9D9D9;
 				--dt	:#181617;
 				--dd	:#858584;
-				--hgBg	:#0063E2;
-				--hgDt	:#FAFCFE;
-				--hgDd	:#B9D2F6;
+				--hg	:#0063E2;/*F3AF12;*/
 				--fnBg	:2.3vh;
 				--fnSm	:2vh;
 			}
@@ -33,12 +31,8 @@
 			dt {font-weight:bolder;}
 			.group, .button, label {user-select: none;}
 			#dualSection {display:grid;grid-template-columns: 20vw auto;}
-			polygon, path, circle {
-				stroke-linejoin:round;
-				fill:transparent;
-				stroke:#0063E2;
-				stroke-width:5;
-			}
+			svg {stroke:var(--hg);stroke-width:5;}
+			polygon, path, circle {stroke-linejoin:round;fill:transparent;}
 
 			aside, #leftPart{border-right:solid 1px var(--bCol);}
 			#leftPart .task {margin-left:19.94vw;border-left:solid 1px var(--bCol);}
@@ -55,8 +49,13 @@
 			#backButton {display:none}
 
 			#rows label {border-top:solid 1px var(--bCol);}
-			#rows input:checked + label dt {color:var(--hgDt)!important;}
-			#rows input:checked + label {border-radius:1vh;color:var(--hgDd)!important;animation:listSel 0.7s forwards;}
+
+			#rows input:checked + label {color:white;border-radius:1vh;animation:listSel 0.7s forwards;}
+
+			
+			#rows input:checked + label div:nth-child(2) > div, #rows input:checked + label dd  {opacity:.7;}
+			#rows input:checked + label dt {color:#FFFFFF;}
+
 			.menus input:checked + label {border-radius:1vh;color:var(--dt)!important;animation:menuSel 0.7s forwards;}
 
 			.circ {
@@ -73,7 +72,7 @@
 			#rows input:checked + label + input + label,
 			#rows label:first-of-type {border-top:solid 1px transparent;}
 
-			.button {height:3.2vh;cursor:pointer;color:var(--hgBg)}
+			.button {height:4vh;cursor:pointer;color:var(--hg)}
 			.menus, #rows, #main {height:85.9vh;padding:2vh;overflow-y:scroll;scrollbar-width: none;}
 			#detail .button {margin-right:4vh;}
 
@@ -95,7 +94,7 @@
 			.wrap::after {width:100%;padding-bottom:1vh;content: attr(data-replicated-value) " ";white-space: pre-wrap;visibility: hidden;}
 			.wrap>textarea,.wrap::after {margin: 0 0 0 0;padding:0 0 0 0;width:34.2vw;box-sizing: content-box;border: none;font: inherit;grid-area: 1 / 1 / 2 / 2;}
 
-			@keyframes listSel {from {background-color:transparent;}to {background-color:var(--hgBg);}}
+			@keyframes listSel {from {background-color:transparent;}to {background-color:var(--hg);}}
 			@keyframes menuSel {from {background-color:transparent;}to {background-color:var(--bCol);}}
 			@keyframes showDet {from{left:99vw} to {left:0}}
 			@keyframes hideDet {from{left:0} to {left:100vw}}
@@ -119,7 +118,7 @@
 
 				#dualSection {grid-template-columns: 49.8vw;}
 				#navToggle + fieldset {display:none}
-				#navToggle:checked + fieldset {display:block}
+				#navToggle:checked + fieldset {/*width:46.8vw;*/display:block}
 				
 				#filters {display:block}
 				#filterToggle:checked + fieldset {display:block}
@@ -135,11 +134,6 @@
 				}				
 			}
 			@media (max-width:974px) {
-				:root {
-					--hgBg:	#0063E2;
-					--hgDt:	#181617;
-					--hgDd:	#858584;
-				}
 				#detail .button {margin-right:3.8vh;}
 				.menus, #rows, #main {height:90.2vh;}
 				#rows {padding:0;width:auto}
@@ -148,17 +142,19 @@
 				.menus {display:none}
 				.menus label svg{padding-top:1px}
 				#navToggle:checked + fieldset {display:block}
-				#rows input:checked + label dt {color:var(--hgDt)}
-				#rows input:checked + label {border-radius:0}
+
+				#rows input:checked + label {border-radius:0;color:var(--dd);opacity:1}
+				#rows input:checked + label dt {color:var(--dt)}
+				#rows input:checked + label:not(:first-of-type),
+				#rows input:checked + label + input + label {border-top:solid 1px var(--bCol)}
+				#rows input:checked + label div:nth-child(2) > div, #rows input:checked + label dd  {opacity:1;}
 
 				@keyframes listSel {
 					from {background-color:var(--bCol);}
 					to {background-color:transparent;}
 				}
-				#rows input:checked + label:not(:first-of-type),
-				#rows input:checked + label + input + label {border-top:solid 1px var(--bCol)}
-				
-				#detail {height:100vh;display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);}
+
+				#detail {height:100vh;display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);/*animation:showDet .3s forwards*/}
 				#entries > div {display:block;}
 				.wrap > textarea,.wrap::after {width:90vw;}
 				#main {padding:0;width:100vw}
@@ -172,7 +168,6 @@
 					--bg	:#1E1E1E;
 					--bCol	:#282828;
 					--dt	:#E5E5E5;
-					--hgDt	:#E5E5E5;
 				}
 				.circ {color:var(--dt)}
 			}
@@ -576,7 +571,7 @@ United States of America</textarea></div>
 		width 	= parseInt(window.innerWidth),
 		target 	= width < 975?'input':'focus',
 		submit	= () => { document.getElementsByTagName('form')[0].submit(); }
-	
+
 	width < 1181 && [...document.querySelectorAll('#rows label')].forEach(list => {
 		var setPrev = () => {
 			preview.innerHTML = list.innerHTML;
