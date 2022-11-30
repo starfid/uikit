@@ -13,46 +13,49 @@
 		<style>
 			:root {
 				--bg	:#FFFFFF;
+				--bgMob	:#F0F0F6;
 				--bCol	:#D9D9D9;
+				--borL	:#E2E3E6;
+				--borT	:#D5D6D9;
 				--dt	:#181617;
 				--dd	:#858584;
-				--hg	:#0063E2;/*F3AF12;*/
+				--hg	:#0063E2;
 				--fnBg	:2.3vh;
 				--fnSm	:2vh;
 			}
 			::-webkit-scrollbar {display: none;}
 			html {-webkit-tap-highlight-color: transparent;}
+			body {font-family:arial;}
 			input:focus, select:focus, label:focus, textarea:focus, button:focus {outline: none;}
 			body, form, dl, dt, dd {margin:0;padding:0}
-			form {display: grid;grid-template-columns: 50vw auto;font-family:arial;overflow:hidden}
-			body{background-color:var(--bg);font-size:var(--fnSm);color:var(--dd)}
+			form {display: grid;grid-template-columns: 50vw auto;overflow:hidden}
+			body,#leftPart,#detail{background-color:var(--bg);font-size:var(--fnSm);color:var(--dd);overflow:hidden}
 			dt {font-size:var(--fnBg);color:var(--dt)}
 			fieldset {border:0;}
 			dt {font-weight:bolder;}
 			.group, .button, label {user-select: none;}
 			#dualSection {display:grid;grid-template-columns: 20vw auto;}
-			svg {stroke:var(--hg);stroke-width:5;}
+			svg {stroke:var(--dd);stroke-width:5;}
+			aside svg, svg:hover {stroke:var(--hg)}
 			polygon, path, circle {stroke-linejoin:round;fill:transparent;}
 
 			aside, #leftPart{border-right:solid 1px var(--bCol);}
 			#leftPart .task {margin-left:19.94vw;border-left:solid 1px var(--bCol);}
-			.valign, .circ {display: flex; align-items: center;}
+			.valign, .circ {display: flex; align-items: center;text-align:center}
 			.alRight, label dl dd {justify-content: right;text-align:right;}
 			label dl:nth-child(2) dt {font-weight:normal}
+			#leftPart .task label:first-of-type, #detail .task dl {margin-left:auto}
+			
 
 			#navLabel {display:none}
 			input[type='checkbox'],input[type='radio'] {margin:0;padding:0;display:block;transform: scale(0.1);appearance:none;opacity:0}
-			.task {display:grid;grid-template-columns: 75% auto;}
-
-			.task {display:grid;grid-template-columns: 60% auto;border-bottom:solid 1px var(--bCol);color:var(--dd);}
-			.task > * {padding:2vh}
+			.task {display:flex;padding-right:2vh;border-bottom:solid 1px var(--bCol);color:var(--dd);}
+			.task > * {padding:2vh 0 2vh 2vh}
 			#backButton {display:none}
 
 			#rows label {border-top:solid 1px var(--bCol);}
 
 			#rows input:checked + label {color:white;border-radius:1vh;animation:listSel 0.7s forwards;}
-
-			
 			#rows input:checked + label div:nth-child(2) > div, #rows input:checked + label dd  {opacity:.7;}
 			#rows input:checked + label dt {color:#FFFFFF;}
 
@@ -71,10 +74,15 @@
 			#rows input:checked + label,
 			#rows input:checked + label + input + label,
 			#rows label:first-of-type {border-top:solid 1px transparent;}
+			#rows label div:last-of-type div:last-of-type {display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;min-height:calc(var(--fnSm) * 2.4);overflow:hidden;}
 
-			.button {height:4vh;cursor:pointer;color:var(--hg)}
-			.menus, #rows, #main {height:85.9vh;padding:2vh;overflow-y:scroll;scrollbar-width: none;}
+			#rows dt {display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;min-height:calc(var(--fnSm) * 1.2);overflow:hidden;}
+
+			.button {height:3vh;cursor:pointer;color:var(--hg)}
+			.menus, #rows, #main {height:86.7vh;padding:2vh;overflow-y:scroll;scrollbar-width: none;}
 			#detail .button {margin-right:4vh;}
+			#detail .button:last-child {display:none}
+			#detail .task header dl {margin-left:auto}
 
 			.group {cursor:pointer;padding:1vh 0 0 0;font-weight:bolder;display:block;}
 			.group + div {margin-bottom:2vh;color:var(--dt);}
@@ -86,8 +94,8 @@
 			#main {padding:2vh;}
 			#preview {border-bottom:solid 1px var(--bCol)}
 
-			#entries > div {border-bottom:solid 1px var(--bCol);padding:2vh 2vh 2vh 2vh;display:grid;grid-template-columns: 20% auto;font-size:var(--fnBg)}
-			#entries > div label {text-align:right;margin-right:2vh;padding:0}
+			.entries > div {border-bottom:solid 1px var(--bCol);padding:2vh 2vh 2vh 2vh;display:grid;grid-template-columns: 20% auto;font-size:var(--fnBg)}
+			.entries > div label {text-align:right;margin-right:2vh;padding:0}
 
 			.wrap {width:100%;display: grid;}
 			.wrap>textarea {margin:0;padding:0 0 0 0;background-color:transparent;color:var(--dt);resize:none;overflow:hidden;}
@@ -98,6 +106,20 @@
 			@keyframes menuSel {from {background-color:transparent;}to {background-color:var(--bCol);}}
 			@keyframes showDet {from{left:99vw} to {left:0}}
 			@keyframes hideDet {from{left:0} to {left:100vw}}
+			@keyframes moveRowLeft {from{margin-left:0;margin-right:0} to {margin-left:-5vh;margin-right:5vh}}
+			@keyframes moveRowRight {from{margin-left:-5vh;margin-right:5vh} to {margin-left:0;margin-right:0}}
+			@keyframes zoomIn {
+				from {opacity:1;}
+				to {opacity:.9;}
+			}
+			@keyframes zoomOut {
+				from {opacity:.9;}
+				to {opacity:1;}
+			}
+			@keyframes slideUp {
+				from {top:100vh;}
+				to {top:5vh}
+			}
 
 			@media (min-width:1024px) {
 				body {border-top:solid 1px var(--bCol)}
@@ -108,9 +130,11 @@
 				.button {font-size:4vh;}
 			}
 			@media (max-width:1180px) {
-				#navLabel {margin-left:auto;display:flex;align-items:center}
-				#leftPart .task {display:grid;grid-template-columns: 73% auto;margin-left:0;border-left:0}
-
+				#navLabel {display:flex;align-items:center}
+				#leftPart .task {margin-left:0;border-left:0}
+				#leftPart .task label:last-of-type {padding-left:0}
+				aside {border-right:none}
+				#compose {margin-right:4.5vh;}
 				.menus {border-right:0;font-size:var(--fnBg);}
 				.menus label svg{height:var(--fnBg);padding-top:0.5px}
 				.button {margin-right:0;font-size:5vh;}
@@ -118,55 +142,86 @@
 
 				#dualSection {grid-template-columns: 49.8vw;}
 				#navToggle + fieldset {display:none}
-				#navToggle:checked + fieldset {/*width:46.8vw;*/display:block}
-				
-				#filters {display:block}
-				#filterToggle:checked + fieldset {display:block}
-
+				#navToggle:checked + fieldset {display:block}
+				#rows label div:last-of-type div:last-of-type {
+					display:-webkit-box;
+					-webkit-line-clamp:2;
+					-webkit-box-orient:vertical;
+					min-height:calc(var(--fnSm) * 2.4);
+					overflow:hidden;
+				}
+				svg {stroke:var(--hg);}
 				label {padding:2vh;}
 				input[type='checkbox'],input[type='radio'] {display:none}
 
 				.menus .group {animation:navStart .3s forwards}
-				#entries div {grid-template-columns: 22% auto;}
+				.entries div {grid-template-columns: 22% auto;}
 				@keyframes navStart {
 					from {padding-top:0;opacity:0.2}
 					to {padding-top:1vh;opacity:1}
-				}				
+				}
 			}
 			@media (max-width:974px) {
-				#detail .button {margin-right:3.8vh;}
-				.menus, #rows, #main {height:90.2vh;}
-				#rows {padding:0;width:auto}
+				#rows, #main {height:90.7vh;}
+				.menus {height:86vh;}
+
+				.task div {height:5vh}
+				
+				#rows {padding:0;margin:0;background-color:var(--bgMob)}
+				#rows label {border-radius:1vh;border-top:none;padding:1.4vh;background-color:var(--bg);margin:2vh;}
+				#rows label:first-of-type {border-top:none;}
+				form {border-radius:1vh}
+
 				#leftPart .task {margin-left:0;border-left:0;}
-				#dualSection, form, #backButton {display: block;}
-				.menus {display:none}
+				#compose {margin-right:0}
+				#detail .task svg {display:flex;}
+				#dualSection, form, #backButton, #detail .task, .entries > div {display: block;}
+				.menus, #detail .task dl {display:none}
 				.menus label svg{padding-top:1px}
 				#navToggle:checked + fieldset {display:block}
 
-				#rows input:checked + label {border-radius:0;color:var(--dd);opacity:1}
+				#rows input:checked + label {color:var(--dd);opacity:1}
 				#rows input:checked + label dt {color:var(--dt)}
 				#rows input:checked + label:not(:first-of-type),
-				#rows input:checked + label + input + label {border-top:solid 1px var(--bCol)}
+				#rows input:checked + label + input + label {border-top:none;}
 				#rows input:checked + label div:nth-child(2) > div, #rows input:checked + label dd  {opacity:1;}
 
+				#rows label {
+					border-left:solid 1px var(--borL);
+					border-right:solid 1px var(--borL);
+					border-bottom:solid 1px var(--borT);
+				}
+				#detail {height:100vh;display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);/*animation:showDet .3s forwards*/}
+				.wrap > textarea,.wrap::after {width:90vw;}
+				#main {padding:0;width:100vw}
+				#detail .button {margin-right:3.8vh;}
+				.hideMobile {display:none!important}
+				#detail .task .button:last-child {display:block;margin-right:0!important;margin-left:auto}
 				@keyframes listSel {
 					from {background-color:var(--bCol);}
 					to {background-color:transparent;}
 				}
-
-				#detail {height:100vh;display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);/*animation:showDet .3s forwards*/}
-				#entries > div {display:block;}
-				.wrap > textarea,.wrap::after {width:90vw;}
-				#main {padding:0;width:100vw}
-				#detail .task {display:block}
-				#detail .task dl {display:none}
-				#detail .task .button:last-child {margin-right:0!important}
+				@keyframes zoomIn {
+					from {transform:scale(1);opacity:1;}
+					to {transform:scale(.94);opacity:.9;}
+				}
+				@keyframes zoomOut {
+					from {transform:scale(.94);opacity:.9;}
+					to {transform:scale(1);opacity:1;}
+				}
+				@keyframes slideUp {
+					from {top:100vh;}
+					to {top:4vh}
+				}
 			}
 			@media (prefers-color-scheme: dark) {
 				body {background-color:#1E1E1E}
 				:root {
 					--bg	:#1E1E1E;
+					--bgMob	:#070707;
 					--bCol	:#282828;
+					--borL	:#1F2022;
+					--borT	:#1F2022;
 					--dt	:#E5E5E5;
 				}
 				.circ {color:var(--dt)}
@@ -181,12 +236,20 @@
 					<dt>All Inboxes</dt>
 					<dd>36 messages, 15 unread</dd>
 				</dl>
+				
+				<label class="valign">
+					<svg class="button valign" viewbox="0 0 100 100" id='compose'>
+						<polygon points="20,10 50,10 80,35 80,90 20,90" />
+						<polygon points="50,10 50,35" />
+						<polygon points="50,35 80,35" />
+					</svg>
+				</label>
+				
 				<label id="navLabel" for="navToggle" class="valign">
-					<svg class="button valign" viewbox="0 0 100 100" id='three-line-decrease'>
-						<circle cx="50" cy="50" r="40"  />
-						<polygon points="25,35 75,35"/>
-						<polygon points="30,50 70,50"/>
-						<polygon points="35,65 65,65"/>
+					<svg class="button valign" viewbox="0 0 100 100" id='folder'>
+						<polygon points="84,10 90,10 90,15 84,15" />
+						<polygon points="84,48 90,48 90,53 84,53" />
+						<polygon points="84,85 90,85 90,90 84,90" />
 					</svg>
 				</label>
 			</header>
@@ -194,12 +257,36 @@
 				<aside>
 					<input type="checkbox" id="navToggle">
 					<fieldset class="menus">
+						<label for="fd3" class="group">List Actions</label>
+						<input type="checkbox" id="fd3">
+						<div>
+							<input type="radio" name="path" id="b8">
+							<label for="b8">
+								<svg viewbox="0 0 100 100" class='paperplane'>
+									<circle cx="52.5" cy="50" r="38"  />
+									<polygon points="50,22 50,50" />
+									<polygon points="50,50 68,68" />
+									<polygon points="10,48 20,48 15,53" />
+								</svg>
+								<div>Newest Entries</div>
+							</label>
+							<input type="radio" name="path" id="b9">
+							<label for="b9">
+								<svg viewbox="0 0 100 100" class='paperplane'>
+									<circle cx="52.5" cy="50" r="38"  />
+									<polygon points="50,22 50,50" />
+									<polygon points="50,50 68,68" />
+									<polygon points="10,48 20,48 15,53" />
+								</svg>
+								<div>Oldest Entries</div>
+							</label>
+						</div>
 						<label for="fd1" class="group">Favorites</label>
 						<input type="checkbox" id="fd1">
 						<div>
 							<input type="radio" name="path" id="b1">
 							<label for="b1">
-								<svg viewbox="0 0 100 100" id='tray'>
+								<svg viewbox="0 0 100 100" class='tray'>
 									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
 									<polygon points="10,50 35,50" />
 									<polygon points="65,50 90,50" />
@@ -209,7 +296,7 @@
 							</label>
 							<input type="radio" name="path" id="b2" checked>
 							<label for="b2">
-								<svg viewbox="0 0 100 100" id='paperplane'>
+								<svg viewbox="0 0 100 100" class='paperplane'>
 									<polygon points="10,45 90,10 60,90 45,55" />
 									<polygon points="45,55 90,10" />
 								</svg>
@@ -217,14 +304,14 @@
 							</label>
 							<input type="radio" name="path" id="b3">
 							<label for="b3">
-								<svg viewbox="0 0 100 100" id='star'>
+								<svg viewbox="0 0 100 100" class='star'>
 									<polygon points="50,10 60,40 90,40 70,60 80,90 50,70 20,90 30,60 10,40 40,40" />
 								</svg>
 								<div>VIPs</div>
 							</label>
 							<input type="radio" name="path" id="b4">
 							<label for="b4">
-								<svg viewbox="0 0 100 100" id='timeline'>
+								<svg viewbox="0 0 100 100" class='timeline'>
 									<circle cx="52.5" cy="50" r="38"  />
 									<mask>
 										<rect x="10" y="40" fill="red" width="10" height="10"/>
@@ -241,7 +328,7 @@
 						<div>
 							<input type="radio" name="path" id="b5">
 							<label for="b5">
-								<svg viewbox="0 0 100 100" id='tray'>
+								<svg viewbox="0 0 100 100" class='tray'>
 									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
 									<polygon points="10,50 35,50" />
 									<polygon points="65,50 90,50" />
@@ -251,7 +338,7 @@
 							</label>
 							<input type="radio" name="path" id="b6">
 							<label for="b6">
-								<svg viewbox="0 0 100 100" id='doc'>
+								<svg viewbox="0 0 100 100" class='doc'>
 									<polygon points="20,10 50,10 80,35 80,90 20,90" />
 									<polygon points="50,10 50,35" />
 									<polygon points="50,35 80,35" />
@@ -260,23 +347,11 @@
 							</label>
 							<input type="radio" name="path" id="b7">
 							<label for="b7">
-								<svg viewbox="0 0 100 100" id='paperplane'>
+								<svg viewbox="0 0 100 100" class='paperplane'>
 									<polygon points="10,45 90,10 60,90 45,55" />
 									<polygon points="45,55 90,10" />
 								</svg>
 								<div>Sent</div>
-							</label>
-							<input type="radio" name="path" id="b8">
-							<label for="b8">
-								<svg viewbox="0 0 100 100" id='trash'>
-									<polygon points="33,10 68,10 68,20 33,20" />
-									<polygon points="20,20 80,20 75,90 25,90" />
-									<polygon points="10,20 90,20" />
-									<polygon points="33,30 39,80" />
-									<polygon points="50,30 50,80" />
-									<polygon points="67,30 62,80" />
-								</svg>
-								<div>Trash</div>
 							</label>
 						</div>
 					</fieldset>
@@ -291,7 +366,7 @@
 								<dd>12/14/21</dd>
 							</dl>
 							<dl>
-								<dt>How To Build A Sleep Routine</dt>
+								<dt>How To Build A Sleep Routine forever into the unknown</dt>
 								<dd>&#9825;</dd>
 							</dl>
 							<div>I thought you might find this articles interestings. Begin forwarded</div>
@@ -307,10 +382,10 @@
 								<dd>12/14/21</dd>
 							</dl>
 							<dl>
-								<dt>Lebanese Family Recipes</dt>
-								<dd>&nbsp;</dd>
+								<dt>Lebanese Family Recipes for you and for your family</dt>
+								<dd>&#9825;</dd>
 							</dl>
-							<div>Hey I was thinking it would be great if we could have some more..</div>
+							<div>Hey I was thinking it would be great if we could have some more if you want to go to the store please buy some milk..</div>
 						</div>
 					</label>
 					
@@ -326,11 +401,11 @@
 								<dt>Portfolio Review</dt>
 								<dd>&#9825;</dd>
 							</dl>
-							<div>Thanks for sharing! The recipes were all delicious</div>
+							<div>Thanks for sharing! The recipes were</div>
 						</div>
 					</label>
 					
-					<input type="radio" name="li" id="a4" checked autofocus>
+					<input type="radio" name="li" id="a4" tabindex="1" checked autofocus>
 					<label for="a4">
 						<div class="circ">CA</div>
 						<div>
@@ -484,15 +559,7 @@
 						<polygon points="50,10 10,50" />
 						<polygon points="10,50 50,90" />
 					</svg>
-					<svg viewbox="0 0 100 100" class="button" id="compose">
-						<polygon points="85,15 40,60" />
-						<polygon points="90,10 89,11" />
-						<polygon points="10,20 70,20" />
-						<polygon points="80,30 80,90" />
-						<polygon points="10,90 80,90" />
-						<polygon points="10,20 10,90" />
-					</svg>
-					<svg viewbox="0 0 100 100" class="button" id="delete">
+					<svg viewbox="0 0 100 100" class="button hideMobile delete">
 						<polygon points="33,10 68,10 68,20 33,20" />
 						<polygon points="20,20 80,20 75,90 25,90" />
 						<polygon points="10,20 90,20" />
@@ -500,7 +567,8 @@
 						<polygon points="50,30 50,80" />
 						<polygon points="67,30 62,80" />
 					</svg>
-					<svg viewbox="0 0 100 100" class="button" id="link">
+					<!--
+					<svg viewbox="0 0 100 100" class="button hideMobile link">
 						<polygon points="51,10 51,35" />
 						<polygon points="51,10 90,50" />
 						<polygon points="90,50 51,90" />
@@ -508,9 +576,23 @@
 						<path d="M 10 90 q 0 -50 41 -55" />
 						<path d="M 10 90 q 0 -27 41 -25" />
 					</svg>
-					<svg viewbox="0 0 100 100" class="button" id="send" onclick="submit('save')">
-						<polygon points="10,45 90,10 60,90 45,55" />
-						<polygon points="45,55 90,10" />
+					<svg viewbox="0 0 100 100" class="button hideMobile download">
+						<circle cx="50" cy="50" r="40"  />
+						<polygon points="50,25 50,75" />
+						<polygon points="30,55 50,75" />
+						<polygon points="70,55 50,75" />
+					</svg>
+					-->
+					<svg viewbox="0 0 100 100" class="button hideMobile save">
+						<polygon points="10,90 90,90 90,25 75,10 10,10" />
+						<polygon points="30,10 30,35 70,35 70,10" />
+						<polygon points="20,90 20,50 80,50 80,90" />
+						<polygon points="59,17 62,17 62,28 59,28" />
+					</svg>
+					<svg viewbox="0 0 100 100" class="button three-dots">
+						<polygon points="84,10 90,10 90,15 84,15" />
+						<polygon points="84,48 90,48 90,53 84,53" />
+						<polygon points="84,85 90,85 90,90 84,90" />
 					</svg>
 				</div>
 				<dl class="alRight">
@@ -521,7 +603,7 @@
 			<input type="checkbox" id="showMain" name="showMain">
 			<div id="main">
 				<label id="preview"></label>
-				<div id="entries" action="?" method="post">
+				<div id="entries" class="entries" action="?" method="post">
 					<div>
 						<label for="f1">mobile</label>
 						<div class="wrap"><textarea autocorrect="off" rows="1" id="f1" placeholder="home">(415) 555-9225</textarea></div>
@@ -583,10 +665,16 @@ United States of America</textarea></div>
 		list.addEventListener(target,()=>{
 			preview.innerHTML = list.nextElementSibling.innerHTML;
 			if(width < 975){
-				document.getElementById("detail").style.cssText = "display:block;animation:showDet .3s forwards";
-				setTimeout(()=>{list.checked = false;},1000);
+				document.getElementById("rows").style.cssText = "animation:moveRowLeft .3s forwards;";
+				[...document.querySelectorAll("#rows label")].forEach(label=>{
+					label.style.opacity = .7;
+				});
+
+				document.getElementById("detail").style.cssText = "display:block;animation:showDet .3s forwards ease-out";
+				setTimeout(()=>{list.checked = false;},500);
 			}
-		})
+		});
+		if(width < 975){ list.checked = false; }
 	});
 	[...document.querySelectorAll('form textarea')].forEach(txt => {
 		txt.parentNode.dataset.replicatedValue = txt.value;
@@ -595,15 +683,53 @@ United States of America</textarea></div>
 		});
 	});
 	document.getElementById("backButton").addEventListener("click", () => {
+		document.getElementById("rows").style.animation = "moveRowRight .3s forwards";
+		[...document.querySelectorAll("#rows label")].forEach(label=>{
+			label.style.opacity= 1;
+		});
 		document.getElementById("detail").style.animation = "hideDet .3s forwards";
 		setTimeout(()=>{
 			document.getElementById("detail").style.display = 'none';
+			document.getElementById("rows").style.animation = "none";
 		},500);
 	});
+	document.getElementById("navToggle").addEventListener("click",() => {
+		document.getElementById("rows").style.display = document.getElementById("navToggle").checked?"none":"block";
+	});
+
 	[...document.querySelectorAll('aside label:not([class])')].forEach(path => {
 		path.addEventListener('click',()=>{
 			//document.location = '?=' + (path.querySelector('div:nth-child(2)').innerHTML);
 		});
+	});
+	document.getElementById('compose').addEventListener('click',()=>{
+		document.body.style.backgroundColor = "#000000";
+		document.querySelector('meta[name="theme-color"]').setAttribute('content','#000000');
+		document.getElementsByTagName('form')[0].style.cssText = "animation:zoomIn .3s forwards;";
+
+		var layer = document.createElement('div');
+		layer.style.cssText = "position:absolute;z-index:2;width:100vw;height:100vh;left:0;top:0;/*background-color:pink*/";
+		layer.addEventListener('click',()=>{
+			layer.parentNode.removeChild(layer);
+			document.getElementById('pop').parentNode.removeChild(document.getElementById('pop'));
+			document.getElementsByTagName('form')[0].style.cssText = "animation:zoomOut .3s forwards;";
+			setTimeout(()=>{
+				document.body.style.backgroundColor = getComputedStyle(document.body).getPropertyValue('--bg');
+			},60);
+		});
+		document.body.appendChild(layer);
+
+		var pop = document.createElement('div');
+		if(width < 975){
+			pop.style.cssText = "animation:slideUp .3s forwards;position:absolute;z-index:2;width:100vw;height:96vh;left:0;top:4vh;background-color:white;border-top-left-radius:1vh;border-top-right-radius";
+		}
+		else {
+			pop.style.cssText = "animation:slideUp .2s forwards;position:absolute;z-index:2;width:60vw;height:90vh;left:20vw;top:5vh;background-color:white;border-radius:1vh";
+		}
+		pop.classList.add('entries');
+		pop.innerHTML = document.getElementById('entries').innerHTML;
+		pop.id = "pop";
+		document.body.appendChild(pop);
 	});
 
 	
