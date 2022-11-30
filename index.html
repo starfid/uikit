@@ -101,6 +101,15 @@
 			.wrap>textarea {margin:0;padding:0 0 0 0;background-color:transparent;color:var(--dt);resize:none;overflow:hidden;}
 			.wrap::after {width:100%;padding-bottom:1vh;content: attr(data-replicated-value) " ";white-space: pre-wrap;visibility: hidden;}
 			.wrap>textarea,.wrap::after {margin: 0 0 0 0;padding:0 0 0 0;width:34.2vw;box-sizing: content-box;border: none;font: inherit;grid-area: 1 / 1 / 2 / 2;}
+			#pop > div:first-of-type {margin-bottom:2vh;display:flex;justify-content:space-between;color:var(--hg);font-size:var(--fnBg);}
+			#pop > div:first-of-type > div {cursor:pointer}
+			#pop {
+				animation:slideUp .25s forwards;
+				position:absolute;z-index:3;
+				background-color:var(--bg);
+				padding:2vh;width:60vw;height:86vh;
+				left:20vw;top:5vh;border-radius:1vh
+			}
 
 			@keyframes listSel {from {background-color:transparent;}to {background-color:var(--hg);}}
 			@keyframes menuSel {from {background-color:transparent;}to {background-color:var(--bCol);}}
@@ -108,18 +117,10 @@
 			@keyframes hideDet {from{left:0} to {left:100vw}}
 			@keyframes moveRowLeft {from{margin-left:0;margin-right:0} to {margin-left:-5vh;margin-right:5vh}}
 			@keyframes moveRowRight {from{margin-left:-5vh;margin-right:5vh} to {margin-left:0;margin-right:0}}
-			@keyframes zoomIn {
-				from {opacity:1;}
-				to {opacity:.9;}
-			}
-			@keyframes zoomOut {
-				from {opacity:.9;}
-				to {opacity:1;}
-			}
-			@keyframes slideUp {
-				from {top:100vh;}
-				to {top:5vh}
-			}
+			@keyframes zoomIn {from {opacity:1;} to {opacity:.9;}}
+			@keyframes zoomOut {from {opacity:.9;} to {opacity:1;}}
+			@keyframes slideUp {from {top:100vh;} to {top:5vh}}
+			@keyframes slideDown {from {top:5vh} to {top:100vh;}}
 
 			@media (min-width:1024px) {
 				body {border-top:solid 1px var(--bCol)}
@@ -197,22 +198,18 @@
 				#detail .button {margin-right:3.8vh;}
 				.hideMobile {display:none!important}
 				#detail .task .button:last-child {display:block;margin-right:0!important;margin-left:auto}
-				@keyframes listSel {
-					from {background-color:var(--bCol);}
-					to {background-color:transparent;}
-				}
-				@keyframes zoomIn {
-					from {transform:scale(1);opacity:1;}
-					to {transform:scale(.94);opacity:.9;}
-				}
-				@keyframes zoomOut {
-					from {transform:scale(.94);opacity:.9;}
-					to {transform:scale(1);opacity:1;}
-				}
-				@keyframes slideUp {
-					from {top:100vh;}
-					to {top:4vh}
-				}
+				#preview {margin:2vh;padding:1.5vh 0}
+				.entries {padding:2vh}
+				.entries > div {padding:2vh 0}
+				#pop .entries {height: 84vh;overflow: scroll;}
+				#pop {padding:0;width:100vw;height:96vh;left:0;top:4vh;border-top-left-radius:1vh;border-top-right-radius:1vh}
+				#pop > div:first-of-type {padding:2vh 2vh 0 2vh;margin:0}
+
+				@keyframes listSel {from {background-color:var(--bCol);} to {background-color:transparent;}}
+				@keyframes zoomIn {from {transform:scale(1);opacity:1;} to {transform:scale(.94);opacity:.9;}}
+				@keyframes zoomOut {from {transform:scale(.94);opacity:.9;} to {transform:scale(1);opacity:1;}}
+				@keyframes slideUp {from {top:100vh;} to {top:4.2vh}}
+				@keyframes slideDown {from {top:4.2vh} to {top:100vh;}}
 			}
 			@media (prefers-color-scheme: dark) {
 				body {background-color:#1E1E1E}
@@ -626,22 +623,6 @@
 San Francisco CA 94113.
 United States of America</textarea></div>
 					</div>
-					<div>
-						<label for="f6">note</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f6" placeholder="home">(714) 555-8431</textarea></div>
-					</div>
-					<div>
-						<label for="f6">ringtone</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f6" placeholder="home">Opening</textarea></div>
-					</div>
-					<div>
-						<label for="f6">school</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f6" placeholder="home"></textarea></div>
-					</div>
-					<div>
-						<label for="f6">office</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f6" placeholder="home"></textarea></div>
-					</div>
 				</div>
 			</div>
 		</section>
@@ -652,7 +633,22 @@ United States of America</textarea></div>
 	var 	preview	= document.querySelector('#preview'),
 		width 	= parseInt(window.innerWidth),
 		target 	= width < 975?'input':'focus',
+		bg 	= getComputedStyle(document.body).getPropertyValue('--bg'),
 		submit	= () => { document.getElementsByTagName('form')[0].submit(); }
+		expand	= (selector) => {
+			[...document.querySelectorAll(selector)].forEach(txt => {
+				if(selector=='#pop textarea'){
+					txt.value = '';
+					(width < 975) && txt.setAttribute('placeholder','');
+				}
+				txt.parentNode.dataset.replicatedValue = txt.value;
+				txt.addEventListener('input',()=>{
+					txt.parentNode.dataset.replicatedValue = txt.value;
+				});
+			});
+		};
+	
+	expand('form textarea');
 
 	width < 1181 && [...document.querySelectorAll('#rows label')].forEach(list => {
 		var setPrev = () => {
@@ -669,19 +665,13 @@ United States of America</textarea></div>
 				[...document.querySelectorAll("#rows label")].forEach(label=>{
 					label.style.opacity = .7;
 				});
-
 				document.getElementById("detail").style.cssText = "display:block;animation:showDet .3s forwards ease-out";
 				setTimeout(()=>{list.checked = false;},500);
 			}
 		});
 		if(width < 975){ list.checked = false; }
 	});
-	[...document.querySelectorAll('form textarea')].forEach(txt => {
-		txt.parentNode.dataset.replicatedValue = txt.value;
-		txt.addEventListener('input',()=>{
-			txt.parentNode.dataset.replicatedValue = txt.value;
-		});
-	});
+
 	document.getElementById("backButton").addEventListener("click", () => {
 		document.getElementById("rows").style.animation = "moveRowRight .3s forwards";
 		[...document.querySelectorAll("#rows label")].forEach(label=>{
@@ -703,37 +693,50 @@ United States of America</textarea></div>
 		});
 	});
 	document.getElementById('compose').addEventListener('click',()=>{
-		document.body.style.backgroundColor = "#000000";
+		var layer = document.createElement('div');
+		document.body.style.backgroundColor = '#000000';
 		document.querySelector('meta[name="theme-color"]').setAttribute('content','#000000');
 		document.getElementsByTagName('form')[0].style.cssText = "animation:zoomIn .3s forwards;";
 
-		var layer = document.createElement('div');
-		layer.style.cssText = "position:absolute;z-index:2;width:100vw;height:100vh;left:0;top:0;/*background-color:pink*/";
+		layer.style.cssText = "position:absolute;z-index:2;width:100vw;height:100vh;left:0;top:0;";
 		layer.addEventListener('click',()=>{
 			layer.parentNode.removeChild(layer);
-			document.getElementById('pop').parentNode.removeChild(document.getElementById('pop'));
+			document.getElementById('pop').style.animation = "slideDown .3s forwards";
+
 			document.getElementsByTagName('form')[0].style.cssText = "animation:zoomOut .3s forwards;";
 			setTimeout(()=>{
-				var bg = getComputedStyle(document.body).getPropertyValue('--bg');
 				document.body.style.backgroundColor = bg;
 				document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
+				
 			},30);
+			setTimeout(()=>{
+				document.getElementById('pop').parentNode.removeChild(document.getElementById('pop'));
+			},500);
 		});
+		layer.classList.add('cancel');
 		document.body.appendChild(layer);
-
+		
 		var pop = document.createElement('div');
-		if(width < 975){
-			pop.style.cssText = "animation:slideUp .3s forwards;position:absolute;z-index:2;width:100vw;height:96vh;left:0;top:4vh;background-color:white;border-top-left-radius:1vh;border-top-right-radius:1vh";
-		}
-		else {
-			pop.style.cssText = "animation:slideUp .2s forwards;position:absolute;z-index:2;width:60vw;height:90vh;left:20vw;top:5vh;background-color:white;border-radius:1vh";
-		}
-		pop.classList.add('entries');
-		pop.innerHTML = document.getElementById('entries').innerHTML;
+		var tmp = "";
+		tmp  = "<div>";
+		tmp += "<div class='cancel'>Cancel</div><div>Send</div></div>";
+		tmp += "<div class='entries'>" + document.getElementById('entries').innerHTML + "</div>";
+		pop.innerHTML = tmp;
 		pop.id = "pop";
 		document.body.appendChild(pop);
+		expand('#pop textarea');
+		[...document.querySelectorAll('.cancel')].forEach(cancel => {
+			cancel.addEventListener('click',()=>{
+				document.getElementById('pop').style.animation = "slideDown .3s forwards";
+				document.getElementsByTagName('form')[0].style.cssText = "animation:zoomOut .3s forwards;";
+				setTimeout(()=>{
+					document.body.style.backgroundColor = bg;
+					document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
+					if(cancel.parentNode) cancel.parentNode.removeChild(cancel);
+				},30);
+			});
+		});
 	});
-
 	
 	setTimeout(()=>
 		document.querySelector("meta[name=viewport]").setAttribute("content", "height=" + parseInt(screen.height/*window.innerHeight*/) + "px, width=device-width, initial-scale=1.0")
