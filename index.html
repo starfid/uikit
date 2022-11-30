@@ -108,7 +108,8 @@
 				position:absolute;z-index:3;
 				background-color:var(--bg);
 				padding:2vh;width:60vw;height:86vh;
-				left:20vw;top:5vh;border-radius:1vh
+				left:20vw;top:5vh;border-radius:1vh;
+				box-shadow: 1px -1px 66px -20px rgba(0,0,0,0.75);
 			}
 
 			@keyframes listSel {from {background-color:transparent;}to {background-color:var(--hg);}}
@@ -165,9 +166,7 @@
 			@media (max-width:974px) {
 				#rows, #main {height:90.7vh;}
 				.menus {height:86vh;}
-
 				.task div {height:5vh}
-				
 				#rows {padding:0;margin:0;background-color:var(--bgMob)}
 				#rows label {border-radius:1vh;border-top:none;padding:1.4vh;background-color:var(--bg);margin:2vh;}
 				#rows label:first-of-type {border-top:none;}
@@ -202,7 +201,7 @@
 				.entries {padding:2vh}
 				.entries > div {padding:2vh 0}
 				#pop .entries {height: 84vh;overflow: scroll;}
-				#pop {padding:0;width:100vw;height:96vh;left:0;top:4vh;border-top-left-radius:1vh;border-top-right-radius:1vh}
+				#pop {box-shadow:none;padding:0;width:100vw;height:96vh;left:0;top:4vh;border-top-left-radius:1vh;border-top-right-radius:1vh}
 				#pop > div:first-of-type {padding:2vh 2vh 0 2vh;margin:0}
 
 				@keyframes listSel {from {background-color:var(--bCol);} to {background-color:transparent;}}
