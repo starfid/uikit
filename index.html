@@ -19,7 +19,7 @@
 				--borT	:#D5D6D9;
 				--dt	:#181617;
 				--dd	:#858584;
-				--hg	:#0063E2;
+				--hg	:#0063E2;/*F3AF12;*/
 				--fnBg	:2.3vh;
 				--fnSm	:2vh;
 			}
@@ -714,14 +714,16 @@ United States of America</textarea></div>
 			document.getElementById('pop').parentNode.removeChild(document.getElementById('pop'));
 			document.getElementsByTagName('form')[0].style.cssText = "animation:zoomOut .3s forwards;";
 			setTimeout(()=>{
-				document.body.style.backgroundColor = getComputedStyle(document.body).getPropertyValue('--bg');
-			},60);
+				var bg = getComputedStyle(document.body).getPropertyValue('--bg');
+				document.body.style.backgroundColor = bg;
+				document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
+			},30);
 		});
 		document.body.appendChild(layer);
 
 		var pop = document.createElement('div');
 		if(width < 975){
-			pop.style.cssText = "animation:slideUp .3s forwards;position:absolute;z-index:2;width:100vw;height:96vh;left:0;top:4vh;background-color:white;border-top-left-radius:1vh;border-top-right-radius";
+			pop.style.cssText = "animation:slideUp .3s forwards;position:absolute;z-index:2;width:100vw;height:96vh;left:0;top:4vh;background-color:white;border-top-left-radius:1vh;border-top-right-radius:1vh";
 		}
 		else {
 			pop.style.cssText = "animation:slideUp .2s forwards;position:absolute;z-index:2;width:60vw;height:90vh;left:20vw;top:5vh;background-color:white;border-radius:1vh";
