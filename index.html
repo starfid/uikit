@@ -191,7 +191,7 @@
 					border-right:solid 1px var(--borL);
 					border-bottom:solid 1px var(--borT);
 				}
-				#detail {height:100vh;display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);/*animation:showDet .3s forwards*/}
+				#detail {height:100vh;display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);}
 				.wrap > textarea,.wrap::after {width:90vw;}
 				#main {padding:0;width:100vw}
 				#detail .button {margin-right:3.8vh;}
@@ -708,10 +708,8 @@ United States of America</textarea></div>
 				document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
 				
 			},30);
-			setTimeout(()=>{
-				document.getElementById('pop').parentNode.removeChild(document.getElementById('pop'));
-			},500);
 		});
+		layer.id = 'layer';
 		layer.classList.add('cancel');
 		document.body.appendChild(layer);
 		
@@ -731,7 +729,10 @@ United States of America</textarea></div>
 				setTimeout(()=>{
 					document.body.style.backgroundColor = bg;
 					document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
-					if(cancel.parentNode) cancel.parentNode.removeChild(cancel);
+					//if(cancel.parentNode) cancel.parentNode.removeChild(cancel);
+					[...document.querySelectorAll('#pop,#layer')].forEach(del => {
+						del.parentNode.removeChild(del);
+					});
 				},30);
 			});
 		});
