@@ -104,7 +104,7 @@
 			#pop > div:first-of-type {margin-bottom:2vh;display:flex;justify-content:space-between;color:var(--hg);font-size:var(--fnBg);}
 			#pop > div:first-of-type > div {cursor:pointer}
 			#pop {
-				animation:slideUp .25s forwards;
+				animation:slideUp .17s forwards ease-out;
 				position:absolute;z-index:3;
 				background-color:var(--bg);
 				padding:2vh;width:60vw;height:86vh;
@@ -122,6 +122,7 @@
 			@keyframes zoomOut {from {opacity:.9;} to {opacity:1;}}
 			@keyframes slideUp {from {top:100vh;} to {top:5vh}}
 			@keyframes slideDown {from {top:5vh} to {top:100vh;}}
+			@keyframes fadeUp {from {top:5.1vh;} to {top:-100vh}}
 
 			@media (min-width:1024px) {
 				body {border-top:solid 1px var(--bCol)}
@@ -714,9 +715,16 @@ United States of America</textarea></div>
 		document.body.appendChild(layer);
 		
 		var pop = document.createElement('div');
+		var killPop = () => {
+			document.body.style.backgroundColor = bg;
+			document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
+			[...document.querySelectorAll('#pop,#layer')].forEach(del => {
+				del.parentNode.removeChild(del);
+			});
+		}
 		var tmp = "";
 		tmp  = "<div>";
-		tmp += "<div class='cancel'>Cancel</div><div>Send</div></div>";
+		tmp += "<div class='cancel'>Cancel</div><div id='popSend'>Send</div></div>";
 		tmp += "<div class='entries'>" + document.getElementById('entries').innerHTML + "</div>";
 		pop.innerHTML = tmp;
 		pop.id = "pop";
@@ -726,15 +734,13 @@ United States of America</textarea></div>
 			cancel.addEventListener('click',()=>{
 				document.getElementById('pop').style.animation = "slideDown .3s forwards";
 				document.getElementsByTagName('form')[0].style.cssText = "animation:zoomOut .3s forwards;";
-				setTimeout(()=>{
-					document.body.style.backgroundColor = bg;
-					document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
-					//if(cancel.parentNode) cancel.parentNode.removeChild(cancel);
-					[...document.querySelectorAll('#pop,#layer')].forEach(del => {
-						del.parentNode.removeChild(del);
-					});
-				},30);
+				setTimeout(()=>{killPop()},30);
 			});
+		});
+		document.getElementById('popSend').addEventListener('click',()=>{
+			document.getElementsByTagName('form')[0].style.cssText = "animation:zoomOut 0s forwards;";
+			document.getElementById('pop').style.animation = "fadeUp .15s forwards";
+			setTimeout(()=>{killPop()},90);
 		});
 	});
 	
