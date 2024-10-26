@@ -3,14 +3,13 @@
 	<head>
 		<title>Starfid</title>
 		<link rel="icon" href="data:,">
-		<link rel="stylesheet" href="style.css" type="text/css">
 		<meta content="notranslate" name="google">
 		<meta content="yes" name="mobile-web-app-capable">
 		<meta content="yes" name="apple-mobile-web-app-capable">
 		<meta content="default" name="apple-mobile-web-app-status-bar-style">
 		<meta content="#FFFFFF" name="theme-color" media="(prefers-color-scheme: light)">
 		<meta content="#1E1E1E" name="theme-color" media="(prefers-color-scheme: dark)">
-		<meta content="width=device-width,initial-scale=1,shrink-to-fit=no" name="viewport">
+		<meta content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no" name="viewport">
 		<style>
 			:root {
 				--bg	:#FFFFFF;
@@ -680,7 +679,7 @@ United States of America</textarea></div>
 	document.querySelector("#rows").scrollTop = 
 	(width > 1270) ? innerHeight*0.053 : //desktop
 	(width >= 1180 && width <= 1270) ? innerHeight*0.089 : //ipad
-	innerHeight*0.1; //mobile
+	innerHeight*0.118; //mobile
 
 	width < 1181 && [...document.querySelectorAll('#rows label')].forEach(list => {
 		var setPrev = () => {
@@ -787,6 +786,6 @@ United States of America</textarea></div>
 	});
 	
 	setTimeout(()=>
-		document.querySelector("meta[name=viewport]").setAttribute("content", "height=" + parseInt(screen.height) + "px, width=device-width, initial-scale=1.0")
+		document.querySelector("meta[name=viewport]").setAttribute("content", "height=" + parseInt(screen.height) + "px,width=device-width,initial-scale=1,maximum-scale=1")
 	,300);
 </script>
