@@ -14,12 +14,11 @@
 			:root {
 				--bg	:#FFFFFF;
 				--bgMob	:#F0F0F6;
-				--bCol	:#D9D9D9;
+				--bCol	:#F8F7F6;
 				--borL	:#E2E3E6;
 				--borT	:#D5D6D9;
 				--dt	:#181617;
 				--dd	:#858584;
-				--src	:#F8F7F6;
 				--hg	:#0063E2;
 				--fnBg	:2.3vh;
 				--fnSm	:2vh;
@@ -63,8 +62,8 @@
 			#backButton {display:none}
 			#rows {padding:0 2vh 2vh 2vh}
 			
-			#searchForm {display:none;grid-template-columns:6% auto 4.5%;background-color:var(--src);margin:.5vh 0vh 2vh 0vh;padding:1vh;border-radius:1vh}
-			#searchForm input {border:none;outline:0;background-color:var(--src); font-size: var(--fnSm);color:var(--dt)}
+			#searchForm {display:none;background-color:var(--bCol);margin:.5vh 0vh 2vh 0vh;padding:1vh;border-radius:1vh}
+			#searchForm input {width:100%;border:none;outline:0;background-color:var(--bCol); font-size: var(--fnSm);color:var(--dt)}
 
 			#rows div h2 {margin:0vh 0vh .5vh 0vh}
 			#rows h2 {display:none}
@@ -174,7 +173,6 @@
 				#rows {padding:0 2vh 2vh 2vh}
 				#rows div h2 {margin:.5vh 0 1.6vh 0;padding:0;color:var(--dt);display:block}
 				#searchForm {margin:0 0 1vh 0;}
-
 				#rows label div:last-of-type div:last-of-type {
 					display:-webkit-box;
 					-webkit-line-clamp:2;
@@ -244,11 +242,10 @@
 				:root {
 					--bg	:#1E1E1E;
 					--bgMob	:#070707;
-					--bCol	:#282828;
+					--bCol	:#232324;
 					--borL	:#1F2022;
 					--borT	:#1F2022;
 					--dt	:#E5E5E5;
-					--src	:#232324;
 				}
 				.circ {color:var(--dt)}
 			}
@@ -388,23 +385,7 @@
 						<h2>Sent</h2>
 						
 						<div id="searchForm">
-							<div class="valign">
-								<svg viewbox="0 0 100 100">
-									<circle cx="42" cy="42" r="32" />
-									<polygon points="65,65 90,90" />
-								</svg>
-							</div>
 							<input placeholder="Search" name="q" ondblclick="this.value=''" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="off">
-							<div class="valign">
-								<svg viewbox="0 0 100 100" id='microphone'>
-									<circle cx="50" cy="16" r="10" class="thick fill" />
-									<circle cx="50" cy="50" r="10" class="thick fill" />
-									<polygon points="40,14 60,14 60,50 40,50" class="thick fill" />
-									<polygon points="50,75 50,94" class="thick" />
-									<polygon points="35,94 65,94" class="thick" />
-									<path d="M25,50 C25,80 73,85 75,50" class="thick" />
-								</svg>
-							</div>
 						</div>
 						
 					</div>
@@ -627,7 +608,11 @@
 				</div>
 
 				<dl class="alRight">
-
+					<svg viewbox="0 0 100 100" class="button save">
+						<circle cx="50" cy="50" r="44" />
+						<circle cx="50" cy="32" r="13" />
+						<path d="M 14 78 q 36 -38 72 0" />
+					</svg>
 				</dl>
 				
 			</header>
@@ -720,17 +705,19 @@ United States of America</textarea></div>
 		},500);
 	});
 	document.getElementById("navToggle").addEventListener("click",() => {
-		document.getElementById("rows").style.display = document.getElementById("navToggle").checked?"none":"block";
+		var checked = document.getElementById("navToggle").checked;
+		document.getElementById("rows").style.display = checked?"none":"block";
+		document.querySelector("header label:last-child").style.visibility = checked?"hidden":"visible";
 	});
 	document.getElementById("magnify").addEventListener("click",() => {
 		var sf = document.getElementById("searchForm").style;
 		var h2 = document.querySelector("#rows h2").style;
-		if(sf.display == "grid") {
+		if(sf.display == "block") {
 			sf.display = "none";
 			h2.display = (width < 1181) && "block";
 		}
 		else {
-			sf.display = "grid";
+			sf.display = "block";
 			h2.display = "none";
 			document.querySelector("#searchForm input").focus();
 		}
