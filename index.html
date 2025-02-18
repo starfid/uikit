@@ -34,6 +34,7 @@
 			fieldset {border:0;}
 			dt {font-weight:bolder;}
 			.group, .button, label {user-select: none;}
+			#dualSection, #detail {grid-template-rows: auto 1fr;height: 100vh;}
 			#dualSection {display:grid;grid-template-columns: 20vw auto;}
 			svg {stroke:var(--dd);stroke-width:5;}
 			aside svg, svg:hover {stroke:var(--hg)}
@@ -59,7 +60,7 @@
 			#leftPart .task label:nth-child(1) {display:none}
 			#leftPart .task label:nth-child(3) {margin-left:auto}
 
-			#backButton {display:none}
+			#backButton, #detail header span {display:none}
 			#rows {padding:0 2vh 2vh 2vh}
 			
 			#searchForm {display:none;background-color:var(--bCol);margin:.5vh 0vh 2vh 0vh;padding:1vh;border-radius:1vh}
@@ -95,8 +96,9 @@
 			#rows dt {display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;min-height:calc(var(--fnSm) * 1.2);overflow:hidden;}
 
 			.button {height:3vh;cursor:pointer;color:var(--hg)}
-			.menus, #rows, #main {height:88.8vh;/*86.7vh;*/overflow-y:scroll;scrollbar-width: none;}
+			aside, #rows, #main {overflow-y:scroll;scrollbar-width:none;}
 			.menus, #main {padding:2vh;}
+			#detail {display: grid;}
 			#detail .button {margin-right:4vh;}
 			#detail .button:last-child {margin-right:0!important;/*display:none*/}
 			#detail .task header dl {margin-left:auto}
@@ -192,8 +194,8 @@
 				}
 			}
 			@media (max-width:974px) {
-				#rows, #main {height:90.7vh;}
-				.menus {height:86vh;}
+				aside,#rows,#main,#pop {width:100vw}
+				.menus {height:100vh;}
 				#rows {padding:0;margin:0;}
 				#rows label {border-top:none;padding:1.4vh 2vh 1.4vh 2vh;background-color:var(--bg);border-bottom:solid 1px var(--borT);}
 				#rows label:first-of-type {border-top:none;}
@@ -202,7 +204,8 @@
 				#leftPart .task {margin-left:0;border-left:0;}
 				#compose {margin-right:0}
 				#detail .task svg {display:flex;}
-				#dualSection, form, #backButton, #detail .task, .entries > div {display: block;}
+				form, #backButton, #detail .task, .entries > div {display: block;}
+				#dualSection {display:grid}
 				.menus, #detail .task dl {display:none}
 				.menus label svg{padding-top:1px}
 				#navToggle:checked + fieldset {display:block}
@@ -216,10 +219,12 @@
 				#rows input:checked + label + input + label {border-top:none;}
 				#rows input:checked + label div:nth-child(2) > div, #rows input:checked + label dd  {opacity:1;}
 
-				#detail {height:100vh;display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);}
+				#detail {/*height:100vh;*/display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);}
 				.wrap > textarea,.wrap::after {width:90vw;}
-				#main {padding:0;width:100vw}
+				#main {padding:0;}
 				#detail .button {margin-right:3.8vh;}
+				#backButton {margin-right:0!important;}
+				#detail header span {display:block;color:var(--hg);cursor:pointer}
 
 				#detail .task .button:last-child {display:block;margin-right:0!important;margin-left:10vw!important}
 				#detail .task .button:nth-last-child(2) {display:block;margin-right:0!important;margin-left:auto!important}
@@ -228,7 +233,7 @@
 				.entries {padding:0 2vh 2vh 2vh}
 				.entries > div {padding:2vh 0}
 				#pop .entries {height: 84vh;overflow: scroll;}
-				#pop {box-shadow:none;padding:0;width:100vw;height:96vh;left:0;top:4vh;border-top-left-radius:1vh;border-top-right-radius:1vh}
+				#pop {box-shadow:none;padding:0;height:96vh;left:0;top:4vh;border-top-left-radius:1vh;border-top-right-radius:1vh}
 				#pop > div:first-of-type {padding:2vh 2vh 0 2vh;margin:0}
 
 				@keyframes listSel {from {background-color:var(--bCol);} to {background-color:transparent;}}
@@ -347,6 +352,72 @@
 								<div>Remind Me</div>
 							</label>
 						</div>
+						<label for="fd2" class="group">iClouds</label>
+						<input type="checkbox" id="fd2">
+						<div>
+							<input type="radio" name="path" id="b5">
+							<label for="b5">
+								<svg viewbox="0 0 100 100" class='tray'>
+									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
+									<polygon points="10,50 35,50" />
+									<polygon points="65,50 90,50" />
+									<path d="M 35 50 q 15 25 30 0" />
+								</svg>
+								<div>Inbox</div>
+							</label>
+							<input type="radio" name="path" id="b6">
+							<label for="b6">
+								<svg viewbox="0 0 100 100" class='doc'>
+									<polygon points="20,10 50,10 80,35 80,90 20,90" />
+									<polygon points="50,10 50,35" />
+									<polygon points="50,35 80,35" />
+								</svg>
+								<div>Drafts</div>
+							</label>
+							<input type="radio" name="path" id="b7">
+							<label for="b7">
+								<svg viewbox="0 0 100 100" class='paperplane'>
+									<polygon points="10,45 90,10 60,90 45,55" />
+									<polygon points="45,55 90,10" />
+								</svg>
+								<div>Sent</div>
+							</label>
+						</div>
+
+
+
+						<label for="fd2" class="group">iClouds</label>
+						<input type="checkbox" id="fd2">
+						<div>
+							<input type="radio" name="path" id="b5">
+							<label for="b5">
+								<svg viewbox="0 0 100 100" class='tray'>
+									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
+									<polygon points="10,50 35,50" />
+									<polygon points="65,50 90,50" />
+									<path d="M 35 50 q 15 25 30 0" />
+								</svg>
+								<div>Inbox</div>
+							</label>
+							<input type="radio" name="path" id="b6">
+							<label for="b6">
+								<svg viewbox="0 0 100 100" class='doc'>
+									<polygon points="20,10 50,10 80,35 80,90 20,90" />
+									<polygon points="50,10 50,35" />
+									<polygon points="50,35 80,35" />
+								</svg>
+								<div>Drafts</div>
+							</label>
+							<input type="radio" name="path" id="b7">
+							<label for="b7">
+								<svg viewbox="0 0 100 100" class='paperplane'>
+									<polygon points="10,45 90,10 60,90 45,55" />
+									<polygon points="45,55 90,10" />
+								</svg>
+								<div>Sent</div>
+							</label>
+						</div>
+
 						<label for="fd2" class="group">iClouds</label>
 						<input type="checkbox" id="fd2">
 						<div>
@@ -591,6 +662,7 @@
 						<polygon points="50,10 10,50" />
 						<polygon points="10,50 50,90" />
 					</svg>
+					<span>Back</span>
 					<svg viewbox="0 0 100 100" class="button delete">
 						<polygon points="33,10 68,10 68,20 33,20" />
 						<polygon points="20,20 80,20 75,90 25,90" />
@@ -620,6 +692,33 @@
 			<div id="main">
 				<label id="preview"></label>
 				<div id="entries" class="entries" action="?" method="post">
+					<div>
+						<label for="f1">mobile</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f1" placeholder="home">(415) 555-9225</textarea></div>
+					</div>
+					<div>
+						<label for="f2">FaceTime</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f2" placeholder="home">When you pass by me Say hello once in a while. When you pass by me baby. Does it hurt so much to smile We promised that we'd still be friends until the very end Begging you, baby Let me down easy. Let me down easy For your love for me is gone Let me down easy Since you feel to stay is wrong</textarea></div>
+					</div>
+					<div>
+						<label for="f3">home</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f3" placeholder="Phone">sillers_chis@icloud.com</textarea></div>
+					</div>
+					<div>
+						<label for="f4">birthday</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f4" placeholder="home">May 26</textarea></div>
+					</div>
+					<div>
+						<label for="f5">homepage</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f5" placeholder="home">6109 Winthrop St.
+San Francisco CA 94113.
+United States of America</textarea></div>
+					</div>
+
+
+
+
+
 					<div>
 						<label for="f1">mobile</label>
 						<div class="wrap"><textarea autocorrect="off" rows="1" id="f1" placeholder="home">(415) 555-9225</textarea></div>
@@ -678,31 +777,34 @@ United States of America</textarea></div>
 	});
 	[...document.querySelectorAll('#rows > input')].forEach(list => {
 		list.addEventListener((isPhone?'input':'focus'),()=>{
+			window.scrollTo(0,0);
 			preview.innerHTML = list.nextElementSibling.innerHTML;
 			if(isPhone){
 				document.getElementById("rows").style.cssText = "animation:moveRowLeft .3s forwards;";
 				[...document.querySelectorAll("#rows label")].forEach(label=>{
 					label.style.opacity = .7;
 				});
-				document.getElementById("detail").style.cssText = "display:block;animation:showDet .3s forwards ease-out";
+				document.getElementById("detail").style.cssText = "display:grid;animation:showDet .3s forwards ease-out";
 				setTimeout(()=>{list.checked = false;},500);
 			}
 		});
 		if(isPhone){ list.checked = false; }
 	});
 
-	document.getElementById("backButton").addEventListener("click", () => {
-		var rows = document.getElementById("rows").style;
-		var detail = document.getElementById("detail").style;
-		rows.animation = "moveRowRight .3s forwards";
-		[...document.querySelectorAll("#rows label")].forEach(label=>{
-			label.style.opacity= 1;
+	[...document.querySelectorAll("#backButton,#detail header span")].forEach(back => {
+		back.addEventListener("click", () => {
+			var rows = document.getElementById("rows").style;
+			var detail = document.getElementById("detail").style;
+			rows.animation = "moveRowRight .3s forwards";
+			[...document.querySelectorAll("#rows label")].forEach(label=>{
+				label.style.opacity= 1;
+			});
+			detail.animation = "hideDet .3s forwards";
+			setTimeout(()=>{
+				detail.display = 'none';
+				rows.animation = "none";
+			},500);
 		});
-		detail.animation = "hideDet .3s forwards";
-		setTimeout(()=>{
-			detail.display = 'none';
-			rows.animation = "none";
-		},500);
 	});
 	document.getElementById("navToggle").addEventListener("click",() => {
 		var checked = document.getElementById("navToggle").checked;
