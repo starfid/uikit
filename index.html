@@ -101,7 +101,9 @@
 			#detail {display: grid;}
 			#detail .button {margin-right:4vh;}
 			#detail .button:last-child {margin-right:0!important;/*display:none*/}
+			#detail header {z-index:1;background-color:var(--bg)}
 			#detail .task header dl {margin-left:auto}
+			#detail .task .valign {margin:auto}
 
 			.group {cursor:pointer;padding:1vh 0 1vh 0;font-weight:bolder;display:block;}
 			.group + div {margin-bottom:2vh;color:var(--dt);}
@@ -143,7 +145,31 @@
 			@keyframes slideUp {from {top:100vh;} to {top:5vh}}
 			@keyframes slideDown {from {top:5vh} to {top:100vh;}}
 			@keyframes fadeUp {from {top:5.1vh;} to {top:-100vh}}
-
+			
+			@keyframes zooming1 {
+				0% {zoom:normal;padding:2vh;margin:auto auto auto auto}
+				10% {zoom:0.9848;padding:2.1515vh;margin:auto auto auto auto}
+				20% {zoom:0.9697;padding:2.3030vh;margin:auto auto auto auto}
+				30% {zoom:0.9545;padding:2.4545vh;margin:auto auto auto auto}
+				40% {zoom:0.9394;padding:2.6061vh;margin:auto auto auto auto}
+				50% {zoom:0.9242;padding:2.7576vh;margin:auto auto auto auto}
+				60% {zoom:0.9091;padding:2.9091vh;margin:auto auto auto auto}
+				66% {zoom:0.9;padding:3vh;margin:auto auto auto auto}
+				67% {zoom:0.9;padding:3vh;margin:-1vh auto auto auto}
+				100% {zoom:0.9;padding:3vh;margin:-300vh auto auto auto}
+			}
+			@keyframes zooming {
+				0% {zoom:normal;padding:2vh 2vh 0 2vh;margin:auto auto auto auto}
+				10% {zoom:0.9848;padding:2.1515vh 2.1515vh 0 2.1515vh;margin:auto auto auto auto}
+				20% {zoom:0.9697;padding:2.3030vh 2.3030vh 0 2.3030vh;margin:auto auto auto auto}
+				30% {zoom:0.9545;padding:2.4545vh 2.4545vh 0 2.4545vh;margin:auto auto auto auto}
+				40% {zoom:0.9394;padding:2.6061vh 2.6061vh 0 2.6061vh;margin:auto auto auto auto}
+				50% {zoom:0.9242;padding:2.7576vh 2.7576vh 0 2.7576vh;margin:auto auto auto auto}
+				60% {zoom:0.9091;padding:2.9091vh 2.9091vh 0 2.9091vh;margin:auto auto auto auto}
+				66% {zoom:0.9;padding:3vh 3vh 0 3vh;margin:auto auto auto auto}
+				67% {zoom:0.9;padding:3vh 3vh 0 3vh;margin:-1vh auto auto auto}
+				100% {zoom:0.9;padding:3vh 3vh 0 3vh;margin:-300vh auto auto auto}
+			}
 			@media (min-width:1024px) {
 				body {border-top:solid 1px var(--bCol)}
 			}
@@ -154,7 +180,7 @@
 			}
 			@media (max-width:1180px) {
 				form {grid-template-columns: 32vw auto;}
-				#detail .task .valign {margin:auto}
+				/*#detail .task .valign {margin:auto}*/
 				#detail .task .valign .button:nth-child(2){margin-left:10vw}
 				#navLabel {display:flex;align-items:center}
 
@@ -241,6 +267,7 @@
 				@keyframes zoomOut {from {transform:scale(.94);opacity:.9;} to {transform:scale(1);opacity:1;}}
 				@keyframes slideUp {from {top:100vh;} to {top:4.2vh}}
 				@keyframes slideDown {from {top:4.2vh} to {top:100vh;}}
+
 			}
 			@media (prefers-color-scheme: dark) {
 				body {background-color:#1E1E1E}
@@ -663,7 +690,7 @@
 						<polygon points="10,50 50,90" />
 					</svg>
 					<span>Back</span>
-					<svg viewbox="0 0 100 100" class="button delete">
+					<svg viewbox="0 0 100 100" class="button delete" id="delButton">
 						<polygon points="33,10 68,10 68,20 33,20" />
 						<polygon points="20,20 80,20 75,90 25,90" />
 						<polygon points="10,20 90,20" />
@@ -671,7 +698,7 @@
 						<polygon points="50,30 50,80" />
 						<polygon points="67,30 62,80" />
 					</svg>
-					<svg viewbox="0 0 100 100" class="button save">
+					<svg viewbox="0 0 100 100" class="button save" id="saveButton">
 						<polygon points="10,90 90,90 90,25 75,10 10,10" />
 						<polygon points="30,10 30,35 70,35 70,10" />
 						<polygon points="20,90 20,50 80,50 80,90" />
@@ -752,7 +779,7 @@ United States of America</textarea></div>
 		width 	= parseInt(window.innerWidth),
 		isPhone	= width < 975?true:false,
 		bg 	= getComputedStyle(document.body).getPropertyValue('--bg'),
-		submit	= () => { document.getElementsByTagName('form')[0].submit(); }
+		submit	= () => { document.getElementsByTagName('form')[0].submit(); },
 		expand	= (selector) => {
 			[...document.querySelectorAll(selector)].forEach(txt => {
 				if(selector=='#pop textarea'){
@@ -765,12 +792,23 @@ United States of America</textarea></div>
 				});
 			});
 		};
+		selected = () => {
+			if(isPhone){
+				document.querySelector('#preview').style.cssText = "zoom:normal;padding:0 0 2vh 0;margin:1vh 2vh 0 2vh";
+				document.querySelector('#entries').style.cssText = "zoom:normal;padding:0 2vh 2vh 2vh;margin:0";
+			}
+			else {
+				document.querySelector('#main').style.cssText = "zoom:normal;padding:2vh;margin:0";
+			}
+		}
 	
 	expand('form textarea');
 
 	width < 1181 && [...document.querySelectorAll('#rows label')].forEach(list => {
 		var setPrev = () => {
+			window.scrollTo(0,0);
 			preview.innerHTML = list.innerHTML;
+			selected();
 		}
 		(list.previousElementSibling.nodeName.toLowerCase() == 'input') && list.previousElementSibling.checked && setPrev();
 		list.addEventListener('click', setPrev);
@@ -779,6 +817,7 @@ United States of America</textarea></div>
 		list.addEventListener((isPhone?'input':'focus'),()=>{
 			window.scrollTo(0,0);
 			preview.innerHTML = list.nextElementSibling.innerHTML;
+			selected();
 			if(isPhone){
 				document.getElementById("rows").style.cssText = "animation:moveRowLeft .3s forwards;";
 				[...document.querySelectorAll("#rows label")].forEach(label=>{
@@ -832,6 +871,18 @@ United States of America</textarea></div>
 			});
 			if(width < 1181){
 				document.getElementById("navToggle").click();
+			}
+		});
+	});
+
+	[...document.querySelectorAll('#saveButton, #delButton')].forEach(button => {
+		button.addEventListener('click',()=>{
+			if(isPhone){		
+				document.getElementById('entries').style.animation = 
+				document.getElementById('preview').style.animation = "zooming .5s forwards ease-in";
+			}
+			else {
+				document.getElementById('main').style.animation = "zooming .5s forwards ease-in";
 			}
 		});
 	});
