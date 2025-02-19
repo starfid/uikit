@@ -893,7 +893,13 @@ United States of America</textarea></div>
 		document.querySelector('meta[name="theme-color"]').setAttribute('content','#000000');
 		document.getElementsByTagName('form')[0].style.cssText = "animation:zoomIn .3s forwards;";
 
-		layer.style.cssText = "position:absolute;z-index:2;width:100vw;height:100vh;left:0;top:0;";
+		layer.style.cssText = "cursor:pointer;position:absolute;z-index:2;width:100vw;height:100vh;left:0;top:0;backdrop-filter: blur(10px);";
+		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			layer.style.background = "rgba(0, 0, 0, 0.4)";
+		}
+		else {
+			layer.style.background = "rgba(255, 255, 255, 0.2)";
+		}
 		layer.addEventListener('click',()=>{
 			layer.parentNode.removeChild(layer);
 			document.getElementById('pop').style.animation = "slideDown .3s forwards";
