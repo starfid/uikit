@@ -776,31 +776,32 @@ United States of America</textarea></div>
 </html>
 <script type="text/javascript">
 	var 	preview	= document.querySelector('#preview'),
-		width 	= parseInt(window.innerWidth),
-		isPhone	= width < 975?true:false,
-		bg 	= getComputedStyle(document.body).getPropertyValue('--bg'),
-		submit	= () => { document.getElementsByTagName('form')[0].submit(); },
-		expand	= (selector) => {
-			[...document.querySelectorAll(selector)].forEach(txt => {
-				if(selector=='#pop textarea'){
-					txt.value = '';
-					(isPhone) && txt.setAttribute('placeholder','');
-				}
+	width 	= parseInt(window.innerWidth),
+	isPhone	= width < 975?true:false,
+	bg 	= getComputedStyle(document.body).getPropertyValue('--bg'),
+	submit	= () => { document.getElementsByTagName('form')[0].submit(); },
+	expand	= (selector) => {
+		[...document.querySelectorAll(selector)].forEach(txt => {
+			if(selector=='#pop textarea'){
+				txt.value = '';
+				(isPhone) && txt.setAttribute('placeholder','');
+			}
+			txt.parentNode.dataset.replicatedValue = txt.value;
+			txt.addEventListener('input',()=>{
 				txt.parentNode.dataset.replicatedValue = txt.value;
-				txt.addEventListener('input',()=>{
-					txt.parentNode.dataset.replicatedValue = txt.value;
-				});
 			});
-		};
-		selected = () => {
-			if(isPhone){
-				document.querySelector('#preview').style.cssText = "zoom:normal;padding:0 0 2vh 0;margin:1vh 2vh 0 2vh";
-				document.querySelector('#entries').style.cssText = "zoom:normal;padding:0 2vh 2vh 2vh;margin:0";
-			}
-			else {
-				document.querySelector('#main').style.cssText = "zoom:normal;padding:2vh;margin:0";
-			}
+		});
+	},
+	selected,
+	selecting = () => {
+		if(isPhone){
+			document.querySelector('#preview').style.cssText = "zoom:normal;padding:0 0 2vh 0;margin:1vh 2vh 0 2vh";
+			document.querySelector('#entries').style.cssText = "zoom:normal;padding:0 2vh 2vh 2vh;margin:0";
 		}
+		else {
+			document.querySelector('#main').style.cssText = "zoom:normal;padding:2vh;margin:0";
+		}
+	};
 	
 	expand('form textarea');
 
@@ -808,16 +809,17 @@ United States of America</textarea></div>
 		var setPrev = () => {
 			window.scrollTo(0,0);
 			preview.innerHTML = list.innerHTML;
-			selected();
+			selecting();
 		}
 		(list.previousElementSibling.nodeName.toLowerCase() == 'input') && list.previousElementSibling.checked && setPrev();
 		list.addEventListener('click', setPrev);
 	});
 	[...document.querySelectorAll('#rows > input')].forEach(list => {
 		list.addEventListener((isPhone?'input':'focus'),()=>{
+			selected = list;
 			window.scrollTo(0,0);
 			preview.innerHTML = list.nextElementSibling.innerHTML;
-			selected();
+			selecting();
 			if(isPhone){
 				document.getElementById("rows").style.cssText = "animation:moveRowLeft .3s forwards;";
 				[...document.querySelectorAll("#rows label")].forEach(label=>{
@@ -856,6 +858,7 @@ United States of America</textarea></div>
 		if(sf.display == "block") {
 			sf.display = "none";
 			h2.display = (width < 1181) && "block";
+			(selected instanceof HTMLElement) && selected.focus();
 		}
 		else {
 			sf.display = "block";
@@ -893,12 +896,16 @@ United States of America</textarea></div>
 		document.querySelector('meta[name="theme-color"]').setAttribute('content','#000000');
 		document.getElementsByTagName('form')[0].style.cssText = "animation:zoomIn .3s forwards;";
 
-		layer.style.cssText = "cursor:pointer;position:absolute;z-index:2;width:100vw;height:100vh;left:0;top:0;backdrop-filter: blur(10px);";
-		if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			layer.style.background = "rgba(0, 0, 0, 0.4)";
-		}
-		else {
-			layer.style.background = "rgba(255, 255, 255, 0.2)";
+		layer.style.cssText = "cursor:pointer;position:absolute;z-index:2;width:100vw;height:100vh;left:0;top:0;";
+		
+		if(width>1180){
+			layer.style.backdropFilter = "blur(10px)";
+			if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				layer.style.background = "rgba(0, 0, 0, 0.4)";
+			}
+			else {
+				layer.style.background = "rgba(255, 255, 255, 0.2)";
+			}
 		}
 		layer.addEventListener('click',()=>{
 			layer.parentNode.removeChild(layer);
@@ -930,6 +937,7 @@ United States of America</textarea></div>
 		pop.innerHTML = tmp;
 		pop.id = "pop";
 		document.body.appendChild(pop);
+		setTimeout(()=>{document.querySelector('#pop textarea').focus();},1000);
 		expand('#pop textarea');
 		[...document.querySelectorAll('.cancel')].forEach(cancel => {
 			cancel.addEventListener('click',()=>{
