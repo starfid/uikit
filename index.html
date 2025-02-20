@@ -39,6 +39,8 @@
 			svg {stroke:var(--dd);stroke-width:5;}
 			aside svg, svg:hover {stroke:var(--hg)}
 			polygon, path, circle {stroke-linejoin:round;fill:transparent;}
+			.blackFlag {fill:#0063E2;stroke:var(--hg)}
+			.whiteFlag {fill:transparent;stroke:transparent}
 			#microphone {visibility:hidden}
 			aside, #leftPart{border-right:solid 1px var(--bCol);}
 
@@ -145,19 +147,7 @@
 			@keyframes slideUp {from {top:100vh;} to {top:5vh}}
 			@keyframes slideDown {from {top:5vh} to {top:100vh;}}
 			@keyframes fadeUp {from {top:5.1vh;} to {top:-100vh}}
-			
-			@keyframes zooming1 {
-				0% {zoom:normal;padding:2vh;margin:auto auto auto auto}
-				10% {zoom:0.9848;padding:2.1515vh;margin:auto auto auto auto}
-				20% {zoom:0.9697;padding:2.3030vh;margin:auto auto auto auto}
-				30% {zoom:0.9545;padding:2.4545vh;margin:auto auto auto auto}
-				40% {zoom:0.9394;padding:2.6061vh;margin:auto auto auto auto}
-				50% {zoom:0.9242;padding:2.7576vh;margin:auto auto auto auto}
-				60% {zoom:0.9091;padding:2.9091vh;margin:auto auto auto auto}
-				66% {zoom:0.9;padding:3vh;margin:auto auto auto auto}
-				67% {zoom:0.9;padding:3vh;margin:-1vh auto auto auto}
-				100% {zoom:0.9;padding:3vh;margin:-300vh auto auto auto}
-			}
+	
 			@keyframes zooming {
 				0% {zoom:normal;padding:2vh 2vh 0 2vh;margin:auto auto auto auto}
 				10% {zoom:0.9848;padding:2.1515vh 2.1515vh 0 2.1515vh;margin:auto auto auto auto}
@@ -222,8 +212,8 @@
 			@media (max-width:974px) {
 				aside,#rows,#main,#pop {width:100vw}
 				.menus {height:100vh;}
-				#rows {padding:0;margin:0;}
-				#rows label {border-top:none;padding:1.4vh 2vh 1.4vh 2vh;background-color:var(--bg);border-bottom:solid 1px var(--borT);}
+				#rows {padding:0;margin:0 0 20vh 0;}
+				#rows label {border-top:none;padding:1.4vh 2vh 1.4vh 2vh;background-color:var(--bg);border-bottom:solid 1px var(--bCol);}
 				#rows label:first-of-type {border-top:none;}
 				form {border-radius:1vh}
 
@@ -252,8 +242,8 @@
 				#backButton {margin-right:0!important;}
 				#detail header span {display:block;color:var(--hg);cursor:pointer}
 
-				#detail .task .button:last-child {display:block;margin-right:0!important;margin-left:10vw!important}
-				#detail .task .button:nth-last-child(2) {display:block;margin-right:0!important;margin-left:auto!important}
+				#detail .task .button:last-child {display:block;margin-right:0!important;margin-left:0!important}
+				#detail .task .button:nth-last-child(3) {display:block;margin-right:3.8vh!important;margin-left:auto!important}
 				
 				#preview {margin:1vh 2vh 0 2vh;padding:0 0 2vh 0}
 				.entries {padding:0 2vh 2vh 2vh}
@@ -445,7 +435,7 @@
 							</label>
 						</div>
 
-						<label for="fd2" class="group">Archive</label>
+						<label for="fd2" class="group">Archives</label>
 						<input type="checkbox" id="fd2">
 						<div>
 							<input type="radio" name="path" id="b5">
@@ -476,6 +466,7 @@
 								<div>Sent</div>
 							</label>
 						</div>
+						<br><br><br><br><br><br><br><br><br><br>
 					</fieldset>
 				</aside>
 				<fieldset id="rows">
@@ -497,7 +488,7 @@
 							</dl>
 							<dl>
 								<dt>How To Build A Sleep Routine forever into the unknown</dt>
-								<dd>&#9825;</dd>
+								<dd>&#9873;</dd>
 							</dl>
 							<div>I thought you might find this articles interestings. Begin forwarded</div>
 						</div>
@@ -513,7 +504,7 @@
 							</dl>
 							<dl>
 								<dt>Lebanese Family Recipes for you and for your family</dt>
-								<dd>&#9825;</dd>
+								<dd>&#9873;</dd>
 							</dl>
 							<div>Hey I was thinking it would be great if we could have some more if you want to go to the store please buy some milk..</div>
 						</div>
@@ -529,7 +520,7 @@
 							</dl>
 							<dl>
 								<dt>Portfolio Review</dt>
-								<dd>&#9825;</dd>
+								<dd>&#9873;</dd>
 							</dl>
 							<div>Thanks for sharing! The recipes were</div>
 						</div>
@@ -545,7 +536,7 @@
 							</dl>
 							<dl>
 								<dt>New Hiking Spot</dt>
-								<dd>&nbsp;</dd>
+								<dd>&#9872;</dd>
 							</dl>
 							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
 						</div>
@@ -561,7 +552,7 @@
 							</dl>
 							<dl>
 								<dt>The Best Vacation</dt>
-								<dd>&nbsp;</dd>
+								<dd>&#9872;</dd>
 							</dl>
 							<div>Morning! I was put in touch with Tania by a mutual friend. She had and amazing..</div>
 						</div>
@@ -577,7 +568,7 @@
 							</dl>
 							<dl>
 								<dt>Playground Photos</dt>
-								<dd>&#9825;</dd>
+								<dd>&#9873;</dd>
 							</dl>
 							<div>I've attached Carol's resume. She's the one I was telling you about.</div>
 						</div>
@@ -593,7 +584,7 @@
 							</dl>
 							<dl>
 								<dt>Send photos please</dt>
-								<dd>&nbsp;</dd>
+								<dd>&#9872;</dd>
 							</dl>
 							<div>We're in the early stages of planning a neighborhood garden. Each family would..</div>
 						</div>
@@ -609,7 +600,7 @@
 							</dl>
 							<dl>
 								<dt>Fun Memories</dt>
-								<dd>&#9825;</dd>
+								<dd>&#9873;</dd>
 							</dl>
 							<div>Hey stranger. It's been a while since we've chatted, but I'd love to catch up.</div>
 						</div>
@@ -625,7 +616,7 @@
 							</dl>
 							<dl>
 								<dt>New Hiking Spot</dt>
-								<dd>&nbsp;</dd>
+								<dd>&#9872;</dd>
 							</dl>
 							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
 						</div>
@@ -641,7 +632,7 @@
 							</dl>
 							<dl>
 								<dt>New Hiking Spot</dt>
-								<dd>&nbsp;</dd>
+								<dd>&#9872;</dd>
 							</dl>
 							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
 						</div>
@@ -657,7 +648,7 @@
 							</dl>
 							<dl>
 								<dt>New Hiking Spot</dt>
-								<dd>&nbsp;</dd>
+								<dd>&#9872;</dd>
 							</dl>
 							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
 						</div>
@@ -673,7 +664,7 @@
 							</dl>
 							<dl>
 								<dt>New Hiking Spot</dt>
-								<dd>&nbsp;</dd>
+								<dd>&#9872;</dd>
 							</dl>
 							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
 						</div>
@@ -703,6 +694,17 @@
 						<polygon points="30,10 30,35 70,35 70,10" />
 						<polygon points="20,90 20,50 80,50 80,90" />
 						<polygon points="59,17 62,17 62,28 59,28" />
+					</svg>
+					<svg viewbox="0 0 100 100" class="button" id="flagButton">
+						<polygon points="20,14 20,90" />
+						<path d="M 20 14 q 15 -8 30 0" />
+						<path d="M 50 14 q 15 8 30 0" />
+						<path d="M 20 60 q 15 -8 30 0" />
+						<path d="M 50 60 q 15 8 30 0" />
+						<polygon points="80,14 80,60" />
+
+						<polygon points="80,18 80,60 50,60 50,18" class="whiteFlag" />
+						<polygon points="20,14 20,55 55,55 50,14" class="whiteFlag" />
 					</svg>
 				</div>
 
@@ -768,6 +770,7 @@ United States of America</textarea></div>
 San Francisco CA 94113.
 United States of America</textarea></div>
 					</div>
+					<br><br><br><br><br><br><br><br><br><br>
 				</div>
 			</div>
 		</section>
@@ -793,7 +796,7 @@ United States of America</textarea></div>
 		});
 	},
 	selected,
-	selecting = () => {
+	adjusting = () => {
 		if(isPhone){
 			document.querySelector('#preview').style.cssText = "zoom:normal;padding:0 0 2vh 0;margin:1vh 2vh 0 2vh";
 			document.querySelector('#entries').style.cssText = "zoom:normal;padding:0 2vh 2vh 2vh;margin:0";
@@ -801,6 +804,13 @@ United States of America</textarea></div>
 		else {
 			document.querySelector('#main').style.cssText = "zoom:normal;padding:2vh;margin:0";
 		}
+	},
+	changeFlag = (color) => {
+		color = color=='&#9873;'?'black':'white';
+		var rev = color=='black'?'white':'black';
+		[...document.querySelectorAll('#flagButton polygon.'+rev+'Flag')].forEach(pol=>{
+			pol.classList.replace(rev+'Flag',color+'Flag');
+		});
 	};
 	
 	expand('form textarea');
@@ -809,7 +819,7 @@ United States of America</textarea></div>
 		var setPrev = () => {
 			window.scrollTo(0,0);
 			preview.innerHTML = list.innerHTML;
-			selecting();
+			adjusting();
 		}
 		(list.previousElementSibling.nodeName.toLowerCase() == 'input') && list.previousElementSibling.checked && setPrev();
 		list.addEventListener('click', setPrev);
@@ -819,7 +829,8 @@ United States of America</textarea></div>
 			selected = list;
 			window.scrollTo(0,0);
 			preview.innerHTML = list.nextElementSibling.innerHTML;
-			selecting();
+			adjusting();
+			changeFlag(preview.getElementsByTagName('dd')[1].innerText.split("").map(char => `&#${char.charCodeAt(0)};`).join(""));
 			if(isPhone){
 				document.getElementById("rows").style.cssText = "animation:moveRowLeft .3s forwards;";
 				[...document.querySelectorAll("#rows label")].forEach(label=>{
@@ -878,22 +889,34 @@ United States of America</textarea></div>
 		});
 	});
 
-	[...document.querySelectorAll('#saveButton, #delButton')].forEach(button => {
+	[...document.querySelectorAll('#saveButton, #delButton, #flagButton')].forEach(button => {
 		button.addEventListener('click',()=>{
-			if(isPhone){		
+			if(isPhone){
+				button.style.stroke = getComputedStyle(document.body).getPropertyValue('--dd');
+				if(button.id=='flagButton'){
+					[...document.querySelectorAll('#flagButton polygon.blackFlag')].forEach((pol)=>{
+						pol.style.fill = pol.style.stroke = getComputedStyle(document.body).getPropertyValue('--dd');
+					});
+				}
 				document.getElementById('entries').style.animation = 
 				document.getElementById('preview').style.animation = "zooming .5s forwards ease-in";
 			}
 			else {
 				document.getElementById('main').style.animation = "zooming .5s forwards ease-in";
 			}
+			setTimeout(()=>{
+				location.reload();
+			},500);
 		});
 	});
 	
 	document.getElementById('compose') && document.getElementById('compose').addEventListener('click',()=>{
 		var layer = document.createElement('div');
-		document.body.style.backgroundColor = '#000000';
-		document.querySelector('meta[name="theme-color"]').setAttribute('content','#000000');
+		setTimeout(()=>{
+			document.body.style.backgroundColor = '#000000';
+			document.querySelector('meta[name="theme-color"]').setAttribute('content','#000000');
+			document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]').setAttribute('content','#000000');
+		},30);
 		document.getElementsByTagName('form')[0].style.cssText = "animation:zoomIn .3s forwards;";
 
 		layer.style.cssText = "cursor:pointer;position:absolute;z-index:2;width:100vw;height:100vh;left:0;top:0;";
@@ -915,7 +938,6 @@ United States of America</textarea></div>
 			setTimeout(()=>{
 				document.body.style.backgroundColor = bg;
 				document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
-				
 			},30);
 		});
 		layer.id = 'layer';
@@ -949,10 +971,10 @@ United States of America</textarea></div>
 		document.getElementById('popSend').addEventListener('click',()=>{
 			document.getElementsByTagName('form')[0].style.cssText = "animation:zoomOut 0s forwards;";
 			document.getElementById('pop').style.animation = "fadeUp .15s forwards";
-			setTimeout(()=>{killPop()},90);
+			setTimeout(()=>{
+				killPop();
+				location.reload();
+			},90);
 		});
 	});
-	setTimeout(()=>
-		document.querySelector("meta[name=viewport]").setAttribute("content", "height=" + parseInt(screen.height) + ",width=device-width,initial-scale=1,maximum-scale=1")
-	,300);
 </script>
