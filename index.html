@@ -29,17 +29,22 @@
 			input:focus, select:focus, label:focus, textarea:focus, button:focus {outline: none;}
 			body, form, dl, dt, dd {margin:0;padding:0}
 			form {display: grid;grid-template-columns: 50vw auto;overflow:hidden}
-			body,#leftPart,#detail{background-color:var(--bg);font-size:var(--fnSm);color:var(--dd);overflow:hidden}
-			dt {font-size:var(--fnBg);color:var(--dt)}
+			body,.menus div label,#leftPart,#detail{background-color:var(--bg);font-size:var(--fnBg);color:var(--dd);overflow:hidden}
+			dt,#leftPart {font-size:var(--fnBg);}
+
+			dt {color:var(--dt)}
 			fieldset {border:0;}
 			dt {font-weight:bolder;}
 			.group, .button, label {user-select: none;}
 			#dualSection, #detail {grid-template-rows: auto 1fr;height: 100vh;}
 			#dualSection {display:grid;grid-template-columns: 20vw auto;}
 			svg {stroke:var(--dd);stroke-width:5;}
+
 			aside svg, svg:hover {stroke:var(--hg)}
+			svg:has(.blackFlag:hover) .blackFlag,svg:hover .flag {fill:var(--hg);stroke:var(--hg)}
+
 			polygon, path, circle {stroke-linejoin:round;fill:transparent;}
-			.blackFlag {fill:#0063E2;stroke:var(--hg)}
+			.blackFlag {fill:var(--dd);stroke:transparent}
 			.whiteFlag {fill:transparent;stroke:transparent}
 			#microphone {visibility:hidden}
 			aside, #leftPart{border-right:solid 1px var(--bCol);}
@@ -49,28 +54,27 @@
 			.alRight, label dl dd {justify-content: right;text-align:right;}
 			label dl:nth-child(2) dt {font-weight:normal}
 
-			.alRight {margin-left:auto}
+			
 			#detail header {display:grid;grid-template-columns:auto 10vw}
-			.task h1 {margin:0;padding:0 0 0 2vh;color:var(--dt)}
+			.task h1 {margin:0;padding:0 0 0 4vh;color:var(--dd)}
 
 			#navLabel {display:none}
 			input[type='checkbox'],input[type='radio'] {margin:0;padding:0;display:block;transform: scale(0.1);appearance:none;opacity:0}
-			.task {display:flex;padding-right:2vh;/*border-bottom:solid 1px var(--bCol);*/color:var(--dd);}
-			.task > * {padding:2vh 0 2vh 2vh}
+			.task {display:flex;padding-right:2vh;color:var(--dd);}
+			.task > * {padding:2vh 2vh 2vh 2vh}
+			.alRight {margin-left:auto;padding:2vh!important}
 
 			#leftPart .task {margin-left:19.94vw;border-left:solid 1px var(--bCol);}
-			#leftPart .task label:nth-child(1) {display:none}
-			#leftPart .task label:nth-child(3) {margin-left:auto}
-
-			#backButton, #detail header span {display:none}
+			#leftPart .task label:nth-child(2) {margin-left:auto} 
+			#leftPart .task label label {display:none}
+			#backButton, #detail header span {visibility:hidden}
 			#rows {padding:0 2vh 2vh 2vh}
 			
 			#searchForm {display:none;background-color:var(--bCol);margin:.5vh 0vh 2vh 0vh;padding:1vh;border-radius:1vh}
 			#searchForm input {width:100%;border:none;outline:0;background-color:var(--bCol); font-size: var(--fnSm);color:var(--dt)}
 
-			#rows div h2 {margin:0vh 0vh .5vh 0vh}
-			#rows h2 {display:none}
 			#magnify {margin-right:4vh;}
+			#compose {margin-right:0;}
 			
 
 			#rows label {border-top:solid 1px var(--bCol);}
@@ -99,10 +103,11 @@
 
 			.button {height:3vh;cursor:pointer;color:var(--hg)}
 			aside, #rows, #main {overflow-y:scroll;scrollbar-width:none;}
-			.menus, #main {padding:2vh;}
+			.menus {padding:.7vh 2vh 2vh 2vh;}
+			#main {padding:0 2vh 2vh 2vh;}
 			#detail {display: grid;}
 			#detail .button {margin-right:4vh;}
-			#detail .button:last-child {margin-right:0!important;/*display:none*/}
+			#detail .button:last-child {margin-right:0!important;}
 			#detail header {z-index:1;background-color:var(--bg)}
 			#detail .task header dl {margin-left:auto}
 			#detail .task .valign {margin:auto}
@@ -114,7 +119,6 @@
 			.group + input:checked + div {display:none}
 
 			#rows label:last-child {margin-bottom:6vh}
-			#main {padding:2vh;}
 			#preview {border-bottom:solid 1px var(--bCol)}
 
 			.entries > div {border-bottom:solid 1px var(--bCol);padding:2vh 2vh 2vh 2vh;display:grid;grid-template-columns: 20% auto;font-size:var(--fnBg)}
@@ -131,7 +135,7 @@
 				animation:slideUp .17s forwards ease-out;
 				position:absolute;z-index:3;
 				background-color:var(--bg);
-				padding:2vh;width:60vw;height:86vh;
+				padding:2vh;width:60vw;height:80vh;
 				left:20vw;top:5vh;border-radius:1vh;
 				box-shadow: 1px -1px 66px -20px rgba(0,0,0,0.75);
 			}
@@ -170,26 +174,27 @@
 			}
 			@media (max-width:1180px) {
 				form {grid-template-columns: 32vw auto;}
-				/*#detail .task .valign {margin:auto}*/
 				#detail .task .valign .button:nth-child(2){margin-left:10vw}
 				#navLabel {display:flex;align-items:center}
 
 				#leftPart .task {margin-left:0;border-left:0}
-				#leftPart .task h1 {display:none}
-				#leftPart .task label:nth-child(1) {display: block;}
+				.task svg {stroke:var(--hg);}
+				.task h1 {padding: 0 0 0 4vh;}
+				#compose {margin-right:4vh;}
+				#leftPart .task label label {display:block}
 
 				aside {border-right:0}
-				.menus {font-size:var(--fnBg);}
+				.menus {font-size:var(--fnBg);padding: .7vh 4vh 4vh 4vh;}
 				.menus label svg{height:var(--fnBg);padding-top:0.5px}
 				.button {margin-right:0;font-size:5vh;}
 				#detail .button {margin-right:4.5vh;}
+				.blackFlag {fill:#0063E2;stroke:var(--hg)}
 
 				#dualSection {grid-template-columns: 31.8vw;}
 				#navToggle + fieldset {display:none}
 				#navToggle:checked + fieldset {display:block}
 
 				#rows {padding:0 2vh 2vh 2vh}
-				#rows div h2 {margin:.5vh 0 1.6vh 0;padding:0;color:var(--dt);display:block}
 				#searchForm {margin:0 0 1vh 0;}
 				#rows label div:last-of-type div:last-of-type {
 					display:-webkit-box;
@@ -198,10 +203,9 @@
 					min-height:calc(var(--fnSm) * 2.4);
 					overflow:hidden;
 				}
-				.task svg {stroke:var(--hg);}
-				label {padding:2vh;}
+				
+				label {padding:0;}
 				input[type='checkbox'],input[type='radio'] {display:none}
-
 				.menus .group {animation:navStart .3s forwards}
 				.entries div {grid-template-columns: 22% auto;}
 				@keyframes navStart {
@@ -211,22 +215,25 @@
 			}
 			@media (max-width:974px) {
 				aside,#rows,#main,#pop {width:100vw}
-				.menus {height:100vh;}
+				.menus {height:100vh;padding: .7vh 2vh 2vh 2vh;}
 				#rows {padding:0;margin:0;}
 				#rows label {border-top:none;padding:1.4vh 2vh 1.4vh 2vh;background-color:var(--bg);border-bottom:solid 1px var(--bCol);}
 				#rows label:first-of-type {border-top:none;}
 				form {border-radius:1vh}
 
 				#leftPart .task {margin-left:0;border-left:0;}
-				#compose {margin-right:0}
+				#compose {margin-right:4vh}
 				#detail .task svg {display:flex;}
 				form, #backButton, #detail .task, .entries > div {display: block;}
+				#backButton,  #detail header span {visibility:visible}
 				#dualSection {display:grid}
 				.menus, #detail .task dl {display:none}
 				.menus label svg{padding-top:1px}
 				#navToggle:checked + fieldset {display:block}
 
-				#rows div h2 {margin:.5vh 2vh .7vh 2vh}
+				.task h1 {padding: 0 0 0 2vh;}
+				.task > * {padding-right: 0;}
+				
 				#searchForm {margin:0 2vh 0 2vh;}
 
 				#rows input:checked + label {color:var(--dd);opacity:1}
@@ -235,16 +242,16 @@
 				#rows input:checked + label + input + label {border-top:none;}
 				#rows input:checked + label div:nth-child(2) > div, #rows input:checked + label dd  {opacity:1;}
 
-				#detail {/*height:100vh;*/display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);}
+				#detail {display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);}
 				.wrap > textarea,.wrap::after {width:90vw;}
-				#main {padding:0;}
+				
 				#detail .button {margin-right:3.8vh;}
 				#backButton {margin-right:0!important;}
 				#detail header span {display:block;color:var(--hg);cursor:pointer}
 
 				#detail .task .button:last-child {display:block;margin-right:0!important;margin-left:0!important}
 				#detail .task .button:nth-last-child(3) {display:block;margin-right:3.8vh!important;margin-left:auto!important}
-				
+				#main {padding:0}
 				#preview {margin:1vh 2vh 0 2vh;padding:0 0 2vh 0}
 				.entries {padding:0 2vh 2vh 2vh}
 				.entries > div {padding:2vh 0}
@@ -277,15 +284,6 @@
 		<form action="?" method="post">
 		<section id="leftPart">
 			<header class="task">
-				<label for="navToggle" class="valign">
-					<svg class="button" viewbox="0 0 100 100" id="aside" for="navToggle">
-						<polygon points="10,90 95,90 95,20 10,20" />
-						<polygon points="40,90 40,20" />
-						<polygon points="18,30 32,30" />
-						<polygon points="18,40 32,40" />
-						<polygon points="18,50 32,50" />
-					</svg>
-				</label>
 				<h1 class="valign">Sent</h1>
 				<label class="valign">
 					<svg class="button valign" viewbox="0 0 100 100" id="magnify">
@@ -297,6 +295,15 @@
 						<polygon points="50,10 50,35" />
 						<polygon points="50,35 80,35" />
 					</svg>
+					<label for="navToggle" class="valign">
+						<svg class="button valign" viewbox="0 0 100 100" id="aside" for="navToggle">
+							<polygon points="10,90 95,90 95,20 10,20" />
+							<polygon points="40,90 40,20" />
+							<polygon points="18,30 32,30" />
+							<polygon points="18,40 32,40" />
+							<polygon points="18,50 32,50" />
+						</svg>
+					</label>
 				</label>
 			</header>
 			<div id="dualSection">
@@ -314,7 +321,7 @@
 									<polygon points="50,50 68,68" />
 									<polygon points="10,48 20,48 15,53" />
 								</svg>
-								<div>Newest Entries</div>
+								<div>Newest Entry</div>
 							</label>
 							<input type="radio" name="path" id="b9">
 							<label for="b9">
@@ -324,7 +331,7 @@
 									<polygon points="50,50 68,68" />
 									<polygon points="10,48 20,48 15,53" />
 								</svg>
-								<div>Oldest Entries</div>
+								<div>Oldest Entry</div>
 							</label>
 						</div>
 						<label for="fd1" class="group">Favorites</label>
@@ -471,8 +478,6 @@
 				</aside>
 				<fieldset id="rows">
 					<div>
-						<h2>Sent</h2>
-						
 						<div id="searchForm">
 							<input placeholder="Search" name="q" ondblclick="this.value=''" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="off">
 						</div>
@@ -803,7 +808,7 @@ United States of America</textarea></div>
 			document.querySelector('#entries').style.cssText = "zoom:normal;padding:0 2vh 2vh 2vh;margin:0";
 		}
 		else {
-			document.querySelector('#main').style.cssText = "zoom:normal;padding:2vh;margin:0";
+			document.querySelector('#main').style.cssText = "zoom:normal;padding:0 2vh 2vh 2vh;margin:0";
 		}
 	},
 	changeFlag = (color) => {
@@ -816,17 +821,20 @@ United States of America</textarea></div>
 	
 	expand('form textarea');
 
-	width < 1181 && [...document.querySelectorAll('#rows label')].forEach(list => {
+	[...document.querySelectorAll('#rows label')].forEach(label => {
 		var setPrev = () => {
 			window.scrollTo(0,0);
-			preview.innerHTML = list.innerHTML;
+			preview.innerHTML = label.innerHTML;
+			changeFlag(preview.getElementsByTagName('dd')[1].innerText.split("").map(char => `&#${char.charCodeAt(0)};`).join(""));
 			adjusting();
 		}
-		(list.previousElementSibling.nodeName.toLowerCase() == 'input') && list.previousElementSibling.checked && setPrev();
-		list.addEventListener('click', setPrev);
+		(label.previousElementSibling.nodeName.toLowerCase() == 'input') && label.previousElementSibling.checked && setPrev();
+		label.addEventListener('click', setPrev);
 	});
+
+	
 	[...document.querySelectorAll('#rows > input')].forEach(list => {
-		list.addEventListener((isPhone?'input':'focus'),()=>{
+		list.addEventListener('input',()=>{
 			selected = list;
 			window.scrollTo(0,0);
 			preview.innerHTML = list.nextElementSibling.innerHTML;
@@ -859,32 +867,33 @@ United States of America</textarea></div>
 			},500);
 		});
 	});
+
 	document.getElementById("navToggle").addEventListener("click",() => {
 		var checked = document.getElementById("navToggle").checked;
 		document.getElementById("rows").style.display = checked?"none":"block";
-		document.querySelector("header label:last-child").style.visibility = checked?"hidden":"visible";
+		[...document.querySelectorAll("#compose,#magnify")].forEach(svg=>{
+			svg.style.visibility = checked?"hidden":"visible";
+		});
 	});
+
 	document.getElementById("magnify").addEventListener("click",() => {
 		var sf = document.getElementById("searchForm").style;
-		var h2 = document.querySelector("#rows h2").style;
 		if(sf.display == "block") {
 			sf.display = "none";
-			h2.display = (width < 1181) && "block";
 			(selected instanceof HTMLElement) && selected.focus();
 		}
 		else {
 			sf.display = "block";
-			h2.display = "none";
 			document.querySelector("#searchForm input").focus();
 		}
 	});
 
 	[...document.querySelectorAll('.menus div div')].forEach(node => {
 		node.addEventListener('click',()=>{
-			[...document.querySelectorAll('h1,h2')].forEach((each)=>{
+			[...document.querySelectorAll('h1')].forEach((each)=>{
 				each.innerText = node.innerText;
 			});
-			if(width < 1181){
+			if(width < 1179){
 				document.getElementById("navToggle").click();
 			}
 		});
@@ -892,7 +901,7 @@ United States of America</textarea></div>
 
 	[...document.querySelectorAll('#saveButton, #delButton, #flagButton')].forEach(button => {
 		button.addEventListener('click',()=>{
-			if(isPhone){
+			if(width<1181){
 				button.style.stroke = getComputedStyle(document.body).getPropertyValue('--dd');
 				if(button.id=='flagButton'){
 					[...document.querySelectorAll('#flagButton polygon.blackFlag')].forEach((pol)=>{
@@ -913,7 +922,7 @@ United States of America</textarea></div>
 	
 	document.getElementById('compose') && document.getElementById('compose').addEventListener('click',()=>{
 		var layer = document.createElement('div');
-		setTimeout(()=>{
+		(width < 1000) && setTimeout(()=>{
 			document.body.style.backgroundColor = '#000000';
 			document.querySelector('meta[name="theme-color"]').setAttribute('content','#000000');
 			document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]').setAttribute('content','#000000');
@@ -922,8 +931,9 @@ United States of America</textarea></div>
 
 		layer.style.cssText = "cursor:pointer;position:absolute;z-index:2;width:100vw;height:100vh;left:0;top:0;";
 		
-		if(width>1180){
-			layer.style.backdropFilter = "blur(10px)";
+		if(width>1000){
+			layer.style.backdropFilter = "blur(20px)";
+			layer.style.webkitBackdropFilter = "blur(20px)";
 			if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 				layer.style.background = "rgba(0, 0, 0, 0.4)";
 			}
