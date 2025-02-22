@@ -56,7 +56,7 @@
 
 			
 			#detail header {display:grid;grid-template-columns:auto 10vw}
-			.task h1 {margin:0;padding:0 0 0 4vh;color:var(--dd)}
+			.task h1 {margin:0;padding:0 0 0 4vh;color:var(--dd);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
 			#navLabel {display:none}
 			input[type='checkbox'],input[type='radio'] {margin:0;padding:0;display:block;transform: scale(0.1);appearance:none;opacity:0}
@@ -182,6 +182,7 @@
 				.task h1 {padding: 0 0 0 4vh;}
 				#compose {margin-right:4vh;}
 				#leftPart .task label label {display:block}
+				#leftPart .task label label svg {vertical-align: middle;}
 
 				aside {border-right:0}
 				.menus {font-size:var(--fnBg);padding: .7vh 4vh 4vh 4vh;}
@@ -716,10 +717,15 @@
 				</div>
 
 				<dl class="alRight">
-					<svg viewbox="0 0 100 100" class="button valign">
-						<circle cx="49" cy="50" r="40" />
-						<circle cx="50" cy="32" r="13" />
-						<path d="M 18 76 q 32 -44 62 0" />
+					<svg viewbox="0 0 100 100" class="button valign" onclick="location.reload()">
+						<polygon points="10,10 10,90" />
+						<polygon points="10,90 60,90" />
+						<polygon points="60,90 60,70" />
+						<polygon points="60,30 60,10" />
+						<polygon points="60,10 10,10" />
+						<polygon points="30,50 97,50" />
+						<polygon points="83,35 97,50" />
+						<polygon points="83,65 97,50" />
 					</svg>
 				</dl>
 				
