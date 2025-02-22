@@ -258,6 +258,7 @@
 				#pop .entries {height: 84vh;overflow: scroll;}
 				#pop {box-shadow:none;padding:0;height:96vh;left:0;top:4vh;border-top-left-radius:1vh;border-top-right-radius:1vh}
 				#pop > div:first-of-type {padding:2vh 2vh 0 2vh;margin:0}
+				#pop h1 {padding:0 2vh;}
 
 				@keyframes listSel {from {background-color:var(--bCol);} to {background-color:transparent;}}
 				@keyframes zoomIn {from {transform:scale(1);opacity:1;} to {transform:scale(.94);opacity:.9;}}
@@ -310,11 +311,11 @@
 				<aside>
 					<input type="checkbox" id="navToggle">
 					<fieldset class="menus">
-						<label for="fd3" class="group">List Actions</label>
-						<input type="checkbox" id="fd3">
+						<label for="fd0" class="group">List Actions</label>
+						<input type="checkbox" id="fd0">
 						<div>
-							<input type="radio" name="path" id="b8">
-							<label for="b8">
+							<input type="radio" name="path" id="b0">
+							<label for="b0">
 								<svg viewbox="0 0 100 100" class='paperplane'>
 									<circle cx="52.5" cy="50" r="38"  />
 									<polygon points="50,22 50,50" />
@@ -323,8 +324,8 @@
 								</svg>
 								<div>Newest Entry</div>
 							</label>
-							<input type="radio" name="path" id="b9">
-							<label for="b9">
+							<input type="radio" name="path" id="ba">
+							<label for="ba">
 								<svg viewbox="0 0 100 100" class='paperplane'>
 									<circle cx="52.5" cy="50" r="38"  />
 									<polygon points="50,22 50,50" />
@@ -410,11 +411,11 @@
 
 
 
-						<label for="fd2" class="group">Trash</label>
-						<input type="checkbox" id="fd2">
+						<label for="fd3" class="group">Trash</label>
+						<input type="checkbox" id="fd3">
 						<div>
-							<input type="radio" name="path" id="b5">
-							<label for="b5">
+							<input type="radio" name="path" id="b8">
+							<label for="b8">
 								<svg viewbox="0 0 100 100" class='tray'>
 									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
 									<polygon points="10,50 35,50" />
@@ -423,8 +424,8 @@
 								</svg>
 								<div>Inbox</div>
 							</label>
-							<input type="radio" name="path" id="b6">
-							<label for="b6">
+							<input type="radio" name="path" id="b9">
+							<label for="b9">
 								<svg viewbox="0 0 100 100" class='doc'>
 									<polygon points="20,10 50,10 80,35 80,90 20,90" />
 									<polygon points="50,10 50,35" />
@@ -432,8 +433,8 @@
 								</svg>
 								<div>Drafts</div>
 							</label>
-							<input type="radio" name="path" id="b7">
-							<label for="b7">
+							<input type="radio" name="path" id="b10">
+							<label for="b10">
 								<svg viewbox="0 0 100 100" class='paperplane'>
 									<polygon points="10,45 90,10 60,90 45,55" />
 									<polygon points="45,55 90,10" />
@@ -442,11 +443,11 @@
 							</label>
 						</div>
 
-						<label for="fd2" class="group">Archives</label>
-						<input type="checkbox" id="fd2">
+						<label for="fd4" class="group">Archives</label>
+						<input type="checkbox" id="fd4">
 						<div>
-							<input type="radio" name="path" id="b5">
-							<label for="b5">
+							<input type="radio" name="path" id="b11">
+							<label for="b11">
 								<svg viewbox="0 0 100 100" class='tray'>
 									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
 									<polygon points="10,50 35,50" />
@@ -455,8 +456,8 @@
 								</svg>
 								<div>Inbox</div>
 							</label>
-							<input type="radio" name="path" id="b6">
-							<label for="b6">
+							<input type="radio" name="path" id="b12">
+							<label for="b12">
 								<svg viewbox="0 0 100 100" class='doc'>
 									<polygon points="20,10 50,10 80,35 80,90 20,90" />
 									<polygon points="50,10 50,35" />
@@ -464,8 +465,8 @@
 								</svg>
 								<div>Drafts</div>
 							</label>
-							<input type="radio" name="path" id="b7">
-							<label for="b7">
+							<input type="radio" name="path" id="b13">
+							<label for="b13">
 								<svg viewbox="0 0 100 100" class='paperplane'>
 									<polygon points="10,45 90,10 60,90 45,55" />
 									<polygon points="45,55 90,10" />
@@ -485,7 +486,7 @@
 					</div>
 					<input type="radio" name="li" id="a1">
 					<label for="a1">
-						<div class="circ">GB</div>
+						<div class="circ" style="background-image:url('avatars/1.jpg')"></div>
 						<div>
 							<dl>
 								<dt>Gary Butcher</dt>
@@ -501,7 +502,7 @@
 					
 					<input type="radio" name="li" id="a2">
 					<label for="a2">
-						<div class="circ">AK</div>
+						<div class="circ" style="background-image:url('avatars/2.jpg')"></div>
 						<div>
 							<dl>
 								<dt>Ashley Kamin</dt>
@@ -511,13 +512,13 @@
 								<dt>Lebanese Family Recipes for you and for your family</dt>
 								<dd>&#9873;</dd>
 							</dl>
-							<div>Hey I was thinking it would be great if we could have some more if you want to go to the store please buy some milk..</div>
+							<div>Hey I was thinking it would be great if we could have some more if you want to go to the store please buy some milk</div>
 						</div>
 					</label>
 					
-					<input type="radio" name="li" id="a3">
+					<input type="radio" name="li" id="a3" tabindex="1" checked autofocus>
 					<label for="a3">
-						<div class="circ">GA</div>
+						<div class="circ" style="background-image:url('avatars/3.jpg')"></div>
 						<div>
 							<dl>
 								<dt>Greg Apodaca</dt>
@@ -527,29 +528,29 @@
 								<dt>Portfolio Review</dt>
 								<dd>&#9873;</dd>
 							</dl>
-							<div>Thanks for sharing! The recipes were</div>
+							<div>Thanks for sharing! Excellent product!</div>
 						</div>
 					</label>
 					
-					<input type="radio" name="li" id="a4" tabindex="1" checked autofocus>
+					<input type="radio" name="li" id="a4">
 					<label for="a4">
-						<div class="circ">CA</div>
+						<div class="circ" style="background-image:url('avatars/4.jpg')"></div>
 						<div>
 							<dl>
-								<dt>Christina Ahmed</dt>
+								<dt>Christina Swift</dt>
 								<dd>6/18/20</dd>
 							</dl>
 							<dl>
 								<dt>New Hiking Spot</dt>
 								<dd>&#9872;</dd>
 							</dl>
-							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
+							<div>Wow, look at that lake! What if we make it an overnight trip</div>
 						</div>
 					</label>
 					
 					<input type="radio" name="li" id="a5">
 					<label for="a5">
-						<div class="circ">DE</div>
+						<div class="circ" style="background-image:url('avatars/5.jpg')"></div>
 						<div>
 							<dl>
 								<dt>Daren Estrada</dt>
@@ -559,13 +560,13 @@
 								<dt>The Best Vacation</dt>
 								<dd>&#9872;</dd>
 							</dl>
-							<div>Morning! I was put in touch with Tania by a mutual friend. She had and amazing..</div>
+							<div>Morning! I was put in touch with Tania by a mutual friend. She had and amazing</div>
 						</div>
 					</label>
 					
 					<input type="radio" name="li" id="a6">
 					<label for="a6">
-						<div class="circ">LY</div>
+						<div class="circ" style="background-image:url('avatars/6.jpg')"></div>
 						<div>
 							<dl>
 								<dt>Lucinda Yang</dt>
@@ -581,7 +582,7 @@
 					
 					<input type="radio" name="li" id="a7">
 					<label for="a7">
-						<div class="circ">SP</div>
+						<div class="circ" style="background-image:url('avatars/7.jpg')"></div>
 						<div>
 							<dl>
 								<dt>Simon Pickford</dt>
@@ -591,13 +592,13 @@
 								<dt>Send photos please</dt>
 								<dd>&#9872;</dd>
 							</dl>
-							<div>We're in the early stages of planning a neighborhood garden. Each family would..</div>
+							<div>We're in the early stages of planning a neighborhood garden. Each family would</div>
 						</div>
 					</label>
 					
 					<input type="radio" name="li" id="a8">
 					<label for="a8">
-						<div class="circ">GK</div>
+						<div class="circ" style="background-image:url('avatars/8.jpg')"></div>
 						<div>
 							<dl>
 								<dt>Geetika Kapoor</dt>
@@ -613,7 +614,7 @@
 					
 					<input type="radio" name="li" id="a9">
 					<label for="a9">
-						<div class="circ">RA</div>
+						<div class="circ" style="background-image:url('avatars/9.jpg')"></div>
 						<div>
 							<dl>
 								<dt>Rody Aulbuerne</dt>
@@ -623,13 +624,13 @@
 								<dt>New Hiking Spot</dt>
 								<dd>&#9872;</dd>
 							</dl>
-							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
+							<div>Wow, look at that lake! What if we make it an overnight trip and do</div>
 						</div>
 					</label>
 					
 					<input type="radio" name="li" id="a10">
 					<label for="a10">
-						<div class="circ">JC</div>
+						<div class="circ" style="background-image:url('avatars/10.jpg')"></div>
 						<div>
 							<dl>
 								<dt>Jenny Court</dt>
@@ -639,13 +640,13 @@
 								<dt>New Hiking Spot</dt>
 								<dd>&#9872;</dd>
 							</dl>
-							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
+							<div>Wow, look at that lake! What if we make it an overnight trip and do</div>
 						</div>
 					</label>
 					
 					<input type="radio" name="li" id="a11">
 					<label for="a11">
-						<div class="circ">HA</div>
+						<div class="circ" style="background-image:url('avatars/11.jpg')"></div>
 						<div>
 							<dl>
 								<dt>Herland Antezana</dt>
@@ -655,13 +656,13 @@
 								<dt>New Hiking Spot</dt>
 								<dd>&#9872;</dd>
 							</dl>
-							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
+							<div>Wow, look at that lake! What if we make it an overnight trip and do</div>
 						</div>
 					</label>
 					
 					<input type="radio" name="li" id="a12">
 					<label for="a12">
-						<div class="circ">RR</div>
+						<div class="circ" style="background-image:url('avatars/12.jpg')"></div>
 						<div>
 							<dl>
 								<dt>Rigo Ragel</dt>
@@ -671,7 +672,7 @@
 								<dt>New Hiking Spot</dt>
 								<dd>&#9872;</dd>
 							</dl>
-							<div>Wow, look at that lake! What if we make it an overnight trip and do...</div>
+							<div>Wow, look at that lake! What if we make it an overnight trip and do</div>
 						</div>
 					</label>
 
@@ -729,50 +730,39 @@
 				<div id="entries" class="entries" action="?" method="post">
 					<div>
 						<label for="f1">mobile</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f1" placeholder="home">(415) 555-9225</textarea></div>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f1" placeholder="number">(415) 555-9225</textarea></div>
 					</div>
 					<div>
 						<label for="f2">FaceTime</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f2" placeholder="home">When you pass by me Say hello once in a while. When you pass by me baby. Does it hurt so much to smile We promised that we'd still be friends until the very end Begging you, baby Let me down easy. Let me down easy For your love for me is gone Let me down easy Since you feel to stay is wrong</textarea></div>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f2" placeholder="text">Like the sky and earth are never as natural as black and white are never the same color, only we feel it. Learning to let go of himself even though half of me is with him, I'm sure we'll get used to it even if the core of our soul doesn't accept it</textarea></div>
 					</div>
 					<div>
 						<label for="f3">home</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f3" placeholder="Phone">sillers_chis@icloud.com</textarea></div>
+						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f3" placeholder="email">egobrain@function.com</textarea></div>
 					</div>
 					<div>
 						<label for="f4">birthday</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f4" placeholder="home">May 26</textarea></div>
+						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f4" placeholder="date">April 3th</textarea></div>
 					</div>
 					<div>
 						<label for="f5">homepage</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f5" placeholder="home">6109 Winthrop St.
-San Francisco CA 94113.
-United States of America</textarea></div>
-					</div>
-
-
-
-
-
-					<div>
-						<label for="f1">fax</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f1" placeholder="home">(415) 555-9225</textarea></div>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f5" placeholder="text">Fourtwnty</textarea></div>
 					</div>
 					<div>
-						<label for="f2">notes</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f2" placeholder="home">When you pass by me Say hello once in a while. When you pass by me baby. Does it hurt so much to smile We promised that we'd still be friends until the very end Begging you, baby Let me down easy. Let me down easy For your love for me is gone Let me down easy Since you feel to stay is wrong</textarea></div>
+						<label for="f6">fax</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f6" placeholder="phone">(2015) 420-024</textarea></div>
 					</div>
 					<div>
-						<label for="f3">office</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f3" placeholder="Phone">sillers_chis@icloud.com</textarea></div>
+						<label for="f7">notes</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1" id="f7" placeholder="note">Like water and fire that never mix, like east and west that never go in the same direction</textarea></div>
 					</div>
 					<div>
-						<label for="f4">postal</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f4" placeholder="home">May 26</textarea></div>
+						<label for="f8">office</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f8" placeholder="device">Microphone</textarea></div>
 					</div>
 					<div>
-						<label for="f5">country</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f5" placeholder="home">6109 Winthrop St.
+						<label for="f9">postal</label>
+						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f9" placeholder="text">6109 Winthrop St.
 San Francisco CA 94113.
 United States of America</textarea></div>
 					</div>
@@ -964,8 +954,8 @@ United States of America</textarea></div>
 			});
 		}
 		var tmp = "";
-		tmp  = "<div>";
-		tmp += "<div class='cancel'>Cancel</div><div id='popSend'>Save</div></div>";
+		tmp  = "<div><div class='cancel'>Cancel</div><div id='popSend'>Send</div></div>";
+		tmp += "<h1>"+document.getElementsByTagName('h1')[0].innerHTML+"</h1>";
 		tmp += "<div class='entries'>" + document.getElementById('entries').innerHTML + "</div>";
 		pop.innerHTML = tmp;
 		pop.id = "pop";
