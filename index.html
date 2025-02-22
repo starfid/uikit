@@ -251,7 +251,9 @@
 				#detail header span {display:block;color:var(--hg);cursor:pointer}
 
 				#detail .task .button:last-child {display:block;margin-right:0!important;margin-left:0!important}
-				#detail .task .button:nth-last-child(3) {display:block;margin-right:3.8vh!important;margin-left:auto!important}
+				
+				#detail .task .valign .button:nth-child(3) { display:block;margin-right:3.8vh!important;margin-left:auto!important}
+				
 				#main {padding:0}
 				#preview {margin:1vh 2vh 0 2vh;padding:0 0 2vh 0}
 				.entries {padding:0 2vh 2vh 2vh}
@@ -689,6 +691,25 @@
 						<polygon points="10,50 50,90" />
 					</svg>
 					<span>Back</span>
+					<svg viewbox="0 0 100 100" class="button" id='arrow-turn-up-right'>
+						<polygon points="51,10 51,35" />
+						<polygon points="51,10 90,50" />
+						<polygon points="90,50 51,90" />
+						<polygon points="51,65 51,90" />	
+						<path d="M 10 90 q 0 -50 41 -55" />
+						<path d="M 10 90 q 0 -27 41 -25" />
+					</svg>
+					<svg viewbox="0 0 100 100" class="button" id='printerButton'>
+						<polygon points="10,25 90,25 90,75 75,75 75,50 25,50 25,75 10,75" />
+						<polygon points="25,75 25,90" />
+						<polygon points="25,90 75,90" />
+						<polygon points="75,90 75,75" />
+						<polygon points="35,65 65,65" />
+						<polygon points="35,75 65,75" />
+						<polygon points="25,10 25,25" />
+						<polygon points="25,10 75,10" />
+						<polygon points="75,10 75,25" />
+					</svg>
 					<svg viewbox="0 0 100 100" class="button delete" id="delButton">
 						<polygon points="33,10 68,10 68,20 33,20" />
 						<polygon points="20,20 80,20 75,90 25,90" />
@@ -895,7 +916,7 @@ United States of America</textarea></div>
 		});
 	});
 
-	[...document.querySelectorAll('#saveButton, #delButton, #flagButton')].forEach(button => {
+	[...document.querySelectorAll('#detail .task .valign .button:not(#backButton)')].forEach(button => {
 		button.addEventListener('click',()=>{
 			if(width<1181){
 				button.style.stroke = getComputedStyle(document.body).getPropertyValue('--dd');
