@@ -173,7 +173,7 @@
 				.button {font-size:4vh;}
 			}
 			@media (max-width:1180px) {
-				form {grid-template-columns: 32vw auto;}
+				form {grid-template-columns: 36vw auto;}
 				#detail .task .valign .button:nth-child(2){margin-left:10vw}
 				#navLabel {display:flex;align-items:center}
 
@@ -191,7 +191,7 @@
 				#detail .button {margin-right:4.5vh;}
 				.blackFlag {fill:#0063E2;stroke:var(--hg)}
 
-				#dualSection {grid-template-columns: 31.8vw;}
+				#dualSection {grid-template-columns: 35.9vw;}
 				#navToggle + fieldset {display:none}
 				#navToggle:checked + fieldset {display:block}
 
@@ -841,6 +841,7 @@ United States of America</textarea></div>
 	[...document.querySelectorAll('#rows label')].forEach(label => {
 		var setPrev = () => {
 			window.scrollTo(0,0);
+			document.querySelector('#main').scrollTo(0,0);
 			preview.innerHTML = label.innerHTML;
 			changeFlag(preview.getElementsByTagName('dd')[1].innerText.split("").map(char => `&#${char.charCodeAt(0)};`).join(""));
 			adjusting();
