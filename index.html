@@ -85,7 +85,7 @@
 			.menus input:checked + label {border-radius:1vh;color:var(--dt)!important;animation:menuSel 0.7s forwards;}
 
 			.circ {
-				justify-content: center;margin-right:2vh;border-radius:6vh;min-width:6vh;height:6vh;
+				justify-content: center;margin-right:2vh;margin-top:.2vh;border-radius:6vh;min-width:6vh;height:6vh;
 				color:var(--bg);background-size: cover!important;background-repeat: no-repeat;
 				background-color: rgb(165,169,175);
 				background: linear-gradient(180deg, rgba(165,169,175,1) 50%, rgba(130,132,135,1) 100%); 
@@ -820,6 +820,10 @@ United States of America</textarea></div>
 	},
 	selected,
 	adjusting = () => {
+		setTimeout(()=>{
+			window.scrollTo(0,0);
+			document.querySelector('#main').scrollTo(0,0);
+		},10);
 		if(isPhone){
 			document.querySelector('#preview').style.cssText = "zoom:normal;padding:0 0 2vh 0;margin:1vh 2vh 0 2vh";
 			document.querySelector('#entries').style.cssText = "zoom:normal;padding:0 2vh 2vh 2vh;margin:0";
@@ -840,8 +844,8 @@ United States of America</textarea></div>
 
 	[...document.querySelectorAll('#rows label')].forEach(label => {
 		var setPrev = () => {
-			window.scrollTo(0,0);
-			document.querySelector('#main').scrollTo(0,0);
+			//window.scrollTo(0,0);
+			//document.querySelector('#main').scrollTo(0,0);
 			preview.innerHTML = label.innerHTML;
 			changeFlag(preview.getElementsByTagName('dd')[1].innerText.split("").map(char => `&#${char.charCodeAt(0)};`).join(""));
 			adjusting();
