@@ -12,16 +12,9 @@
 		<meta content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no" name="viewport">
 		<style>
 			:root {
-				--bg	:#FFFFFF;
-				--bgMob	:#F0F0F6;
-				--bCol	:#F8F7F6;
-				--borL	:#E2E3E6;
-				--borT	:#D5D6D9;
-				--dt	:#181617;
-				--dd	:#858584;
-				--hg	:#0063E2;
-				--fnBg	:2.3vh;
-				--fnSm	:2vh;
+				--bg	:#FFFFFF;	--bgMob	:#F0F0F6;	--bCol	:#F8F7F6;
+				--borL	:#E2E3E6;	--borT	:#D5D6D9;	--dt	:#181617;
+				--dd	:#858584;	--hg	:#0063E2;	--fnBg	:2.3vh;		--fnSm	:2vh;
 			}
 			::-webkit-scrollbar {display: none;}
 			html {-webkit-tap-highlight-color: transparent;}
@@ -70,8 +63,8 @@
 			#backButton, #detail header span {visibility:hidden}
 			#rows {padding:0 2vh 2vh 2vh}
 			
-			#searchForm {display:none;background-color:var(--bCol);margin:.5vh 0vh 2vh 0vh;padding:1vh;border-radius:1vh}
-			#searchForm input {width:100%;border:none;outline:0;background-color:var(--bCol); font-size: var(--fnSm);color:var(--dt)}
+			#searchForm {display:none;height:4vh;animation:showSearch .2s forwards;background-color:var(--bCol);margin:.5vh 0vh 2vh 0vh;padding:1vh;border-radius:1vh}
+			#searchForm input {display:none;width:95%;margin:auto 1vh;border:none;outline:0;background-color:var(--bCol); font-size: var(--fnBg);color:var(--dt)}
 
 			#magnify {margin-right:4vh;}
 			#compose {margin-right:0;}
@@ -151,6 +144,7 @@
 			@keyframes slideUp {from {top:100vh;} to {top:5vh}}
 			@keyframes slideDown {from {top:5vh} to {top:100vh;}}
 			@keyframes fadeUp {from {top:5.1vh;} to {top:-100vh}}
+			@keyframes showSearch {from {height:.1vh;} to {height:3vh}}
 	
 			@keyframes zooming {
 				0% {zoom:normal;padding:2vh 2vh 0 2vh;margin:auto auto auto auto}
@@ -213,6 +207,7 @@
 					from {padding-top:0;opacity:0.2}
 					to {padding-top:1vh;opacity:1}
 				}
+			@keyframes showSearch {from {height:.1vh;} to {height:4vh}}
 			}
 			@media (max-width:974px) {
 				aside,#rows,#main,#pop {width:100vw}
@@ -268,7 +263,7 @@
 				@keyframes zoomOut {from {transform:scale(.94);opacity:.9;} to {transform:scale(1);opacity:1;}}
 				@keyframes slideUp {from {top:100vh;} to {top:4.2vh}}
 				@keyframes slideDown {from {top:4.2vh} to {top:100vh;}}
-
+				@keyframes showSearch {from {height:.1vh;} to {height:3vh;}}
 			}
 			@media (prefers-color-scheme: dark) {
 				body {background-color:#1E1E1E}
@@ -281,6 +276,9 @@
 					--dt	:#E5E5E5;
 				}
 				.circ {color:var(--dt)}
+			}
+			@supports (-webkit-touch-callout: none) {
+				@keyframes showSearch {from {height:.1vh;} to {height:4vh;}}
 			}
 		</style>
 	</head>
@@ -483,7 +481,7 @@
 				<fieldset id="rows">
 					<div>
 						<div id="searchForm">
-							<input placeholder="Search" name="q" ondblclick="this.value=''" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="off">
+							<input placeholder="" name="q" ondblclick="this.value=''" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="off">
 						</div>
 						
 					</div>
@@ -844,8 +842,6 @@ United States of America</textarea></div>
 
 	[...document.querySelectorAll('#rows label')].forEach(label => {
 		var setPrev = () => {
-			//window.scrollTo(0,0);
-			//document.querySelector('#main').scrollTo(0,0);
 			preview.innerHTML = label.innerHTML;
 			changeFlag(preview.getElementsByTagName('dd')[1].innerText.split("").map(char => `&#${char.charCodeAt(0)};`).join(""));
 			adjusting();
@@ -900,13 +896,20 @@ United States of America</textarea></div>
 
 	document.getElementById("magnify").addEventListener("click",() => {
 		var sf = document.getElementById("searchForm").style;
+		var si = document.querySelector("#searchForm input");
 		if(sf.display == "block") {
 			sf.display = "none";
+			si.placeholder = "";
+			si.style.display = "none";
 			(selected instanceof HTMLElement) && selected.focus();
 		}
 		else {
 			sf.display = "block";
-			document.querySelector("#searchForm input").focus();
+			setTimeout(()=>{
+				si.placeholder = "Search";
+				si.style.display = "block";
+				document.querySelector("#searchForm input").focus();
+			},200);
 		}
 	});
 
