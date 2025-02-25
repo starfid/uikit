@@ -144,7 +144,7 @@
 			@keyframes slideUp {from {top:100vh;} to {top:5vh}}
 			@keyframes slideDown {from {top:5vh} to {top:100vh;}}
 			@keyframes fadeUp {from {top:5.1vh;} to {top:-100vh}}
-			@keyframes showSearch {from {height:.1vh;} to {height:3vh}}
+			@keyframes showSearch {from {height:.1vh;} to {height:4vh}}
 	
 			@keyframes zooming {
 				0% {zoom:normal;padding:2vh 2vh 0 2vh;margin:auto auto auto auto}
@@ -207,7 +207,6 @@
 					from {padding-top:0;opacity:0.2}
 					to {padding-top:1vh;opacity:1}
 				}
-			@keyframes showSearch {from {height:.1vh;} to {height:4vh}}
 			}
 			@media (max-width:974px) {
 				aside,#rows,#main,#pop {width:100vw}
@@ -263,7 +262,6 @@
 				@keyframes zoomOut {from {transform:scale(.94);opacity:.9;} to {transform:scale(1);opacity:1;}}
 				@keyframes slideUp {from {top:100vh;} to {top:4.2vh}}
 				@keyframes slideDown {from {top:4.2vh} to {top:100vh;}}
-				@keyframes showSearch {from {height:.1vh;} to {height:3vh;}}
 			}
 			@media (prefers-color-scheme: dark) {
 				body {background-color:#1E1E1E}
@@ -276,9 +274,6 @@
 					--dt	:#E5E5E5;
 				}
 				.circ {color:var(--dt)}
-			}
-			@supports (-webkit-touch-callout: none) {
-				@keyframes showSearch {from {height:.1vh;} to {height:4vh;}}
 			}
 		</style>
 	</head>
@@ -897,14 +892,14 @@ United States of America</textarea></div>
 	document.getElementById("magnify").addEventListener("click",() => {
 		var sf = document.getElementById("searchForm").style;
 		var si = document.querySelector("#searchForm input");
-		if(sf.display == "block") {
+		if(sf.display == "flex") {
 			sf.display = "none";
 			si.placeholder = "";
 			si.style.display = "none";
 			(selected instanceof HTMLElement) && selected.focus();
 		}
 		else {
-			sf.display = "block";
+			sf.display = "flex";
 			setTimeout(()=>{
 				si.placeholder = "Search";
 				si.style.display = "block";
