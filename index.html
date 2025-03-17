@@ -34,6 +34,7 @@
 			svg {stroke:var(--dd);stroke-width:5;}
 
 			aside svg, svg:hover {stroke:var(--hg)}
+			#pop svg:hover {stroke:var(--dd)!important}
 			svg:has(.blackFlag:hover) .blackFlag,svg:hover .flag {fill:var(--hg);stroke:var(--hg)}
 
 			polygon, path, circle {stroke-linejoin:round;fill:transparent;}
@@ -60,6 +61,7 @@
 			#leftPart .task label:nth-child(2) {margin-left:auto} 
 			#leftPart .task label label {display:none}
 			#backButton, #detail header span {visibility:hidden}
+			#backButton {margin-left:7.5vh}
 			#rows {padding:0 2vh 2vh 2vh}
 			
 			#searchForm {display:none;height:4vh;animation:showSearch .2s forwards;background-color:var(--bCol);margin:.5vh 0vh 2vh 0vh;padding:1vh;border-radius:1vh}
@@ -83,7 +85,7 @@
 				background: linear-gradient(180deg, rgba(165,169,175,1) 50%, rgba(130,132,135,1) 100%); 
 			}
 			label dl {display:grid;grid-template-columns: auto auto;}
-			#rows label, .menus div label, #preview {cursor:pointer;display:flex;padding:1.5vh 2vh;}
+			#rows label, .menus div label/*, #preview*/ {cursor:pointer;display:flex;padding:1.5vh 2vh;}
 			.circ + div, label div:nth-child(2) {width:100%}
 
 			#rows input:checked + label,
@@ -102,7 +104,7 @@
 			#detail .button:last-child {margin-right:0!important;}
 			#detail header {z-index:1;background-color:var(--bg)}
 			#detail .task header dl {margin-left:auto}
-			#detail .task .valign {margin:auto}
+			#detail .task .valign {margin:auto;}
 
 			.group {cursor:pointer;padding:1vh 0 1vh 0;font-weight:bolder;display:block;}
 			.group + div {margin-bottom:2vh;color:var(--dt);}
@@ -111,7 +113,8 @@
 			.group + input:checked + div {display:none}
 
 			#rows label:last-child {margin-bottom:6vh}
-			#preview {border-bottom:solid 1px var(--bCol)}
+			/*#preview {border-bottom:solid 1px var(--bCol)}*/
+			#preview {cursor:pointer;width:9vh;height:9vh;margin-right:0!important;margin:1.8vh auto 0 auto!important}
 
 			.entries > div {border-bottom:solid 1px var(--bCol);padding:2vh 2vh 2vh 2vh;display:grid;grid-template-columns: 20% auto;font-size:var(--fnBg)}
 			.entries > div label {text-align:right;margin-right:2vh;padding:0}
@@ -190,6 +193,7 @@
 				.button {margin-right:0;font-size:5vh;}
 				#detail .button {margin-right:4.5vh;}
 				.blackFlag {fill:#0063E2;stroke:var(--hg)}
+				#backButton {margin-left:2vh}
 
 				#dualSection {grid-template-columns: 35.9vw;}
 				#navToggle + fieldset {display:none}
@@ -214,6 +218,20 @@
 					from {padding-top:0;opacity:0.2}
 					to {padding-top:1vh;opacity:1}
 				}
+				@keyframes prevZooming {from {transform: scale(.99)}to {transform: scale(0.7)}}
+				@keyframes zooming {
+					0% {zoom:normal;padding:2vh 2vh 0 2vh;margin:auto auto auto auto}
+					10% {zoom:0.9848;padding:1.9vh 2.1515vh 0 2.1515vh;margin:auto auto auto auto}
+					20% {zoom:0.9697;padding:1.6vh 2.3030vh 0 2.3030vh;margin:auto auto auto auto}
+					30% {zoom:0.9545;padding:1.4vh 2.4545vh 0 2.4545vh;margin:auto auto auto auto}
+					40% {zoom:0.9394;padding:1.2vh 2.6061vh 0 2.6061vh;margin:auto auto auto auto}
+					50% {zoom:0.9242;padding:1vh 2.7576vh 0 2.7576vh;margin:auto auto auto auto}
+					60% {zoom:0.9091;padding:.8vh 2.9091vh 0 2.9091vh;margin:auto auto auto auto}
+					66% {zoom:0.9;padding:.6vh 3vh 0 3vh;margin:auto auto auto auto}
+					67% {zoom:0.9;padding:.5vh 3vh 0 3vh;margin:-1vh auto auto auto}
+					100% {zoom:0.9;padding:0vh 3vh 0 3vh;margin:-300vh auto auto auto}
+				}
+
 			}
 			@media (max-width:974px) {
 				aside,#rows,#main,#pop {width:100vw}
@@ -228,6 +246,7 @@
 				#detail .task svg {display:flex;}
 				form, #backButton, #detail .task, .entries > div {display: block;}
 				#backButton,  #detail header span {visibility:visible}
+				#backButton {margin-left:0}
 				#dualSection {display:grid}
 				.menus, #detail .task dl {display:none}
 				.menus label svg{padding-top:1px}
@@ -256,7 +275,7 @@
 				#detail .task .valign .button:nth-child(3) { display:block;margin-right:3.8vh!important;margin-left:auto!important}
 				
 				#main {padding:0}
-				#preview {margin:1vh 2vh 0 2vh;padding:0 0 2vh 0}
+				#preview {margin:1vh 2vh 0 2vh;padding:0 0 0 0}
 				.entries {padding:0 2vh 2vh 2vh}
 				.entries > div {padding:2vh 0}
 				#pop .entries {height: 84vh;overflow: scroll;}
@@ -270,6 +289,7 @@
 				@keyframes zoomOut {from {transform:scale(.94);opacity:.9;} to {transform:scale(1);opacity:1;}}
 				@keyframes slideUp {from {top:100vh;} to {top:4.2vh}}
 				@keyframes slideDown {from {top:4.2vh} to {top:100vh;}}
+				
 			}
 			@media (prefers-color-scheme: dark) {
 				body {background-color:#1E1E1E}
@@ -750,7 +770,8 @@
 			</header>
 			<input type="checkbox" id="showMain" name="showMain">
 			<div id="main">
-				<label id="preview"></label>
+				<label id="preview" class="circ" for="img"></label>
+				<input type="file" name="img" id="img" style="display:none;" onchange="previewImage(event)">
 				<div id="entries" class="entries" action="?" method="post">
 					<div>
 						<label for="f1">mobile</label>
@@ -835,7 +856,8 @@ United States of America</textarea></div>
 			document.querySelector('#main').scrollTo(0,0);
 		},10);
 		if(isPhone){
-			document.querySelector('#preview').style.cssText = "zoom:normal;padding:0 0 2vh 0;margin:1vh 2vh 0 2vh";
+			/*document.querySelector('#preview').style.cssText = "zoom:normal;padding:0 0 2vh 0;margin:1vh 2vh 0 2vh";*/
+			//document.querySelector('#preview').style.cssText = "zoom:normal;padding:0 0 0 0;margin:1vh 2vh 0 2vh";
 			document.querySelector('#entries').style.cssText = "zoom:normal;padding:0 2vh 2vh 2vh;margin:0";
 		}
 		else {
@@ -856,13 +878,19 @@ United States of America</textarea></div>
 			del.parentNode.removeChild(del);
 		});
 	};
+	setPreview = (el) => {
+		//preview.innerHTML = label.innerHTML;
+		preview.innerHTML = "";
+		preview.style.backgroundImage = el.getElementsByTagName('div')[0].style.backgroundImage;
+
+		changeFlag(el.getElementsByTagName('dd')[1].innerText.split("").map(char => `&#${char.charCodeAt(0)};`).join(""));
+		adjusting();
+	}
 	expand('form textarea');
 
 	[...document.querySelectorAll('#rows label')].forEach(label => {
 		var setPrev = () => {
-			preview.innerHTML = label.innerHTML;
-			changeFlag(preview.getElementsByTagName('dd')[1].innerText.split("").map(char => `&#${char.charCodeAt(0)};`).join(""));
-			adjusting();
+			setPreview(label);
 		}
 		(label.previousElementSibling.nodeName.toLowerCase() == 'input') && label.previousElementSibling.checked && setPrev();
 		label.addEventListener('click', setPrev);
@@ -873,9 +901,7 @@ United States of America</textarea></div>
 		list.addEventListener('input',()=>{
 			selected = list;
 			window.scrollTo(0,0);
-			preview.innerHTML = list.nextElementSibling.innerHTML;
-			adjusting();
-			changeFlag(preview.getElementsByTagName('dd')[1].innerText.split("").map(char => `&#${char.charCodeAt(0)};`).join(""));
+			setPreview(list.nextElementSibling);
 			if(isPhone){
 				document.getElementById("rows").style.cssText = "animation:moveRowLeft .3s forwards;";
 				[...document.querySelectorAll("#rows label")].forEach(label=>{
@@ -963,8 +989,12 @@ United States of America</textarea></div>
 						pol.style.fill = pol.style.stroke = getComputedStyle(document.body).getPropertyValue('--dd');
 					});
 				}
-				document.getElementById('entries').style.animation = 
-				document.getElementById('preview').style.animation = "zooming .5s forwards ease-in";
+				document.getElementById('entries').style.animation = "zooming .5s forwards ease-in";
+				document.getElementById('preview').style.animation = "prevZooming .5s forwards ease-in";
+
+				setTimeout(()=>{
+					document.getElementById('preview').style.visibility = "hidden";
+				},280);
 			}
 			else {
 				document.getElementById('main').style.animation = "zooming .5s forwards ease-in";
@@ -1050,14 +1080,16 @@ United States of America</textarea></div>
 	var previewImage = (event) => {
 		const input = event.target;
 		if (input.files && input.files[0]) {
-		const reader = new FileReader();
+			const reader = new FileReader();
+			reader.onload = function(e) {
+				let id = document.getElementById('pop')?'circ':'preview';
+				document.getElementById(id).style.background = "url("+e.target.result+") center/cover no-repeat";
+				if(document.getElementById('camera')){
+					document.getElementById('camera').style.display = "none";
+				}
+			};
 
-		reader.onload = function(e) {
-			document.getElementById('circ').style.background = "url("+e.target.result+") center/cover no-repeat";
-			document.getElementById('camera').style.display = "none";
-		};
-
-		reader.readAsDataURL(input.files[0]);
+			reader.readAsDataURL(input.files[0]);
 		}
 	}
 </script>
