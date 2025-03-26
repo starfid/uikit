@@ -12,13 +12,14 @@
 		<meta content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no,user-scalable=0,viewport-fit=cover" name="viewport">
 		<style>
 			:root {
-				--bg	:#FFFFFF;	--bgMob	:#F0F0F6;	--bCol	:#F8F7F6;
-				--borL	:#E2E3E6;	--borT	:#D5D6D9;	--dt	:#181617;
+				--bg	:#FAFAF9;	--bgMob	:#F0F0F6;	--bCol	:#EEEDEB;
+				--borL	:#E2E3E6;	--borT	:#D5D6D9;	--dt	:#181617;	--fnH1	:3.45vh;
 				--dd	:#858584;	--hg	:#0063E2;	--fnBg	:2.3vh;		--fnSm	:2vh;
 			}
 			::-webkit-scrollbar {display: none;}
 			html {-webkit-tap-highlight-color: transparent;}
-			body {font-family:arial;overflow:hidden;}
+			body {overflow:hidden;}
+			body, input[type="date"] {font-family:arial;}
 			input:focus, select:focus, label:focus, textarea:focus, button:focus {outline: none;}
 			body, form, dl, dt, dd {margin:0;padding:0}
 			form {display: grid;grid-template-columns: 50vw auto;overflow:hidden}
@@ -42,22 +43,24 @@
 			.whiteFlag {fill:transparent;stroke:transparent}
 			#microphone {visibility:hidden}
 			aside, #leftPart{border-right:solid 1px var(--bCol);}
-
+			aside fieldset > div:last-of-type > label:last-of-type {margin-bottom:20vh}
+			#entries > div:last-of-type {margin-bottom:12vh;}
 
 			.valign, .circ {display: flex; align-items: center;text-align:center}
 			.alRight, label dl dd {justify-content: right;text-align:right;}
 			label dl:nth-child(2) dt {font-weight:normal}
 
 			#detail header {display:grid;grid-template-columns:auto 10vw;}
-			.task h1 {margin:0;padding:0 0 0 4vh;color:var(--dd);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+			.task h1 {font-size:var(--fnH1);cursor:pointer;margin:0;padding:0 0 0 4vh;color:var(--dd);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
 			#navLabel {display:none}
 			input[type='checkbox'],input[type='radio'] {margin:0;padding:0;display:block;transform: scale(0.1);appearance:none;opacity:0}
+			input[type='date']{background: transparent;outline:none;border:0;font-size:var(--fnBg);width:155px}
 			.task {display:flex;padding-right:2vh;color:var(--dd);}
 			.task > * {padding:2vh 2vh 2vh 2vh}
 			.alRight {margin-left:auto;padding:2vh!important}
 
-			#leftPart .task {margin-left:19.94vw;border-left:solid 1px var(--bCol);}
+			#leftPart .task {margin-bottom:0!important;margin-left:19.94vw;border-left:solid 1px var(--bCol);}
 			#leftPart .task label:nth-child(2) {margin-left:auto} 
 			#leftPart .task label label {display:none}
 			#backButton, #detail header span {visibility:hidden}
@@ -69,7 +72,6 @@
 
 			#magnify {margin-right:4vh;}
 			#compose {margin-right:0;}
-			
 
 			#rows label {border-top:solid 1px var(--bCol);}
 			#rows input:checked + label {color:white;border-radius:1vh;animation:listSel 0.7s forwards;}
@@ -81,8 +83,7 @@
 			.circ {
 				justify-content: center;margin-right:2vh;margin-top:.2vh;border-radius:6vh;min-width:6vh;height:6vh;
 				color:var(--bg);background-size: cover!important;background-repeat: no-repeat;
-				background-color: rgb(165,169,175);
-				background: linear-gradient(180deg, rgba(165,169,175,1) 50%, rgba(130,132,135,1) 100%); 
+				background-color: var(--dd)!important;
 			}
 			label dl {display:grid;grid-template-columns: auto auto;}
 			#rows label, .menus div label/*, #preview*/ {cursor:pointer;display:flex;padding:1.5vh 2vh;}
@@ -108,21 +109,21 @@
 
 			.group {cursor:pointer;padding:1vh 0 1vh 0;font-weight:bolder;display:block;}
 			.group + div {margin-bottom:2vh;color:var(--dt);}
-			.menus label svg{margin-right:1.1vh;height:var(--fnSm);padding-top:0.5px}
+			.menus label svg{margin-right:1.1vh;height:var(--fnBg);margin-top:0.1vh}
 			.group:not(:first-of-type){padding-top:2vh!important}
 			.group + input:checked + div {display:none}
 
-			#rows label:last-child {margin-bottom:6vh}
-			/*#preview {border-bottom:solid 1px var(--bCol)}*/
+			#rows label:last-child {margin-bottom:20vh}
 			#preview {cursor:pointer;width:9vh;height:9vh;margin-right:0!important;margin:1.8vh auto 0 auto!important}
 
 			.entries > div {border-bottom:solid 1px var(--bCol);padding:2vh 2vh 2vh 2vh;display:grid;grid-template-columns: 20% auto;font-size:var(--fnBg)}
 			.entries > div label {text-align:right;margin-right:2vh;padding:0}
 
-			.wrap {width:100%;display: grid;}
-			.wrap>textarea {margin:0;padding:0 0 0 0;background-color:transparent;color:var(--dt);resize:none;overflow:hidden;}
-			.wrap::after {width:100%;padding-bottom:1vh;content: attr(data-replicated-value) " ";white-space: pre-wrap;visibility: hidden;}
-			.wrap>textarea,.wrap::after {margin: 0 0 0 0;padding:0 0 0 0;width:34.2vw;box-sizing: content-box;border: none;font: inherit;grid-area: 1 / 1 / 2 / 2;}
+			.wrap {display: grid;}
+			.wrap > textarea {border: none;margin:0;padding:0;background-color:transparent;color:var(--dt);resize: none;overflow: hidden;}
+			.wrap::after {content: attr(data-replicated-value) " ";white-space: pre-wrap;visibility: hidden;}
+			.wrap > textarea, .wrap::after {box-sizing: content-box;font:var(--fnBg);grid-area: 1 / 1 / 2 / 2;}
+
 			#pop > div:first-of-type {padding-bottom:2vh;display:flex;justify-content:space-between;color:var(--hg);font-size:var(--fnBg);}
 			#pop > div:first-of-type > div {cursor:pointer}
 			#pop .entries {height:70vh;overflow-y:scroll;scrollbar-width: none}
@@ -141,6 +142,16 @@
 				left:20vw;top:5vh;border-radius:1vh;
 				box-shadow: 1px -1px 66px -20px rgba(0,0,0,0.75);
 			}
+
+			.switch {margin-top:4px;position: relative;display:inline-block;width:50px;height:24px;}
+			.switch input {border: none!important;outline:0}
+			.switch input:checked + .slider::before {transform: translateX(26px)!important;background-color: #0069D9;}
+			.slider.round::before {border-radius: 50%;}
+			.switch input:focus + .slider {box-shadow: 0 0 1px #0069D9;}
+			.switch input:checked + .slider {background-color: #0069D9;}
+			.slider.round {border-radius: 24px;}
+			.slider {background-color: #CECCC7;position: absolute;cursor: pointer;top: 0;left: 0;right: 0;bottom: 0;-webkit-transition: .4s;transition: .4s;}
+			.slider::before {position: absolute;content: "";height: 16px;width: 16px;left: 4px;bottom: 4px;background-color: white!important;transition: .4s;}
 
 			@keyframes listSel {from {background-color:transparent;}to {background-color:var(--hg);}}
 			@keyframes menuSel {from {background-color:transparent;}to {background-color:var(--bCol);}}
@@ -176,14 +187,17 @@
 				.button {font-size:4vh;}
 			}
 			@media (max-width:1180px) {
-				form {grid-template-columns: 36vw auto;}
+				:root {--bg:#FFFFFF; --bCol:#F8F7F6;}
+				input[type="date"] {background: transparent;/*margin-left:-1vh*/;color:var(--dt);text-align:left;}
+				input::-webkit-date-and-time-value {text-align: left;padding-left:0!important;margin-left:0!important}
+				form {grid-template-columns: 50vw auto;}
 				#detail .task .valign .button:nth-child(2){margin-left:10vw}
 				#navLabel {display:flex;align-items:center}
 
 				#leftPart .task {margin-left:0;border-left:0}
 				.task svg {stroke:var(--hg);}
-				.task h1 {padding: 0 0 0 4vh;}
-				#compose {margin-right:4vh;}
+				.task h1 {padding: 0 0 0 4vh;color:var(--hg)}
+				#compose {/*margin-right:4vh;*/}
 				#leftPart .task label label {display:block}
 				#leftPart .task label label svg {vertical-align: middle;}
 
@@ -195,7 +209,7 @@
 				.blackFlag {fill:#0063E2;stroke:var(--hg)}
 				#backButton {margin-left:2vh}
 
-				#dualSection {grid-template-columns: 35.9vw;}
+				#dualSection {grid-template-columns: 49.9vw;}
 				#navToggle + fieldset {display:none}
 				#navToggle:checked + fieldset {display:block}
 
@@ -212,8 +226,16 @@
 				label {padding:0;}
 				input[type='checkbox'],input[type='radio'] {display:none}
 				.menus .group {animation:navStart .3s forwards}
-				.entries div {grid-template-columns: 22% auto;}
+				/*.entries div {grid-template-columns: 22% auto;}*/
+				.entries > div label {text-align:left}
 				#circ {width:9vh;height:9vh;border-radius:9vh;}
+				.switch {margin-top:0;}
+				input[type='date']{width:150px;padding:0;margin:0;}
+				
+				aside fieldset > div:last-of-type > label:last-of-type {margin-bottom:60vh}
+				#entries > div:last-of-type {margin-bottom:54vh;}
+				#rows label:last-child {margin-bottom:60vh}
+
 				@keyframes navStart {
 					from {padding-top:0;opacity:0.2}
 					to {padding-top:1vh;opacity:1}
@@ -235,18 +257,19 @@
 			}
 			@media (max-width:974px) {
 				aside,#rows,#main,#pop {width:100vw}
-				.menus {height:100vh;padding: .7vh 2vh 2vh 2vh;}
+				.menus {padding: .7vh 2vh 2vh 2vh;}
 				#rows {padding:0;margin:0;}
 				#rows label {border-top:none;padding:1.4vh 2vh 1.4vh 2vh;background-color:var(--bg);border-bottom:solid 1px var(--bCol);}
 				#rows label:first-of-type {border-top:none;}
 				form {border-radius:1vh}
 
 				#leftPart .task {margin-left:0;border-left:0;}
-				#compose {margin-right:4vh}
+				#compose {/*margin-right:4vh*/}
 				#detail .task svg {display:flex;}
 				form, #backButton, #detail .task, .entries > div {display: block;}
 				#backButton,  #detail header span {visibility:visible}
 				#backButton {margin-left:0}
+				#backLabel {color:transparent!important}
 				#dualSection {display:grid}
 				.menus, #detail .task dl {display:none}
 				.menus label svg{padding-top:1px}
@@ -263,15 +286,14 @@
 				#rows input:checked + label + input + label {border-top:none;}
 				#rows input:checked + label div:nth-child(2) > div, #rows input:checked + label dd  {opacity:1;}
 
-				#detail {display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);}
-				.wrap > textarea,.wrap::after {width:90vw;}
+				
+				/*.wrap > textarea,.wrap::after {width:90vw;}*/
+				#backButton {margin-right:0!important;}
 				
 				#detail .button {margin-right:3.8vh;}
-				#backButton {margin-right:0!important;}
+				#detail {display:none;padding:0;position:absolute;z-index:1;left:110vw;top:0;background-color:var(--bg);}
 				#detail header span {display:block;color:var(--hg);cursor:pointer}
-
 				#detail .task .button:last-child {display:block;margin-right:0!important;margin-left:0!important}
-				
 				#detail .task .valign .button:nth-child(3) { display:block;margin-right:3.8vh!important;margin-left:auto!important}
 				
 				#main {padding:0}
@@ -282,7 +304,7 @@
 				#pop {box-shadow:none;padding:0;height:96vh;left:0;top:4vh;border-top-left-radius:1vh;border-top-right-radius:1vh}
 				#pop > div:first-of-type {padding:2vh 2vh 0 2vh;margin:0}
 				#pop h1 {padding:2vh 0;}
-				/*#circ {width:9vh;height:9vh;border-radius:9vh;}*/
+				input[type="date"], .switch {display:block;margin-top:8px;}
 
 				@keyframes listSel {from {background-color:var(--bCol);} to {background-color:transparent;}}
 				@keyframes zoomIn {from {transform:scale(1);opacity:1;} to {transform:scale(.94);opacity:.9;}}
@@ -301,208 +323,513 @@
 				.circ {color:var(--dt)}
 			}
 		</style>
+		<script>
+			const nav = {
+				"Catalog": ["Bibliography", "Exemplar"],
+				"Patron": ["Faculty", "Program", "People"],
+				"Transaction": ["Monitoring", "Failed", "Checkout", "Checkin"],
+				"Manager": ["Category", "Individual"]
+			};
+			const data = [
+				{
+					"name": "Noah Woods",
+					"date": "2025-07-25",
+					"flagged": false,
+					"company": "Scelerisque Scelerisque Dui Incorporated",
+					"phone": "(149) 646-5887",
+					"email": "ut.mi@protonmail.couk",
+					"address": "656-1523 Volutpat St.",
+					"postalZip": "38790",
+					"region": "Central Region",
+					"country": "Australia",
+					"text": "sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit",
+					"currency": "$69.19",
+					"alphanum": "GBN06GIB4RT",
+					"url": "https://guardian.co.uk",
+					"latlng": "-12.8131971072, -47.1941722112",
+					"text1": "dictum augue malesuada malesuada. Integer id magna et ipsum cursus vestibulum. Mauris magna. Duis dignissim tempor arcu.",
+					"text2": "convallis est, vitae sodales nisi magna sed dui. Fusce"
+				},
+				{
+					"name": "Kaseem Joseph",
+					"date": "2025-10-28",
+					"flagged": true,
+					"company": "Ornare Lectus Associates",
+					"phone": "1-571-559-4525",
+					"email": "et.magnis@aol.com",
+					"address": "Ap #168-7542 Lobortis Rd.",
+					"postalZip": "42537",
+					"region": "Munster",
+					"country": "Peru",
+					"text": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare.",
+					"currency": "$6.38",
+					"alphanum": "ZJZ68WFR5DX",
+					"url": "http://pinterest.com",
+					"latlng": "-67.373402112, -103.5765956608",
+					"text1": "Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim.",
+					"text2": "neque venenatis lacus. Etiam bibendum fermentum metus. Aenean sed"
+				},
+				{
+					"name": "Jane Weeks",
+					"date": "2025-02-11",
+					"flagged": true,
+					"company": "Dapibus Incorporated",
+					"phone": "1-251-487-1871",
+					"email": "nunc.pulvinar@aol.org",
+					"address": "P.O. Box 915, 7727 Aliquet St.",
+					"postalZip": "5121",
+					"region": "GoiÃ¡s",
+					"country": "Colombia",
+					"text": "ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc",
+					"currency": "$83.29",
+					"alphanum": "TLX68YGN7WE",
+					"url": "http://zoom.us",
+					"latlng": "32.0971684864, -82.0995796992",
+					"text1": "vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh dolor, nonummy",
+					"text2": "enim. Curabitur massa. Vestibulum accumsan neque et nunc. Quisque ornare"
+				},
+				{
+					"name": "Shaine Bean",
+					"date": "2026-01-01",
+					"flagged": true,
+					"company": "Massa Vestibulum Accumsan Inc.",
+					"phone": "1-681-558-8042",
+					"email": "vitae@protonmail.couk",
+					"address": "202-5985 Curabitur Avenue",
+					"postalZip": "91294",
+					"region": "Ogun",
+					"country": "China",
+					"text": "porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit",
+					"currency": "$81.52",
+					"alphanum": "PXF87HWF1OR",
+					"url": "https://facebook.com",
+					"latlng": "-86.308624384, -41.8427840512",
+					"text1": "venenatis lacus. Etiam bibendum fermentum metus. Aenean sed pede nec ante blandit viverra. Donec tempus, lorem fringilla",
+					"text2": "semper tellus id nunc interdum feugiat. Sed nec metus"
+				},
+				{
+					"name": "Wyoming Ward",
+					"date": "2025-02-22",
+					"flagged": false,
+					"company": "Non Dapibus Company",
+					"phone": "(282) 516-2083",
+					"email": "nibh.lacinia@google.net",
+					"address": "127-409 Elit. Road",
+					"postalZip": "618971",
+					"region": "Utah",
+					"country": "New Zealand",
+					"text": "risus. Nunc ac sem ut dolor dapibus gravida. Aliquam tincidunt, nunc ac mattis ornare, lectus ante dictum mi, ac mattis",
+					"currency": "$36.34",
+					"alphanum": "UMI38URX5TC",
+					"url": "https://bbc.co.uk",
+					"latlng": "-84.8285840384, -139.3290527744",
+					"text1": "sed dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit",
+					"text2": "faucibus orci luctus et ultrices posuere cubilia Curae Donec"
+				},
+				{
+					"name": "Allegra Benton",
+					"date": "2026-03-14",
+					"flagged": false,
+					"company": "Adipiscing Ligula Associates",
+					"phone": "(831) 328-7817",
+					"email": "lacus@protonmail.org",
+					"address": "2398 Ornare Road",
+					"postalZip": "83997",
+					"region": "Nuevo LeÃ³n",
+					"country": "Sweden",
+					"text": "feugiat non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer sem elit,",
+					"currency": "$30.93",
+					"alphanum": "GVP26NEH3KN",
+					"url": "https://walmart.com",
+					"latlng": "-53.8672190464, -50.55888896",
+					"text1": "eu odio tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et, lacinia",
+					"text2": "nibh lacinia orci, consectetuer euismod est arcu ac orci."
+				},
+				{
+					"name": "Zia Short",
+					"date": "2025-10-01",
+					"flagged": true,
+					"company": "Montes Foundation",
+					"phone": "1-173-552-6862",
+					"email": "nunc.ullamcorper.velit@outlook.com",
+					"address": "Ap #433-8962 Aliquet Rd.",
+					"postalZip": "TM4Z 7SZ",
+					"region": "Viken",
+					"country": "Belgium",
+					"text": "mi felis, adipiscing fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh",
+					"currency": "$84.73",
+					"alphanum": "DKQ99DUU7DW",
+					"url": "http://reddit.com",
+					"latlng": "23.0525257728, -82.4641754112",
+					"text1": "Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet,",
+					"text2": "vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur vel lectus."
+				},
+				{
+					"name": "Basil Drake",
+					"date": "2025-06-04",
+					"flagged": true,
+					"company": "Purus Ac Foundation",
+					"phone": "(763) 845-9585",
+					"email": "nullam.lobortis@google.couk",
+					"address": "9851 Ipsum. Ave",
+					"postalZip": "456168",
+					"region": "Santa Catarina",
+					"country": "Philippines",
+					"text": "lorem ac risus. Morbi metus. Vivamus euismod urna. Nullam lobortis quam a felis ullamcorper viverra. Maecenas iaculis aliquet diam. Sed",
+					"currency": "$75.56",
+					"alphanum": "MSJ64NJG5SA",
+					"url": "https://pinterest.com",
+					"latlng": "-80.5207527424, -109.9404212224",
+					"text1": "faucibus leo, in lobortis tellus justo sit amet nulla. Donec non justo. Proin non massa non ante",
+					"text2": "erat, in consectetuer ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et"
+				},
+				{
+					"name": "Reed Meyer",
+					"date": "2024-04-10",
+					"flagged": true,
+					"company": "Enim Nec LLC",
+					"phone": "1-885-463-6202",
+					"email": "commodo.ipsum@aol.com",
+					"address": "Ap #870-783 Risus St.",
+					"postalZip": "1685-6899",
+					"region": "Queensland",
+					"country": "Nigeria",
+					"text": "eu, ligula. Aenean euismod mauris eu elit. Nulla facilisi. Sed neque. Sed eget lacus. Mauris non dui nec urna suscipit",
+					"currency": "$50.60",
+					"alphanum": "FGT07LRP4DZ",
+					"url": "https://zoom.us",
+					"latlng": "-57.2170232832, 127.5545342976",
+					"text1": "Donec at arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Donec",
+					"text2": "magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu"
+				},
+				{
+					"name": "Branden Moss",
+					"date": "2024-04-08",
+					"flagged": false,
+					"company": "Duis LLC",
+					"phone": "1-541-258-4571",
+					"email": "rutrum.magna.cras@hotmail.edu",
+					"address": "Ap #365-3712 Non Street",
+					"postalZip": "8275",
+					"region": "Sachsen",
+					"country": "Singapore",
+					"text": "fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae odio sagittis semper. Nam tempor diam dictum sapien. Aenean",
+					"currency": "$47.74",
+					"alphanum": "IEU26KLU8OP",
+					"url": "http://baidu.com",
+					"latlng": "-68.6543633408, -26.415094784",
+					"text1": "dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam gravida molestie arcu.",
+					"text2": "consectetuer rhoncus. Nullam velit dui, semper et, lacinia vitae, sodales"
+				},
+				{
+					"name": "Rebecca Austin",
+					"date": "2025-01-26",
+					"flagged": false,
+					"company": "Eget Magna Corporation",
+					"phone": "(409) 706-8425",
+					"email": "nulla.eu@protonmail.edu",
+					"address": "Ap #254-9781 Sit Street",
+					"postalZip": "85435-74063",
+					"region": "Saratov Oblast",
+					"country": "Ukraine",
+					"text": "id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus non, lacinia at, iaculis quis, pede. Praesent eu dui.",
+					"currency": "$48.18",
+					"alphanum": "GAR51UBS3VV",
+					"url": "https://pinterest.com",
+					"latlng": "-60.137871872, -166.8309602304",
+					"text1": "euismod enim. Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula.",
+					"text2": "luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis"
+				},
+				{
+					"name": "Indigo Calderon",
+					"date": "2024-12-21",
+					"flagged": true,
+					"company": "At Auctor Associates",
+					"phone": "1-855-271-5225",
+					"email": "ornare.facilisis@yahoo.ca",
+					"address": "Ap #146-8783 In St.",
+					"postalZip": "968398",
+					"region": "Agder",
+					"country": "Brazil",
+					"text": "risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam",
+					"currency": "$99.13",
+					"alphanum": "VLO03IFQ2DC",
+					"url": "http://google.com",
+					"latlng": "-22.7403374592, 140.2241051648",
+					"text1": "semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In mi pede, nonummy ut, molestie in, tempus",
+					"text2": "orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus."
+				},
+				{
+					"name": "Len Richard",
+					"date": "2024-12-12",
+					"flagged": false,
+					"company": "Semper Corporation",
+					"phone": "1-647-481-5639",
+					"email": "vel@google.net",
+					"address": "P.O. Box 466, 5198 Enim. Rd.",
+					"postalZip": "3466-8541",
+					"region": "South Gyeongsang",
+					"country": "Costa Rica",
+					"text": "dictum sapien. Aenean massa. Integer vitae nibh. Donec est mauris, rhoncus id, mollis nec, cursus a, enim. Suspendisse aliquet, sem",
+					"currency": "$45.18",
+					"alphanum": "SBG98JWJ4CR",
+					"url": "http://ebay.com",
+					"latlng": "72.0203420672, -145.374477824",
+					"text1": "quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at arcu. Vestibulum ante",
+					"text2": "Integer sem elit, pharetra ut, pharetra sed, hendrerit"
+				},
+				{
+					"name": "Eliana Lowery",
+					"date": "2025-02-14",
+					"flagged": false,
+					"company": "Rhoncus Id Associates",
+					"phone": "1-378-769-2529",
+					"email": "lacus@yahoo.edu",
+					"address": "P.O. Box 873, 2267 A, Rd.",
+					"postalZip": "56922",
+					"region": "BoyacÃ¡",
+					"country": "France",
+					"text": "vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo.",
+					"currency": "$15.01",
+					"alphanum": "MKB44INW6PG",
+					"url": "https://instagram.com",
+					"latlng": "88.0423453696, 28.1850553344",
+					"text1": "sapien. Aenean massa. Integer vitae nibh. Donec est mauris, rhoncus id, mollis nec, cursus a, enim. Suspendisse",
+					"text2": "lorem semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis"
+				},
+				{
+					"name": "Charde Sexton",
+					"date": "2025-10-22",
+					"flagged": true,
+					"company": "Et Pede Corp.",
+					"phone": "1-165-121-5772",
+					"email": "ligula.donec@icloud.com",
+					"address": "916-1692 Neque Av.",
+					"postalZip": "00475",
+					"region": "Viken",
+					"country": "Norway",
+					"text": "elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum.",
+					"currency": "$61.50",
+					"alphanum": "JRZ04LYI6GT",
+					"url": "http://netflix.com",
+					"latlng": "50.096820224, 110.6795305984",
+					"text1": "lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu ac orci. Ut semper pretium neque. Morbi quis",
+					"text2": "mauris a nunc. In at pede. Cras vulputate"
+				},
+				{
+					"name": "Grady Mccullough",
+					"date": "2024-09-15",
+					"flagged": false,
+					"company": "Leo In Lobortis PC",
+					"phone": "1-323-192-3570",
+					"email": "vestibulum.ante.ipsum@hotmail.edu",
+					"address": "961-7311 Interdum. St.",
+					"postalZip": "68-86",
+					"region": "Rostov Oblast",
+					"country": "Peru",
+					"text": "et malesuada fames ac turpis egestas. Aliquam fringilla cursus purus. Nullam scelerisque neque sed sem egestas blandit. Nam nulla magna,",
+					"currency": "$98.14",
+					"alphanum": "SEI56IUM9VP",
+					"url": "https://netflix.com",
+					"latlng": "-26.96021504, 14.4399466496",
+					"text1": "elementum sem, vitae aliquam eros turpis non enim. Mauris quis turpis vitae purus gravida sagittis. Duis gravida.",
+					"text2": "augue scelerisque mollis. Phasellus libero mauris, aliquam eu, accumsan"
+				},
+				{
+					"name": "Francis Richmond",
+					"date": "2025-07-05",
+					"flagged": false,
+					"company": "Tempor Incorporated",
+					"phone": "1-636-571-4344",
+					"email": "lorem.sit@hotmail.couk",
+					"address": "Ap #322-9289 Mauris Street",
+					"postalZip": "621587",
+					"region": "GoiÃ¡s",
+					"country": "Colombia",
+					"text": "Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in,",
+					"currency": "$45.09",
+					"alphanum": "PXW78XEC4ST",
+					"url": "http://facebook.com",
+					"latlng": "19.9298055168, -127.1352946688",
+					"text1": "non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer",
+					"text2": "pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien,"
+				},
+				{
+					"name": "Fritz Cantrell",
+					"date": "2026-02-22",
+					"flagged": true,
+					"company": "Morbi Metus Corporation",
+					"phone": "(314) 163-6448",
+					"email": "faucibus.lectus.a@aol.net",
+					"address": "P.O. Box 485, 3480 Donec St.",
+					"postalZip": "T9R 2L8",
+					"region": "TrÃ  Vinh",
+					"country": "Philippines",
+					"text": "Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus. Donec egestas. Aliquam",
+					"currency": "$65.14",
+					"alphanum": "XYR64VMJ4ZP",
+					"url": "https://cnn.com",
+					"latlng": "-39.4241666048, -79.0078007296",
+					"text1": "nibh enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis natoque penatibus et magnis dis",
+					"text2": "ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et"
+				},
+				{
+					"name": "Arden Brooks",
+					"date": "2025-09-27",
+					"flagged": false,
+					"company": "Cum Sociis Natoque Incorporated",
+					"phone": "1-622-165-6082",
+					"email": "ante.bibendum@protonmail.ca",
+					"address": "P.O. Box 438, 664 Ante Rd.",
+					"postalZip": "50613",
+					"region": "LimÃ³n",
+					"country": "Colombia",
+					"text": "tellus. Phasellus elit pede, malesuada vel, venenatis vel, faucibus id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus",
+					"currency": "$44.42",
+					"alphanum": "OUY16LZE3LW",
+					"url": "https://twitter.com",
+					"latlng": "69.104523264, 14.2243709952",
+					"text1": "iaculis quis, pede. Praesent eu dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus",
+					"text2": "magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut"
+				},
+				{
+					"name": "Tad Herman",
+					"date": "2025-09-05",
+					"flagged": true,
+					"company": "Neque Corporation",
+					"phone": "1-472-308-5281",
+					"email": "eget.metus@aol.couk",
+					"address": "668-1430 Massa. Road",
+					"postalZip": "5167",
+					"region": "South Island",
+					"country": "Spain",
+					"text": "aliquam eu, accumsan sed, facilisis vitae, orci. Phasellus dapibus quam quis diam. Pellentesque habitant morbi tristique senectus et netus et",
+					"currency": "$19.79",
+					"alphanum": "XKL06YPC3OM",
+					"url": "https://zoom.us",
+					"latlng": "-13.6448137216, -94.1531966464",
+					"text1": "ac orci. Ut semper pretium neque. Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam",
+					"text2": "urna, nec luctus felis purus ac tellus. Suspendisse sed dolor."
+				},
+				{
+					"name": "Dalton Kemp",
+					"date": "2025-05-25",
+					"flagged": true,
+					"company": "Ac Arcu Nunc Ltd",
+					"phone": "1-815-717-3585",
+					"email": "non.feugiat.nec@protonmail.edu",
+					"address": "P.O. Box 388, 4707 Sapien. Street",
+					"postalZip": "41104",
+					"region": "Gaziantep",
+					"country": "Ireland",
+					"text": "eget, dictum placerat, augue. Sed molestie. Sed id risus quis diam luctus lobortis. Class aptent taciti sociosqu ad litora torquent",
+					"currency": "$72.55",
+					"alphanum": "YDC84IKJ5HE",
+					"url": "http://nytimes.com",
+					"latlng": "-53.8123685888, -12.3619889152",
+					"text1": "tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque.",
+					"text2": "dolor. Fusce feugiat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+				},
+				{
+					"name": "Noelle Workman",
+					"date": "2024-07-02",
+					"flagged": true,
+					"company": "Eu Nibh Ltd",
+					"phone": "1-760-548-5546",
+					"email": "morbi.quis@aol.ca",
+					"address": "185-797 Nullam Ave",
+					"postalZip": "645089",
+					"region": "Lanarkshire",
+					"country": "Belgium",
+					"text": "tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In",
+					"currency": "$81.74",
+					"alphanum": "ISC50PTU2JB",
+					"url": "http://pinterest.com",
+					"latlng": "-27.9171096576, 103.9023556608",
+					"text1": "cursus, diam at pretium aliquet, metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus elit",
+					"text2": "enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie"
+				},
+				{
+					"name": "Brett Frank",
+					"date": "2025-08-14",
+					"flagged": false,
+					"company": "In Scelerisque Corporation",
+					"phone": "(653) 494-8366",
+					"email": "faucibus.orci@protonmail.net",
+					"address": "P.O. Box 904, 5844 Adipiscing St.",
+					"postalZip": "31555",
+					"region": "Kocaeli",
+					"country": "Nigeria",
+					"text": "Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc interdum feugiat. Sed nec metus facilisis lorem tristique",
+					"currency": "$42.44",
+					"alphanum": "PVN42LON8CK",
+					"url": "http://reddit.com",
+					"latlng": "66.3192117248, 161.232950272",
+					"text1": "fringilla purus mauris a nunc. In at pede. Cras vulputate velit eu sem. Pellentesque ut ipsum ac",
+					"text2": "accumsan sed, facilisis vitae, orci. Phasellus dapibus quam quis"
+				},
+				{
+					"name": "Aaron Kirk",
+					"date": "2025-03-28",
+					"flagged": false,
+					"company": "Gravida Corp.",
+					"phone": "1-896-882-6136",
+					"email": "aliquam.ultrices@outlook.com",
+					"address": "979-7738 Mattis Avenue",
+					"postalZip": "38107",
+					"region": "JÃ¶nkÃ¶pings lÃ¤n",
+					"country": "Indonesia",
+					"text": "Sed eu eros. Nam consequat dolor vitae dolor. Donec fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae",
+					"currency": "$94.37",
+					"alphanum": "BYW02CXT1SH",
+					"url": "http://walmart.com",
+					"latlng": "56.0534920192, 125.0969469952",
+					"text1": "ante. Nunc mauris sapien, cursus in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu enim. Etiam",
+					"text2": "metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus"
+				},
+				{
+					"name": "Chelsea Harmon",
+					"date": "2025-08-07",
+					"flagged": false,
+					"company": "Integer Sem Corp.",
+					"phone": "1-272-372-9110",
+					"email": "ut.nisi.a@aol.edu",
+					"address": "722-5217 Cursus Street",
+					"postalZip": "XB3 5BE",
+					"region": "Saarland",
+					"country": "Netherlands",
+					"text": "eu, euismod ac, fermentum vel, mauris. Integer sem elit, pharetra ut, pharetra sed, hendrerit a, arcu. Sed et libero. Proin",
+					"currency": "$53.02",
+					"alphanum": "PLQ53CQG1LF",
+					"url": "https://youtube.com",
+					"latlng": "86.8722148352, 149.1657669632",
+					"text1": "eu erat semper rutrum. Fusce dolor quam, elementum at, egestas a, scelerisque sed, sapien. Nunc pulvinar arcu",
+					"text2": "fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem magna"
+				}
+			];
+		</script>
 	</head>
 	<body ontouchstart>
 		<form action="?" method="post">
 		<section id="leftPart">
 			<header class="task">
-				<h1 class="valign">Sent</h1>
+				<h1 class="valign">&nbsp;</h1>
 				<label class="valign">
 					<svg class="button valign" viewbox="0 0 100 100" id="magnify">
 						<circle cx="42" cy="42" r="32" />
 						<polygon points="65,65 90,90" />
 					</svg>
 					<svg class="button valign" viewbox="0 0 100 100" id="compose">
-						<polygon points="50,10 50,30" />
-						<polygon points="50,30 70,30" />
-						<polygon points="70,40 70,30" />
-						<polygon points="70,30 50,10" />
-						<polygon points="50,10 10,10" />
-						<polygon points="10,10 10,90" />
-						<polygon points="10,90 70,90" />
-						<polygon points="70,90 70,70" />
-						<polygon points="50,70 85,35 90,40 55,75 45,80" />
+						<circle cx="50" cy="50" r="40"  />
+						<polygon points="50,25 50,75" />
+						<polygon points="25,50 75,50" />
 					</svg>
-					<label for="navToggle" class="valign">
-						<svg class="button valign" viewbox="0 0 100 100" id="aside" for="navToggle">
-							<polygon points="10,90 95,90 95,20 10,20" />
-							<polygon points="40,90 40,20" />
-							<polygon points="18,30 32,30" />
-							<polygon points="18,40 32,40" />
-							<polygon points="18,50 32,50" />
-						</svg>
-					</label>
 				</label>
 			</header>
 			<div id="dualSection">
 				<aside>
 					<input type="checkbox" id="navToggle">
-					<fieldset class="menus">
-						<label for="fd0" class="group">List Actions</label>
-						<input type="checkbox" id="fd0">
-						<div>
-							<input type="radio" name="path" id="b0">
-							<label for="b0">
-								<svg viewbox="0 0 100 100" class='paperplane'>
-									<circle cx="52.5" cy="50" r="38"  />
-									<polygon points="50,22 50,50" />
-									<polygon points="50,50 68,68" />
-									<polygon points="10,48 20,48 15,53" />
-								</svg>
-								<div>Newest Entry</div>
-							</label>
-							<input type="radio" name="path" id="ba">
-							<label for="ba">
-								<svg viewbox="0 0 100 100" class='paperplane'>
-									<circle cx="52.5" cy="50" r="38"  />
-									<polygon points="50,22 50,50" />
-									<polygon points="50,50 68,68" />
-									<polygon points="10,48 20,48 15,53" />
-								</svg>
-								<div>Oldest Entry</div>
-							</label>
-						</div>
-						<label for="fd1" class="group">Favorites</label>
-						<input type="checkbox" id="fd1">
-						<div>
-							<input type="radio" name="path" id="b1">
-							<label for="b1">
-								<svg viewbox="0 0 100 100" class='tray'>
-									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
-									<polygon points="10,50 35,50" />
-									<polygon points="65,50 90,50" />
-									<path d="M 35 50 q 15 25 30 0" />
-								</svg> 
-								<div>Inbox</div>
-							</label>
-							<input type="radio" name="path" id="b2" checked>
-							<label for="b2">
-								<svg viewbox="0 0 100 100" class='paperplane'>
-									<polygon points="10,45 90,10 60,90 45,55" />
-									<polygon points="45,55 90,10" />
-								</svg>
-								<div>Sent</div>
-							</label>
-							<input type="radio" name="path" id="b3">
-							<label for="b3">
-								<svg viewbox="0 0 100 100" class='star'>
-									<polygon points="50,10 60,40 90,40 70,60 80,90 50,70 20,90 30,60 10,40 40,40" />
-								</svg>
-								<div>VIPs</div>
-							</label>
-							<input type="radio" name="path" id="b4">
-							<label for="b4">
-								<svg viewbox="0 0 100 100" class='timeline'>
-									<circle cx="52.5" cy="50" r="38"  />
-									<mask>
-										<rect x="10" y="40" fill="red" width="10" height="10"/>
-									</mask>
-									<polygon points="50,22 50,50" />
-									<polygon points="50,50 68,68" />
-									<polygon points="10,48 20,48 15,53" />
-								</svg>
-								<div>Remind Me</div>
-							</label>
-						</div>
-						<label for="fd2" class="group">iClouds</label>
-						<input type="checkbox" id="fd2">
-						<div>
-							<input type="radio" name="path" id="b5">
-							<label for="b5">
-								<svg viewbox="0 0 100 100" class='tray'>
-									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
-									<polygon points="10,50 35,50" />
-									<polygon points="65,50 90,50" />
-									<path d="M 35 50 q 15 25 30 0" />
-								</svg>
-								<div>Inbox</div>
-							</label>
-							<input type="radio" name="path" id="b6">
-							<label for="b6">
-								<svg viewbox="0 0 100 100" class='doc'>
-									<polygon points="20,10 50,10 80,35 80,90 20,90" />
-									<polygon points="50,10 50,35" />
-									<polygon points="50,35 80,35" />
-								</svg>
-								<div>Drafts</div>
-							</label>
-							<input type="radio" name="path" id="b7">
-							<label for="b7">
-								<svg viewbox="0 0 100 100" class='paperplane'>
-									<polygon points="10,45 90,10 60,90 45,55" />
-									<polygon points="45,55 90,10" />
-								</svg>
-								<div>Sent</div>
-							</label>
-						</div>
-
-
-
-						<label for="fd3" class="group">Trash</label>
-						<input type="checkbox" id="fd3">
-						<div>
-							<input type="radio" name="path" id="b8">
-							<label for="b8">
-								<svg viewbox="0 0 100 100" class='tray'>
-									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
-									<polygon points="10,50 35,50" />
-									<polygon points="65,50 90,50" />
-									<path d="M 35 50 q 15 25 30 0" />
-								</svg>
-								<div>Inbox</div>
-							</label>
-							<input type="radio" name="path" id="b9">
-							<label for="b9">
-								<svg viewbox="0 0 100 100" class='doc'>
-									<polygon points="20,10 50,10 80,35 80,90 20,90" />
-									<polygon points="50,10 50,35" />
-									<polygon points="50,35 80,35" />
-								</svg>
-								<div>Drafts</div>
-							</label>
-							<input type="radio" name="path" id="b10">
-							<label for="b10">
-								<svg viewbox="0 0 100 100" class='paperplane'>
-									<polygon points="10,45 90,10 60,90 45,55" />
-									<polygon points="45,55 90,10" />
-								</svg>
-								<div>Sent</div>
-							</label>
-						</div>
-
-						<label for="fd4" class="group">Archives</label>
-						<input type="checkbox" id="fd4">
-						<div>
-							<input type="radio" name="path" id="b11">
-							<label for="b11">
-								<svg viewbox="0 0 100 100" class='tray'>
-									<polygon points="30,25 70,25 90,50 90,90 10,90 10,50" />
-									<polygon points="10,50 35,50" />
-									<polygon points="65,50 90,50" />
-									<path d="M 35 50 q 15 25 30 0" />
-								</svg>
-								<div>Inbox</div>
-							</label>
-							<input type="radio" name="path" id="b12">
-							<label for="b12">
-								<svg viewbox="0 0 100 100" class='doc'>
-									<polygon points="20,10 50,10 80,35 80,90 20,90" />
-									<polygon points="50,10 50,35" />
-									<polygon points="50,35 80,35" />
-								</svg>
-								<div>Drafts</div>
-							</label>
-							<input type="radio" name="path" id="b13">
-							<label for="b13">
-								<svg viewbox="0 0 100 100" class='paperplane'>
-									<polygon points="10,45 90,10 60,90 45,55" />
-									<polygon points="45,55 90,10" />
-								</svg>
-								<div>Sent</div>
-							</label>
-						</div>
-						<br><br><br><br><br><br><br><br><br><br>
-					</fieldset>
+					<fieldset class="menus"></fieldset>
 				</aside>
 				<fieldset id="rows">
 					<div>
@@ -511,199 +838,6 @@
 						</div>
 						
 					</div>
-					<input type="radio" name="li" id="a1">
-					<label for="a1">
-						<div class="circ" style="background-image:url('avatars/1.jpg');color:transparent;">GB</div>
-						<div>
-							<dl>
-								<dt>Gary Butcher</dt>
-								<dd>12/14/21</dd>
-							</dl>
-							<dl>
-								<dt>How To Build A Sleep Routine forever into the unknown</dt>
-								<dd>&#9873;</dd>
-							</dl>
-							<div>I thought you might find this articles interestings. Begin forwarded</div>
-						</div>
-					</label>
-					
-					<input type="radio" name="li" id="a2">
-					<label for="a2">
-						<div class="circ" style="background-image:url('avatars/2.jpg');color:transparent;">AK</div>
-						<div>
-							<dl>
-								<dt>Ashley Kamin</dt>
-								<dd>12/14/21</dd>
-							</dl>
-							<dl>
-								<dt>Lebanese Family Recipes for you and for your family</dt>
-								<dd>&#9873;</dd>
-							</dl>
-							<div>Hey I was thinking it would be great if we could have some more if you want to go to the store please buy some milk</div>
-						</div>
-					</label>
-					
-					<input type="radio" name="li" id="a3" tabindex="1" checked autofocus>
-					<label for="a3">
-						<div class="circ" style="background-image:url('avatars/3.jpg');color:transparent;">GA</div>
-						<div>
-							<dl>
-								<dt>Greg Apodaca</dt>
-								<dd>11/19/21</dd>
-							</dl>
-							<dl>
-								<dt>Portfolio Review</dt>
-								<dd>&#9873;</dd>
-							</dl>
-							<div>Thanks for sharing! Excellent product!</div>
-						</div>
-					</label>
-					
-					<input type="radio" name="li" id="a4">
-					<label for="a4">
-						<div class="circ" style="background-image:url('avatars/4.jpg');color:transparent;">CS</div>
-						<div>
-							<dl>
-								<dt>Christina Swift</dt>
-								<dd>6/18/20</dd>
-							</dl>
-							<dl>
-								<dt>New Hiking Spot</dt>
-								<dd>&#9872;</dd>
-							</dl>
-							<div>Wow, look at that lake! What if we make it an overnight trip</div>
-						</div>
-					</label>
-					
-					<input type="radio" name="li" id="a5">
-					<label for="a5">
-						<div class="circ" style="background-image:url('avatars/5.jpg');color:transparent;">DE</div>
-						<div>
-							<dl>
-								<dt>Daren Estrada</dt>
-								<dd>6/18/20</dd>
-							</dl>
-							<dl>
-								<dt>The Best Vacation</dt>
-								<dd>&#9872;</dd>
-							</dl>
-							<div>Morning! I was put in touch with Tania by a mutual friend. She had and amazing</div>
-						</div>
-					</label>
-					
-					<input type="radio" name="li" id="a6">
-					<label for="a6">
-						<div class="circ" style="background-image:url('avatars/6.jpg');color:transparent;">LY</div>
-						<div>
-							<dl>
-								<dt>Lucinda Yang</dt>
-								<dd>6/18/20</dd>
-							</dl>
-							<dl>
-								<dt>Playground Photos</dt>
-								<dd>&#9873;</dd>
-							</dl>
-							<div>I've attached Carol's resume. She's the one I was telling you about.</div>
-						</div>
-					</label>
-					
-					<input type="radio" name="li" id="a7">
-					<label for="a7">
-						<div class="circ" style="background-image:url('avatars/7.jpg');color:transparent;">SP</div>
-						<div>
-							<dl>
-								<dt>Simon Pickford</dt>
-								<dd>6/18/20</dd>
-							</dl>
-							<dl>
-								<dt>Send photos please</dt>
-								<dd>&#9872;</dd>
-							</dl>
-							<div>We're in the early stages of planning a neighborhood garden. Each family would</div>
-						</div>
-					</label>
-					
-					<input type="radio" name="li" id="a8">
-					<label for="a8">
-						<div class="circ" style="background-image:url('avatars/8.jpg');color:transparent;">GK</div>
-						<div>
-							<dl>
-								<dt>Geetika Kapoor</dt>
-								<dd>6/18/20</dd>
-							</dl>
-							<dl>
-								<dt>Fun Memories</dt>
-								<dd>&#9873;</dd>
-							</dl>
-							<div>Hey stranger. It's been a while since we've chatted, but I'd love to catch up.</div>
-						</div>
-					</label>
-					
-					<input type="radio" name="li" id="a9">
-					<label for="a9">
-						<div class="circ" style="background-image:url('avatars/9.jpg');color:transparent;">RA</div>
-						<div>
-							<dl>
-								<dt>Rody Aulbuerne</dt>
-								<dd>6/18/20</dd>
-							</dl>
-							<dl>
-								<dt>New Hiking Spot</dt>
-								<dd>&#9872;</dd>
-							</dl>
-							<div>Wow, look at that lake! What if we make it an overnight trip and do</div>
-						</div>
-					</label>
-					
-					<input type="radio" name="li" id="a10">
-					<label for="a10">
-						<div class="circ" style="background-image:url('avatars/10.jpg');color:transparent;">JC</div>
-						<div>
-							<dl>
-								<dt>Jenny Court</dt>
-								<dd>6/18/20</dd>
-							</dl>
-							<dl>
-								<dt>New Hiking Spot</dt>
-								<dd>&#9872;</dd>
-							</dl>
-							<div>Wow, look at that lake! What if we make it an overnight trip and do</div>
-						</div>
-					</label>
-					
-					<input type="radio" name="li" id="a11">
-					<label for="a11">
-						<div class="circ" style="background-image:url('avatars/11.jpg');color:transparent;">HA</div>
-						<div>
-							<dl>
-								<dt>Herland Antezana</dt>
-								<dd>6/18/20</dd>
-							</dl>
-							<dl>
-								<dt>New Hiking Spot</dt>
-								<dd>&#9872;</dd>
-							</dl>
-							<div>Wow, look at that lake! What if we make it an overnight trip and do</div>
-						</div>
-					</label>
-					
-					<input type="radio" name="li" id="a12">
-					<label for="a12">
-						<div class="circ" style="background-image:url('avatars/12.jpg');color:transparent;">RR</div>
-						<div>
-							<dl>
-								<dt>Rigo Ragel</dt>
-								<dd>6/18/20</dd>
-							</dl>
-							<dl>
-								<dt>New Hiking Spot</dt>
-								<dd>&#9872;</dd>
-							</dl>
-							<div>Wow, look at that lake! What if we make it an overnight trip and do</div>
-						</div>
-					</label>
-
-					<br><br><br><br><br><br><br><br><br><br><br>
 				</fieldset>
 			</div>
 		</section>
@@ -714,26 +848,7 @@
 						<polygon points="50,10 10,50" />
 						<polygon points="10,50 50,90" />
 					</svg>
-					<span>Back</span>
-					<svg viewbox="0 0 100 100" class="button" id='arrow-turn-up-right'>
-						<polygon points="51,10 51,35" />
-						<polygon points="51,10 90,50" />
-						<polygon points="90,50 51,90" />
-						<polygon points="51,65 51,90" />	
-						<path d="M 10 90 q 0 -50 41 -55" />
-						<path d="M 10 90 q 0 -27 41 -25" />
-					</svg>
-					<svg viewbox="0 0 100 100" class="button" id='printerButton'>
-						<polygon points="10,25 90,25 90,75 75,75 75,50 25,50 25,75 10,75" />
-						<polygon points="25,75 25,90" />
-						<polygon points="25,90 75,90" />
-						<polygon points="75,90 75,75" />
-						<polygon points="35,65 65,65" />
-						<polygon points="35,75 65,75" />
-						<polygon points="25,10 25,25" />
-						<polygon points="25,10 75,10" />
-						<polygon points="75,10 75,25" />
-					</svg>
+					<span id="backLabel">Back</span>
 					<svg viewbox="0 0 100 100" class="button delete" id="delButton">
 						<polygon points="33,10 68,10 68,20 33,20" />
 						<polygon points="20,20 80,20 75,90 25,90" />
@@ -747,16 +862,6 @@
 						<polygon points="30,10 30,35 70,35 70,10" />
 						<polygon points="20,90 20,50 80,50 80,90" />
 						<polygon points="59,17 62,17 62,28 59,28" />
-					</svg>
-					<svg viewbox="0 0 100 100" class="button" id="flagButton">
-						<polygon points="20,14 20,90" />
-						<path d="M 20 14 q 15 -8 30 0" />
-						<path d="M 50 14 q 15 8 30 0" />
-						<path d="M 20 60 q 15 -8 30 0" />
-						<path d="M 50 60 q 15 8 30 0" />
-						<polygon points="80,14 80,60" />
-						<polygon points="80,18 80,60 50,60 50,18" class="whiteFlag" />
-						<polygon points="20,14 20,55 55,55 50,14" class="whiteFlag" />
 					</svg>
 				</div>
 
@@ -774,58 +879,69 @@
 				</dl>
 				
 			</header>
-			<input type="checkbox" id="showMain" name="showMain">
 			<div id="main">
 				<label id="preview" class="circ" for="img"></label>
 				<input type="file" name="img" id="img" style="display:none;" onchange="previewImage(event)">
-				<div id="entries" class="entries" action="?" method="post">
-					<div>
-						<label for="f1">mobile</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f1" placeholder="number">(415) 555-9225</textarea></div>
-					</div>
-					<div>
-						<label for="f2">FaceTime</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f2" placeholder="text">Like the sky and earth are never as natural as black and white are never the same color, only we feel it. Learning to let go of himself even though half of me is with him, I'm sure we'll get used to it even if the core of our soul doesn't accept it</textarea></div>
-					</div>
-					<div>
-						<label for="f3">home</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f3" placeholder="email">egobrain@function.com</textarea></div>
-					</div>
-					<div>
-						<label for="f4">birthday</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f4" placeholder="date">April 3th</textarea></div>
-					</div>
-					<div>
-						<label for="f5">homepage</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f5" placeholder="text">Fourtwnty</textarea></div>
-					</div>
-					<div>
-						<label for="f6">fax</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f6" placeholder="phone">(2015) 420-024</textarea></div>
-					</div>
-					<div>
-						<label for="f7">notes</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1" id="f7" placeholder="note">Like water and fire that never mix, like east and west that never go in the same direction</textarea></div>
-					</div>
-					<div>
-						<label for="f8">office</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f8" placeholder="device">Microphone</textarea></div>
-					</div>
-					<div>
-						<label for="f9">postal</label>
-						<div class="wrap"><textarea autocorrect="off" rows="1"  id="f9" placeholder="text">6109 Winthrop St.
-San Francisco CA 94113.
-United States of America</textarea></div>
-					</div>
-					<br><br><br><br><br><br><br><br><br><br>
-				</div>
+				<div id="entries" class="entries" action="?" method="post"></div>
 			</div>
 		</section>
 		</form>
 	</body>
 </html>
 <script type="text/javascript">
-	var 	preview	= document.querySelector('#preview'),
+	let str = "";
+	data.forEach((row,index) => {
+		let checked = index<1?"tabindex='1' checked autofocus":"";
+		let header = row['name'];
+		let flagged = row['flagged']?"&#9873;":"&#9872;";
+		let avatar = "avatars/"+index+".jpg";
+
+		str += "<input type=\"radio\" name=\"li\" id=\"list"+index+"\""+checked+">";
+		str += "<label for=\"list"+index+"\" data-id=\""+index+"\">";
+			
+			if(avatar!="") {
+				str += "<div class=\"circ\" style=\"background-image:url('"+avatar+"');color:transparent;\">";
+			}
+			else {
+				str += "<div class=\"circ\">";
+			}
+			str += header.split(' ').map(word => word[0].toUpperCase()).join('');
+			str += "</div>";
+			str += "<div>";
+				str += "<dl>";
+					str += "<dt>"+header+"</dt>";
+					str += "<dd>"+row['date']+"</dd>";
+				str += "</dl>";
+				str += "<dl>";
+					str += "<dt>"+row['phone']+"</dt>";
+					str += "<dd>"+flagged+"</dd>";
+				str += "</dl>";
+				str += "<div>"+row['text']+"</div>";
+			str += "</div>";
+		str += "</label>";
+	});
+	document.querySelector('#rows').innerHTML += str;
+
+	const firstCategory = Object.keys(nav)[0] || "No category found";
+	const firstItem = nav[firstCategory]?.[0] || "No item found";
+	document.querySelector('#leftPart header h1').innerHTML = firstItem;
+
+	let checked;
+	str = "";
+	Object.keys(nav).forEach((category,navIndex) => {
+		str += "<label for=\"n"+navIndex+"\" class=\"group\">"+category+"</label>";
+		str += "<input type=\"checkbox\" name=\"group\" value=\""+category+"\" id=\"n"+navIndex+"\">";
+		str += "<div>";
+		nav[category].forEach((item,subNavIndex) => {
+			checked = navIndex == 0 && subNavIndex == 0?" checked":"";
+			str += "<input type=\"radio\" name=\"app\" value=\""+item+"\" id=\"n"+navIndex+"s"+subNavIndex+"\""+checked+">";
+			str += "<label for=\"n"+navIndex+"s"+subNavIndex+"\">"+item+"</label>";
+		});
+		str += "</div>";
+	});
+	document.querySelector('#dualSection aside fieldset').innerHTML += str;
+
+	let 	preview	= document.querySelector('#preview'),	selected,	
 	width 	= parseInt(window.innerWidth),
 	isPhone	= width < 975?true:false,
 	bg 	= getComputedStyle(document.body).getPropertyValue('--bg'),
@@ -846,37 +962,8 @@ United States of America</textarea></div>
 			txt.addEventListener('focus',()=>{
 				setTimeout(()=>{window.scrollTo(0,0);},70);
 			});
-			txt.addEventListener('keydown',()=>{
-				if(event.keyCode == 27){
-					document.getElementById('pop').style.animation = "slideDown .3s forwards";
-					document.getElementsByTagName('form')[0].style.cssText = "animation:zoomOut .3s forwards;";
-					setTimeout(()=>{killPop()},30);
-				}
-			});
 		});
 	},
-	selected,
-	adjusting = () => {
-		setTimeout(()=>{
-			window.scrollTo(0,0);
-			document.querySelector('#main').scrollTo(0,0);
-		},10);
-		if(isPhone){
-			/*document.querySelector('#preview').style.cssText = "zoom:normal;padding:0 0 2vh 0;margin:1vh 2vh 0 2vh";*/
-			//document.querySelector('#preview').style.cssText = "zoom:normal;padding:0 0 0 0;margin:1vh 2vh 0 2vh";
-			document.querySelector('#entries').style.cssText = "zoom:normal;padding:0 2vh 2vh 2vh;margin:0";
-		}
-		else {
-			document.querySelector('#main').style.cssText = "zoom:normal;padding:0 2vh 2vh 2vh;margin:0";
-		}
-	},
-	changeFlag = (color) => {
-		color = color=='&#9873;'?'black':'white';
-		var rev = color=='black'?'white':'black';
-		[...document.querySelectorAll('#flagButton polygon.'+rev+'Flag')].forEach(pol=>{
-			pol.classList.replace(rev+'Flag',color+'Flag');
-		});
-	};
 	killPop = () => {
 		document.body.style.backgroundColor = bg;
 		document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
@@ -885,24 +972,73 @@ United States of America</textarea></div>
 		});
 	};
 	setPreview = (el) => {
-		//preview.innerHTML = label.innerHTML;
-		preview.innerHTML = "";
-		preview.style.backgroundImage = el.getElementsByTagName('div')[0].style.backgroundImage;
+		let circ = el.getElementsByTagName('div')[0];
+		preview.innerHTML = circ.innerHTML;
+		preview.style.backgroundImage = circ.style.backgroundImage;
+		preview.style.color = circ.style.color;
+		document.querySelector(
+			isPhone?'#entries':'#main'
+		).style.cssText = "zoom:normal;padding:0 2vh 2vh 2vh;margin:0";
+		setTimeout(()=>{
+			window.scrollTo(0,0);
+			document.querySelector('#main').scrollTo(0,0);
+		},10);
 
-		changeFlag(el.getElementsByTagName('dd')[1].innerText.split("").map(char => `&#${char.charCodeAt(0)};`).join(""));
-		adjusting();
-	}
-	expand('form textarea');
+		
+		let id = el.dataset.id;
+		let row = data[id];
+		let str = "";
+		for (let key in row) {
+			if (row.hasOwnProperty(key)) {
+				str += "<div>";
+					str += "<label for=\"f"+id+"\">"+key+"</label>";
+					
+					if(row[key] == true|| row[key] == false){
+						checked = row[key]?" checked":"";
+						str += "<label class=\"switch\">";
+						str += "<input class=\"toggle\" type=\"checkbox\" id=\"f"+id+"\" name=\""+key+"\""+checked+">";
+						str += "<span class=\"slider round\"></span>";
+						str += "</label>";
+					}
+					else if(/^\d{4}\-\d{2}\-\d{2}$/.test(row[key])){
+						str += "<input type=\"date\" value=\""+row[key]+"\">";
+					}
+					else {
+						str += "<div class=\"wrap\">";
+						str += "<textarea row=\"1\" oninput=\"this.parentNode.dataset.replicatedValue = this.value\" autocorrect=\"off\" rows=\"1\" id=\"f"+id+"\" name=\""+key+"\">"+row[key]+"</textarea>";
+						str += "</div>";
+					}
+					
+				str += "</div>";
+			}
+		}
+		document.querySelector('#entries').innerHTML = str;
+		expand('textarea');
+	},
+	navToggle = () => {
+		var checked = document.getElementById("navToggle").checked;
+		document.getElementById("rows").style.display = checked?"none":"block";
+		[...document.querySelectorAll("#compose,#magnify")].forEach(svg=>{
+			svg.style.visibility = checked?"hidden":"visible";
+		});
+	},
+	cancelSearch = () => {
+		var sf = document.getElementById("searchForm").style;
+		var si = document.querySelector("#searchForm input");
+		sf.display = "none";
+		si.placeholder = "";
+		si.style.display = "none";
+		(selected instanceof HTMLElement) && selected.focus();
+	};
 
 	[...document.querySelectorAll('#rows label')].forEach(label => {
-		var setPrev = () => {
+		(label.previousElementSibling.nodeName.toLowerCase() == 'input') && label.previousElementSibling.checked && setPreview(label);
+		label.addEventListener('click', ()=>{
 			setPreview(label);
-		}
-		(label.previousElementSibling.nodeName.toLowerCase() == 'input') && label.previousElementSibling.checked && setPrev();
-		label.addEventListener('click', setPrev);
+
+		});
 	});
 
-	
 	[...document.querySelectorAll('#rows > input')].forEach(list => {
 		list.addEventListener('input',()=>{
 			selected = list;
@@ -920,7 +1056,7 @@ United States of America</textarea></div>
 		if(isPhone){ list.checked = false; }
 	});
 
-	[...document.querySelectorAll("#backButton,#detail header span")].forEach(back => {
+	[...document.querySelectorAll("#backButton, #detail header span")].forEach(back => {
 		back.addEventListener("click", () => {
 			var rows = document.getElementById("rows").style;
 			var detail = document.getElementById("detail").style;
@@ -936,22 +1072,32 @@ United States of America</textarea></div>
 		});
 	});
 
+	
 	document.getElementById("navToggle").addEventListener("click",() => {
+		navToggle();
+	});
+	
+
+	width < 1181 && document.querySelector("#leftPart h1").addEventListener("click",() => {
+		document.querySelector("#navToggle").checked = !document.querySelector("#navToggle").checked;
+		navToggle();
+	});
+
+	/*
+	navToggle = () => {
 		var checked = document.getElementById("navToggle").checked;
 		document.getElementById("rows").style.display = checked?"none":"block";
 		[...document.querySelectorAll("#compose,#magnify")].forEach(svg=>{
 			svg.style.visibility = checked?"hidden":"visible";
 		});
-	});
+	}
+	*/
 
 	document.getElementById("magnify").addEventListener("click",() => {
 		var sf = document.getElementById("searchForm").style;
 		var si = document.querySelector("#searchForm input");
 		if(sf.display == "flex") {
-			sf.display = "none";
-			si.placeholder = "";
-			si.style.display = "none";
-			(selected instanceof HTMLElement) && selected.focus();
+			cancelSearch();
 		}
 		else {
 			let showingSf = () => {
@@ -975,7 +1121,7 @@ United States of America</textarea></div>
 		}
 	});
 
-	[...document.querySelectorAll('.menus div div')].forEach(node => {
+	[...document.querySelectorAll('.menus div label')].forEach(node => {
 		node.addEventListener('click',()=>{
 			[...document.querySelectorAll('h1')].forEach((each)=>{
 				each.innerText = node.innerText;
@@ -1009,6 +1155,18 @@ United States of America</textarea></div>
 				location.reload();
 			},500);
 		});
+	});
+	document.body.addEventListener('keydown',()=>{
+		if(event.keyCode == 27){
+			if(document.getElementById('pop')){
+				document.getElementById('pop').style.animation = "slideDown .3s forwards";
+				document.getElementsByTagName('form')[0].style.cssText = "animation:zoomOut .3s forwards;";
+				setTimeout(()=>{killPop()},30);
+			}
+			else if(document.getElementById('searchForm')){
+				cancelSearch();
+			}
+		}
 	});
 	
 	document.getElementById('compose') && document.getElementById('compose').addEventListener('click',()=>{
@@ -1057,16 +1215,19 @@ United States of America</textarea></div>
 			tmp += "<input type='file' name='img' id='img' style='display:none;' onchange='previewImage(event)'/>";
 			tmp += "<svg viewbox='0 0 100 100' id='camera'><polygon points='10,80 90,80 90,30 70,30 60,20 40,20 30,30 10,30' /><circle cx='50' cy='53' r='15' /><polygon points='70,40 71,40' /></svg></label>";
 			tmp += document.getElementById('entries').innerHTML;
-			tmp += "<br><br><br><br><br><br><br><br>";
 		tmp += "</div>";
 		pop.innerHTML = tmp;
 		pop.id = "pop";
 		document.body.appendChild(pop);
-		setTimeout(()=>{
-			document.querySelector('#pop textarea').focus();
-			window.scrollTo(0,0);
-		},1000);
+
 		expand('#pop textarea');
+		[...document.querySelectorAll('#pop input[type="date"]')].forEach(dt=>{
+			dt.value = new Date().toISOString().split('T')[0];
+		});
+		[...document.querySelectorAll('#pop input[type="checkbox"]')].forEach(cb=>{
+			cb.checked = false;
+		});
+
 		[...document.querySelectorAll('.cancel')].forEach(cancel => {
 			cancel.addEventListener('click',()=>{
 				document.getElementById('pop').style.animation = "slideDown .3s forwards";
@@ -1079,7 +1240,8 @@ United States of America</textarea></div>
 			document.getElementById('pop').style.animation = "fadeUp .15s forwards";
 			setTimeout(()=>{
 				killPop();
-				location.reload();
+				//location.reload();
+				document.getElementsByTagName('form')[0].submit();
 			},90);
 		});
 	});
@@ -1098,4 +1260,5 @@ United States of America</textarea></div>
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+
 </script>
