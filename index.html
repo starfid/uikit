@@ -3,638 +3,667 @@
 	<head>
 		<script>
 			const nav = {
-				"Products": ["Types", "Catalogs", "Items"],
+				"Products": ["Catalogs", "Items", "Types"],
 				"User": ["Divisions", "Units", "Members"],
 				"Transactions": ["Checkout", "Checkin", "Monitoring", "Failed"],
 				"Management": ["Roles", "Staff"]
 			};
-			const data = [
-				{
-					"name": "Noah Woods",
-					"registered": "2025-07-25",
-					"active": false,
-					"company": "Scelerisque Scelerisque Dui Incorporated",
-					"phone": "(149) 646-5887",
-					"email": "ut.mi@protonmail.couk",
-					"address": "656-1523 Volutpat St.",
-					"postalZip": "38790",
-					"region": "Central Region",
-					"country": "Australia",
-					"text": "sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit",
-					"currency": "$69.19",
-					"alphanum": "GBN06GIB4RT",
-					"url": "https://guardian.co.uk",
-					"latlng": "-12.8131971072, -47.1941722112",
-					"text1": "dictum augue malesuada malesuada. Integer id magna et ipsum cursus vestibulum. Mauris magna. Duis dignissim tempor arcu.",
-					"text2": "convallis est, vitae sodales nisi magna sed dui. Fusce",
-					"$header": "Noah Woods",
-					"$subheader": "(149) 646-5887",
-					"$description": "sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit",
-					"$date": "2025-07-25",
-					"$flagged": false,
-					"$imagecirc": "avatars/0.jpg"
+			const list = {
+				"type" : {
+					"name": "text",
+					"registered": "date",
+					"active": "boolean",
+					"company": "text",
+					"phone": "text",
+					"email": "text",
+					"address": "text",
+					"postalZip": "text",
+					"region": "text",
+					"country": "text",
+					"text": "text",
+					"currency": "text",
+					"alphanum": "text",
+					"url": "text",
+					"latlng": "text",
+					"text1": "text",
+					"text2": "text",
+					"$header": "text",
+					"$subheader": "text",
+					"$description": "text",
+					"$date": "text",
+					"$flagged": "boolean",
+					"$imagecirc": "text"
 				},
-				{
-					"name": "Kaseem Joseph",
-					"registered": "2025-10-28",
-					"active": true,
-					"company": "Ornare Lectus Associates",
-					"phone": "1-571-559-4525",
-					"email": "et.magnis@aol.com",
-					"address": "Ap #168-7542 Lobortis Rd.",
-					"postalZip": "42537",
-					"region": "Munster",
-					"country": "Peru",
-					"text": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare.",
-					"currency": "$6.38",
-					"alphanum": "ZJZ68WFR5DX",
-					"url": "http://pinterest.com",
-					"latlng": "-67.373402112, -103.5765956608",
-					"text1": "Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim.",
-					"text2": "neque venenatis lacus. Etiam bibendum fermentum metus. Aenean sed",
-					"$header": "Kaseem Joseph",
-					"$subheader": "1-571-559-4525",
-					"$description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare.",
-					"$date": "2025-10-28",
-					"$flagged": true,
-					"$imagecirc": "avatars/1.jpg"
-				},
-				{
-					"name": "Jane Weeks",
-					"registered": "2025-02-11",
-					"active": true,
-					"company": "Dapibus Incorporated",
-					"phone": "1-251-487-1871",
-					"email": "nunc.pulvinar@aol.org",
-					"address": "P.O. Box 915, 7727 Aliquet St.",
-					"postalZip": "5121",
-					"region": "Goi\u00c3\u00a1s",
-					"country": "Colombia",
-					"text": "ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc",
-					"currency": "$83.29",
-					"alphanum": "TLX68YGN7WE",
-					"url": "http://zoom.us",
-					"latlng": "32.0971684864, -82.0995796992",
-					"text1": "vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh dolor, nonummy",
-					"text2": "enim. Curabitur massa. Vestibulum accumsan neque et nunc. Quisque ornare",
-					"$header": "Jane Weeks",
-					"$subheader": "1-251-487-1871",
-					"$description": "ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc",
-					"$date": "2025-02-11",
-					"$flagged": true,
-					"$imagecirc": "avatars/2.jpg"
-				},
-				{
-					"name": "Shaine Bean",
-					"registered": "2026-01-01",
-					"active": true,
-					"company": "Massa Vestibulum Accumsan Inc.",
-					"phone": "1-681-558-8042",
-					"email": "vitae@protonmail.couk",
-					"address": "202-5985 Curabitur Avenue",
-					"postalZip": "91294",
-					"region": "Ogun",
-					"country": "China",
-					"text": "porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit",
-					"currency": "$81.52",
-					"alphanum": "PXF87HWF1OR",
-					"url": "https://facebook.com",
-					"latlng": "-86.308624384, -41.8427840512",
-					"text1": "venenatis lacus. Etiam bibendum fermentum metus. Aenean sed pede nec ante blandit viverra. Donec tempus, lorem fringilla",
-					"text2": "semper tellus id nunc interdum feugiat. Sed nec metus",
-					"$header": "Shaine Bean",
-					"$subheader": "1-681-558-8042",
-					"$description": "porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit",
-					"$date": "2026-01-01",
-					"$flagged": true,
-					"$imagecirc": "avatars/3.jpg"
-				},
-				{
-					"name": "Wyoming Ward",
-					"registered": "2025-02-22",
-					"active": false,
-					"company": "Non Dapibus Company",
-					"phone": "(282) 516-2083",
-					"email": "nibh.lacinia@google.net",
-					"address": "127-409 Elit. Road",
-					"postalZip": "618971",
-					"region": "Utah",
-					"country": "New Zealand",
-					"text": "risus. Nunc ac sem ut dolor dapibus gravida. Aliquam tincidunt, nunc ac mattis ornare, lectus ante dictum mi, ac mattis",
-					"currency": "$36.34",
-					"alphanum": "UMI38URX5TC",
-					"url": "https://bbc.co.uk",
-					"latlng": "-84.8285840384, -139.3290527744",
-					"text1": "sed dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit",
-					"text2": "faucibus orci luctus et ultrices posuere cubilia Curae Donec",
-					"$header": "Wyoming Ward",
-					"$subheader": "(282) 516-2083",
-					"$description": "risus. Nunc ac sem ut dolor dapibus gravida. Aliquam tincidunt, nunc ac mattis ornare, lectus ante dictum mi, ac mattis",
-					"$date": "2025-02-22",
-					"$flagged": false,
-					"$imagecirc": "avatars/4.jpg"
-				},
-				{
-					"name": "Allegra Benton",
-					"registered": "2026-03-14",
-					"active": false,
-					"company": "Adipiscing Ligula Associates",
-					"phone": "(831) 328-7817",
-					"email": "lacus@protonmail.org",
-					"address": "2398 Ornare Road",
-					"postalZip": "83997",
-					"region": "Nuevo Le\u00c3\u00b3n",
-					"country": "Sweden",
-					"text": "feugiat non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer sem elit,",
-					"currency": "$30.93",
-					"alphanum": "GVP26NEH3KN",
-					"url": "https://walmart.com",
-					"latlng": "-53.8672190464, -50.55888896",
-					"text1": "eu odio tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et, lacinia",
-					"text2": "nibh lacinia orci, consectetuer euismod est arcu ac orci.",
-					"$header": "Allegra Benton",
-					"$subheader": "(831) 328-7817",
-					"$description": "feugiat non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer sem elit,",
-					"$date": "2026-03-14",
-					"$flagged": false,
-					"$imagecirc": "avatars/5.jpg"
-				},
-				{
-					"name": "Zia Short",
-					"registered": "2025-10-01",
-					"active": true,
-					"company": "Montes Foundation",
-					"phone": "1-173-552-6862",
-					"email": "nunc.ullamcorper.velit@outlook.com",
-					"address": "Ap #433-8962 Aliquet Rd.",
-					"postalZip": "TM4Z 7SZ",
-					"region": "Viken",
-					"country": "Belgium",
-					"text": "mi felis, adipiscing fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh",
-					"currency": "$84.73",
-					"alphanum": "DKQ99DUU7DW",
-					"url": "http://reddit.com",
-					"latlng": "23.0525257728, -82.4641754112",
-					"text1": "Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet,",
-					"text2": "vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur vel lectus.",
-					"$header": "Zia Short",
-					"$subheader": "1-173-552-6862",
-					"$description": "mi felis, adipiscing fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh",
-					"$date": "2025-10-01",
-					"$flagged": true,
-					"$imagecirc": "avatars/6.jpg"
-				},
-				{
-					"name": "Basil Drake",
-					"registered": "2025-06-04",
-					"active": true,
-					"company": "Purus Ac Foundation",
-					"phone": "(763) 845-9585",
-					"email": "nullam.lobortis@google.couk",
-					"address": "9851 Ipsum. Ave",
-					"postalZip": "456168",
-					"region": "Santa Catarina",
-					"country": "Philippines",
-					"text": "lorem ac risus. Morbi metus. Vivamus euismod urna. Nullam lobortis quam a felis ullamcorper viverra. Maecenas iaculis aliquet diam. Sed",
-					"currency": "$75.56",
-					"alphanum": "MSJ64NJG5SA",
-					"url": "https://pinterest.com",
-					"latlng": "-80.5207527424, -109.9404212224",
-					"text1": "faucibus leo, in lobortis tellus justo sit amet nulla. Donec non justo. Proin non massa non ante",
-					"text2": "erat, in consectetuer ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et",
-					"$header": "Basil Drake",
-					"$subheader": "(763) 845-9585",
-					"$description": "lorem ac risus. Morbi metus. Vivamus euismod urna. Nullam lobortis quam a felis ullamcorper viverra. Maecenas iaculis aliquet diam. Sed",
-					"$date": "2025-06-04",
-					"$flagged": true,
-					"$imagecirc": "avatars/7.jpg"
-				},
-				{
-					"name": "Reed Meyer",
-					"registered": "2024-04-10",
-					"active": true,
-					"company": "Enim Nec LLC",
-					"phone": "1-885-463-6202",
-					"email": "commodo.ipsum@aol.com",
-					"address": "Ap #870-783 Risus St.",
-					"postalZip": "1685-6899",
-					"region": "Queensland",
-					"country": "Nigeria",
-					"text": "eu, ligula. Aenean euismod mauris eu elit. Nulla facilisi. Sed neque. Sed eget lacus. Mauris non dui nec urna suscipit",
-					"currency": "$50.60",
-					"alphanum": "FGT07LRP4DZ",
-					"url": "https://zoom.us",
-					"latlng": "-57.2170232832, 127.5545342976",
-					"text1": "Donec at arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Donec",
-					"text2": "magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu",
-					"$header": "Reed Meyer",
-					"$subheader": "1-885-463-6202",
-					"$description": "eu, ligula. Aenean euismod mauris eu elit. Nulla facilisi. Sed neque. Sed eget lacus. Mauris non dui nec urna suscipit",
-					"$date": "2024-04-10",
-					"$flagged": true,
-					"$imagecirc": "avatars/8.jpg"
-				},
-				{
-					"name": "Branden Moss",
-					"registered": "2024-04-08",
-					"active": false,
-					"company": "Duis LLC",
-					"phone": "1-541-258-4571",
-					"email": "rutrum.magna.cras@hotmail.edu",
-					"address": "Ap #365-3712 Non Street",
-					"postalZip": "8275",
-					"region": "Sachsen",
-					"country": "Singapore",
-					"text": "fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae odio sagittis semper. Nam tempor diam dictum sapien. Aenean",
-					"currency": "$47.74",
-					"alphanum": "IEU26KLU8OP",
-					"url": "http://baidu.com",
-					"latlng": "-68.6543633408, -26.415094784",
-					"text1": "dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam gravida molestie arcu.",
-					"text2": "consectetuer rhoncus. Nullam velit dui, semper et, lacinia vitae, sodales",
-					"$header": "Branden Moss",
-					"$subheader": "1-541-258-4571",
-					"$description": "fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae odio sagittis semper. Nam tempor diam dictum sapien. Aenean",
-					"$date": "2024-04-08",
-					"$flagged": false,
-					"$imagecirc": "avatars/9.jpg"
-				},
-				{
-					"name": "Rebecca Austin",
-					"registered": "2025-01-26",
-					"active": false,
-					"company": "Eget Magna Corporation",
-					"phone": "(409) 706-8425",
-					"email": "nulla.eu@protonmail.edu",
-					"address": "Ap #254-9781 Sit Street",
-					"postalZip": "85435-74063",
-					"region": "Saratov Oblast",
-					"country": "Ukraine",
-					"text": "id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus non, lacinia at, iaculis quis, pede. Praesent eu dui.",
-					"currency": "$48.18",
-					"alphanum": "GAR51UBS3VV",
-					"url": "https://pinterest.com",
-					"latlng": "-60.137871872, -166.8309602304",
-					"text1": "euismod enim. Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula.",
-					"text2": "luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis",
-					"$header": "Rebecca Austin",
-					"$subheader": "(409) 706-8425",
-					"$description": "id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus non, lacinia at, iaculis quis, pede. Praesent eu dui.",
-					"$date": "2025-01-26",
-					"$flagged": false,
-					"$imagecirc": "avatars/10.jpg"
-				},
-				{
-					"name": "Indigo Calderon",
-					"registered": "2024-12-21",
-					"active": true,
-					"company": "At Auctor Associates",
-					"phone": "1-855-271-5225",
-					"email": "ornare.facilisis@yahoo.ca",
-					"address": "Ap #146-8783 In St.",
-					"postalZip": "968398",
-					"region": "Agder",
-					"country": "Brazil",
-					"text": "risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam",
-					"currency": "$99.13",
-					"alphanum": "VLO03IFQ2DC",
-					"url": "http://google.com",
-					"latlng": "-22.7403374592, 140.2241051648",
-					"text1": "semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In mi pede, nonummy ut, molestie in, tempus",
-					"text2": "orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus.",
-					"$header": "Indigo Calderon",
-					"$subheader": "1-855-271-5225",
-					"$description": "risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam",
-					"$date": "2024-12-21",
-					"$flagged": true,
-					"$imagecirc": "avatars/11.jpg"
-				},
-				{
-					"name": "Len Richard",
-					"registered": "2024-12-12",
-					"active": false,
-					"company": "Semper Corporation",
-					"phone": "1-647-481-5639",
-					"email": "vel@google.net",
-					"address": "P.O. Box 466, 5198 Enim. Rd.",
-					"postalZip": "3466-8541",
-					"region": "South Gyeongsang",
-					"country": "Costa Rica",
-					"text": "dictum sapien. Aenean massa. Integer vitae nibh. Donec est mauris, rhoncus id, mollis nec, cursus a, enim. Suspendisse aliquet, sem",
-					"currency": "$45.18",
-					"alphanum": "SBG98JWJ4CR",
-					"url": "http://ebay.com",
-					"latlng": "72.0203420672, -145.374477824",
-					"text1": "quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at arcu. Vestibulum ante",
-					"text2": "Integer sem elit, pharetra ut, pharetra sed, hendrerit",
-					"$header": "Len Richard",
-					"$subheader": "1-647-481-5639",
-					"$description": "dictum sapien. Aenean massa. Integer vitae nibh. Donec est mauris, rhoncus id, mollis nec, cursus a, enim. Suspendisse aliquet, sem",
-					"$date": "2024-12-12",
-					"$flagged": false,
-					"$imagecirc": "avatars/12.jpg"
-				},
-				{
-					"name": "Eliana Lowery",
-					"registered": "2025-02-14",
-					"active": false,
-					"company": "Rhoncus Id Associates",
-					"phone": "1-378-769-2529",
-					"email": "lacus@yahoo.edu",
-					"address": "P.O. Box 873, 2267 A, Rd.",
-					"postalZip": "56922",
-					"region": "Boyac\u00c3\u00a1",
-					"country": "France",
-					"text": "vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo.",
-					"currency": "$15.01",
-					"alphanum": "MKB44INW6PG",
-					"url": "https://instagram.com",
-					"latlng": "88.0423453696, 28.1850553344",
-					"text1": "sapien. Aenean massa. Integer vitae nibh. Donec est mauris, rhoncus id, mollis nec, cursus a, enim. Suspendisse",
-					"text2": "lorem semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis",
-					"$header": "Eliana Lowery",
-					"$subheader": "1-378-769-2529",
-					"$description": "vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo.",
-					"$date": "2025-02-14",
-					"$flagged": false,
-					"$imagecirc": "avatars/13.jpg"
-				},
-				{
-					"name": "Charde Sexton",
-					"registered": "2025-10-22",
-					"active": true,
-					"company": "Et Pede Corp.",
-					"phone": "1-165-121-5772",
-					"email": "ligula.donec@icloud.com",
-					"address": "916-1692 Neque Av.",
-					"postalZip": "00475",
-					"region": "Viken",
-					"country": "Norway",
-					"text": "elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum.",
-					"currency": "$61.50",
-					"alphanum": "JRZ04LYI6GT",
-					"url": "http://netflix.com",
-					"latlng": "50.096820224, 110.6795305984",
-					"text1": "lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu ac orci. Ut semper pretium neque. Morbi quis",
-					"text2": "mauris a nunc. In at pede. Cras vulputate",
-					"$header": "Charde Sexton",
-					"$subheader": "1-165-121-5772",
-					"$description": "elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum.",
-					"$date": "2025-10-22",
-					"$flagged": true,
-					"$imagecirc": ""
-				},
-				{
-					"name": "Grady Mccullough",
-					"registered": "2024-09-15",
-					"active": false,
-					"company": "Leo In Lobortis PC",
-					"phone": "1-323-192-3570",
-					"email": "vestibulum.ante.ipsum@hotmail.edu",
-					"address": "961-7311 Interdum. St.",
-					"postalZip": "68-86",
-					"region": "Rostov Oblast",
-					"country": "Peru",
-					"text": "et malesuada fames ac turpis egestas. Aliquam fringilla cursus purus. Nullam scelerisque neque sed sem egestas blandit. Nam nulla magna,",
-					"currency": "$98.14",
-					"alphanum": "SEI56IUM9VP",
-					"url": "https://netflix.com",
-					"latlng": "-26.96021504, 14.4399466496",
-					"text1": "elementum sem, vitae aliquam eros turpis non enim. Mauris quis turpis vitae purus gravida sagittis. Duis gravida.",
-					"text2": "augue scelerisque mollis. Phasellus libero mauris, aliquam eu, accumsan",
-					"$header": "Grady Mccullough",
-					"$subheader": "1-323-192-3570",
-					"$description": "et malesuada fames ac turpis egestas. Aliquam fringilla cursus purus. Nullam scelerisque neque sed sem egestas blandit. Nam nulla magna,",
-					"$date": "2024-09-15",
-					"$flagged": false,
-					"$imagecirc": ""
-				},
-				{
-					"name": "Francis Richmond",
-					"registered": "2025-07-05",
-					"active": false,
-					"company": "Tempor Incorporated",
-					"phone": "1-636-571-4344",
-					"email": "lorem.sit@hotmail.couk",
-					"address": "Ap #322-9289 Mauris Street",
-					"postalZip": "621587",
-					"region": "Goi\u00c3\u00a1s",
-					"country": "Colombia",
-					"text": "Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in,",
-					"currency": "$45.09",
-					"alphanum": "PXW78XEC4ST",
-					"url": "http://facebook.com",
-					"latlng": "19.9298055168, -127.1352946688",
-					"text1": "non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer",
-					"text2": "pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien,",
-					"$header": "Francis Richmond",
-					"$subheader": "1-636-571-4344",
-					"$description": "Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in,",
-					"$date": "2025-07-05",
-					"$flagged": false,
-					"$imagecirc": ""
-				},
-				{
-					"name": "Fritz Cantrell",
-					"registered": "2026-02-22",
-					"active": true,
-					"company": "Morbi Metus Corporation",
-					"phone": "(314) 163-6448",
-					"email": "faucibus.lectus.a@aol.net",
-					"address": "P.O. Box 485, 3480 Donec St.",
-					"postalZip": "T9R 2L8",
-					"region": "Tr\u00c3  Vinh",
-					"country": "Philippines",
-					"text": "Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus. Donec egestas. Aliquam",
-					"currency": "$65.14",
-					"alphanum": "XYR64VMJ4ZP",
-					"url": "https://cnn.com",
-					"latlng": "-39.4241666048, -79.0078007296",
-					"text1": "nibh enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis natoque penatibus et magnis dis",
-					"text2": "ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et",
-					"$header": "Fritz Cantrell",
-					"$subheader": "(314) 163-6448",
-					"$description": "Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus. Donec egestas. Aliquam",
-					"$date": "2026-02-22",
-					"$flagged": true,
-					"$imagecirc": ""
-				},
-				{
-					"name": "Arden Brooks",
-					"registered": "2025-09-27",
-					"active": false,
-					"company": "Cum Sociis Natoque Incorporated",
-					"phone": "1-622-165-6082",
-					"email": "ante.bibendum@protonmail.ca",
-					"address": "P.O. Box 438, 664 Ante Rd.",
-					"postalZip": "50613",
-					"region": "Lim\u00c3\u00b3n",
-					"country": "Colombia",
-					"text": "tellus. Phasellus elit pede, malesuada vel, venenatis vel, faucibus id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus",
-					"currency": "$44.42",
-					"alphanum": "OUY16LZE3LW",
-					"url": "https://twitter.com",
-					"latlng": "69.104523264, 14.2243709952",
-					"text1": "iaculis quis, pede. Praesent eu dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus",
-					"text2": "magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut",
-					"$header": "Arden Brooks",
-					"$subheader": "1-622-165-6082",
-					"$description": "tellus. Phasellus elit pede, malesuada vel, venenatis vel, faucibus id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus",
-					"$date": "2025-09-27",
-					"$flagged": false,
-					"$imagecirc": ""
-				},
-				{
-					"name": "Tad Herman",
-					"registered": "2025-09-05",
-					"active": true,
-					"company": "Neque Corporation",
-					"phone": "1-472-308-5281",
-					"email": "eget.metus@aol.couk",
-					"address": "668-1430 Massa. Road",
-					"postalZip": "5167",
-					"region": "South Island",
-					"country": "Spain",
-					"text": "aliquam eu, accumsan sed, facilisis vitae, orci. Phasellus dapibus quam quis diam. Pellentesque habitant morbi tristique senectus et netus et",
-					"currency": "$19.79",
-					"alphanum": "XKL06YPC3OM",
-					"url": "https://zoom.us",
-					"latlng": "-13.6448137216, -94.1531966464",
-					"text1": "ac orci. Ut semper pretium neque. Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam",
-					"text2": "urna, nec luctus felis purus ac tellus. Suspendisse sed dolor.",
-					"$header": "Tad Herman",
-					"$subheader": "1-472-308-5281",
-					"$description": "aliquam eu, accumsan sed, facilisis vitae, orci. Phasellus dapibus quam quis diam. Pellentesque habitant morbi tristique senectus et netus et",
-					"$date": "2025-09-05",
-					"$flagged": true,
-					"$imagecirc": ""
-				},
-				{
-					"name": "Dalton Kemp Rams",
-					"registered": "2025-05-25",
-					"active": true,
-					"company": "Ac Arcu Nunc Ltd",
-					"phone": "1-815-717-3585",
-					"email": "non.feugiat.nec@protonmail.edu",
-					"address": "P.O. Box 388, 4707 Sapien. Street",
-					"postalZip": "41104",
-					"region": "Gaziantep",
-					"country": "Ireland",
-					"text": "eget, dictum placerat, augue. Sed molestie. Sed id risus quis diam luctus lobortis. Class aptent taciti sociosqu ad litora torquent",
-					"currency": "$72.55",
-					"alphanum": "YDC84IKJ5HE",
-					"url": "http://nytimes.com",
-					"latlng": "-53.8123685888, -12.3619889152",
-					"text1": "tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque.",
-					"text2": "dolor. Fusce feugiat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-					"$header": "Dalton Kemp Rams",
-					"$subheader": "1-815-717-3585",
-					"$description": "eget, dictum placerat, augue. Sed molestie. Sed id risus quis diam luctus lobortis. Class aptent taciti sociosqu ad litora torquent",
-					"$date": "2025-05-25",
-					"$flagged": true,
-					"$imagecirc": ""
-				},
-				{
-					"name": "Noelle Workman",
-					"registered": "2024-07-02",
-					"active": true,
-					"company": "Eu Nibh Ltd",
-					"phone": "1-760-548-5546",
-					"email": "morbi.quis@aol.ca",
-					"address": "185-797 Nullam Ave",
-					"postalZip": "645089",
-					"region": "Lanarkshire",
-					"country": "Belgium",
-					"text": "tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In",
-					"currency": "$81.74",
-					"alphanum": "ISC50PTU2JB",
-					"url": "http://pinterest.com",
-					"latlng": "-27.9171096576, 103.9023556608",
-					"text1": "cursus, diam at pretium aliquet, metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus elit",
-					"text2": "enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie",
-					"$header": "Noelle Workman",
-					"$subheader": "1-760-548-5546",
-					"$description": "tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In",
-					"$date": "2024-07-02",
-					"$flagged": true,
-					"$imagecirc": ""
-				},
-				{
-					"name": "Brett Frank",
-					"registered": "2025-08-14",
-					"active": false,
-					"company": "In Scelerisque Corporation",
-					"phone": "(653) 494-8366",
-					"email": "faucibus.orci@protonmail.net",
-					"address": "P.O. Box 904, 5844 Adipiscing St.",
-					"postalZip": "31555",
-					"region": "Kocaeli",
-					"country": "Nigeria",
-					"text": "Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc interdum feugiat. Sed nec metus facilisis lorem tristique",
-					"currency": "$42.44",
-					"alphanum": "PVN42LON8CK",
-					"url": "http://reddit.com",
-					"latlng": "66.3192117248, 161.232950272",
-					"text1": "fringilla purus mauris a nunc. In at pede. Cras vulputate velit eu sem. Pellentesque ut ipsum ac",
-					"text2": "accumsan sed, facilisis vitae, orci. Phasellus dapibus quam quis",
-					"$header": "Brett Frank",
-					"$subheader": "(653) 494-8366",
-					"$description": "Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc interdum feugiat. Sed nec metus facilisis lorem tristique",
-					"$date": "2025-08-14",
-					"$flagged": false,
-					"$imagecirc": ""
-				},
-				{
-					"name": "Aaron Kirk",
-					"registered": "2025-03-28",
-					"active": false,
-					"company": "Gravida Corp.",
-					"phone": "1-896-882-6136",
-					"email": "aliquam.ultrices@outlook.com",
-					"address": "979-7738 Mattis Avenue",
-					"postalZip": "38107",
-					"region": "J\u00c3\u00b6nk\u00c3\u00b6pings l\u00c3\u00a4n",
-					"country": "Indonesia",
-					"text": "Sed eu eros. Nam consequat dolor vitae dolor. Donec fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae",
-					"currency": "$94.37",
-					"alphanum": "BYW02CXT1SH",
-					"url": "http://walmart.com",
-					"latlng": "56.0534920192, 125.0969469952",
-					"text1": "ante. Nunc mauris sapien, cursus in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu enim. Etiam",
-					"text2": "metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus",
-					"$header": "Aaron Kirk",
-					"$subheader": "1-896-882-6136",
-					"$description": "Sed eu eros. Nam consequat dolor vitae dolor. Donec fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae",
-					"$date": "2025-03-28",
-					"$flagged": false,
-					"$imagecirc": ""
-				},
-				{
-					"name": "Chelsea Harmon",
-					"registered": "2025-08-07",
-					"active": false,
-					"company": "Integer Sem Corp.",
-					"phone": "1-272-372-9110",
-					"email": "ut.nisi.a@aol.edu",
-					"address": "722-5217 Cursus Street",
-					"postalZip": "XB3 5BE",
-					"region": "Saarland",
-					"country": "Netherlands",
-					"text": "eu, euismod ac, fermentum vel, mauris. Integer sem elit, pharetra ut, pharetra sed, hendrerit a, arcu. Sed et libero. Proin",
-					"currency": "$53.02",
-					"alphanum": "PLQ53CQG1LF",
-					"url": "https://youtube.com",
-					"latlng": "86.8722148352, 149.1657669632",
-					"text1": "eu erat semper rutrum. Fusce dolor quam, elementum at, egestas a, scelerisque sed, sapien. Nunc pulvinar arcu",
-					"text2": "fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem magna",
-					"$header": "Chelsea Harmon",
-					"$subheader": "1-272-372-9110",
-					"$description": "eu, euismod ac, fermentum vel, mauris. Integer sem elit, pharetra ut, pharetra sed, hendrerit a, arcu. Sed et libero. Proin",
-					"$date": "2025-08-07",
-					"$flagged": false,
-					"$imagecirc": ""
-				}
-			];
+				"data"	: [
+					/**/
+					{
+						"name": "Noah Woods",
+						"registered": "2025-07-25",
+						"active": false,
+						"company": "Scelerisque Scelerisque Dui Incorporated",
+						"phone": "(149) 646-5887",
+						"email": "ut.mi@protonmail.couk",
+						"address": "656-1523 Volutpat St.",
+						"postalZip": "38790",
+						"region": "Central Region",
+						"country": "Australia",
+						"text": "sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit",
+						"currency": "$69.19",
+						"alphanum": "GBN06GIB4RT",
+						"url": "https://guardian.co.uk",
+						"latlng": "-12.8131971072, -47.1941722112",
+						"text1": "dictum augue malesuada malesuada. Integer id magna et ipsum cursus vestibulum. Mauris magna. Duis dignissim tempor arcu.",
+						"text2": "convallis est, vitae sodales nisi magna sed dui. Fusce",
+						"$header": "Noah Woods",
+						"$subheader": "(149) 646-5887",
+						"$description": "sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit",
+						"$date": "2025-07-25",
+						"$flagged": false,
+						"$imagecirc": "avatars/0.jpg"
+					},
+					{
+						"name": "Kaseem Joseph",
+						"registered": "2025-10-28",
+						"active": true,
+						"company": "Ornare Lectus Associates",
+						"phone": "1-571-559-4525",
+						"email": "et.magnis@aol.com",
+						"address": "Ap #168-7542 Lobortis Rd.",
+						"postalZip": "42537",
+						"region": "Munster",
+						"country": "Peru",
+						"text": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare.",
+						"currency": "$6.38",
+						"alphanum": "ZJZ68WFR5DX",
+						"url": "http://pinterest.com",
+						"latlng": "-67.373402112, -103.5765956608",
+						"text1": "Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim.",
+						"text2": "neque venenatis lacus. Etiam bibendum fermentum metus. Aenean sed",
+						"$header": "Kaseem Joseph",
+						"$subheader": "1-571-559-4525",
+						"$description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare.",
+						"$date": "2025-10-28",
+						"$flagged": true,
+						"$imagecirc": "avatars/1.jpg"
+					},
+					{
+						"name": "Jane Weeks",
+						"registered": "2025-02-11",
+						"active": true,
+						"company": "Dapibus Incorporated",
+						"phone": "1-251-487-1871",
+						"email": "nunc.pulvinar@aol.org",
+						"address": "P.O. Box 915, 7727 Aliquet St.",
+						"postalZip": "5121",
+						"region": "Goi\u00c3\u00a1s",
+						"country": "Colombia",
+						"text": "ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc",
+						"currency": "$83.29",
+						"alphanum": "TLX68YGN7WE",
+						"url": "http://zoom.us",
+						"latlng": "32.0971684864, -82.0995796992",
+						"text1": "vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh dolor, nonummy",
+						"text2": "enim. Curabitur massa. Vestibulum accumsan neque et nunc. Quisque ornare",
+						"$header": "Jane Weeks",
+						"$subheader": "1-251-487-1871",
+						"$description": "ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc",
+						"$date": "2025-02-11",
+						"$flagged": true,
+						"$imagecirc": "avatars/2.jpg"
+					},
+					{
+						"name": "Shaine Bean",
+						"registered": "2026-01-01",
+						"active": true,
+						"company": "Massa Vestibulum Accumsan Inc.",
+						"phone": "1-681-558-8042",
+						"email": "vitae@protonmail.couk",
+						"address": "202-5985 Curabitur Avenue",
+						"postalZip": "91294",
+						"region": "Ogun",
+						"country": "China",
+						"text": "porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit",
+						"currency": "$81.52",
+						"alphanum": "PXF87HWF1OR",
+						"url": "https://facebook.com",
+						"latlng": "-86.308624384, -41.8427840512",
+						"text1": "venenatis lacus. Etiam bibendum fermentum metus. Aenean sed pede nec ante blandit viverra. Donec tempus, lorem fringilla",
+						"text2": "semper tellus id nunc interdum feugiat. Sed nec metus",
+						"$header": "Shaine Bean",
+						"$subheader": "1-681-558-8042",
+						"$description": "porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit",
+						"$date": "2026-01-01",
+						"$flagged": true,
+						"$imagecirc": "avatars/3.jpg"
+					},
+					{
+						"name": "Wyoming Ward",
+						"registered": "2025-02-22",
+						"active": false,
+						"company": "Non Dapibus Company",
+						"phone": "(282) 516-2083",
+						"email": "nibh.lacinia@google.net",
+						"address": "127-409 Elit. Road",
+						"postalZip": "618971",
+						"region": "Utah",
+						"country": "New Zealand",
+						"text": "risus. Nunc ac sem ut dolor dapibus gravida. Aliquam tincidunt, nunc ac mattis ornare, lectus ante dictum mi, ac mattis",
+						"currency": "$36.34",
+						"alphanum": "UMI38URX5TC",
+						"url": "https://bbc.co.uk",
+						"latlng": "-84.8285840384, -139.3290527744",
+						"text1": "sed dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit",
+						"text2": "faucibus orci luctus et ultrices posuere cubilia Curae Donec",
+						"$header": "Wyoming Ward",
+						"$subheader": "(282) 516-2083",
+						"$description": "risus. Nunc ac sem ut dolor dapibus gravida. Aliquam tincidunt, nunc ac mattis ornare, lectus ante dictum mi, ac mattis",
+						"$date": "2025-02-22",
+						"$flagged": false,
+						"$imagecirc": "avatars/4.jpg"
+					},
+					{
+						"name": "Allegra Benton",
+						"registered": "2026-03-14",
+						"active": false,
+						"company": "Adipiscing Ligula Associates",
+						"phone": "(831) 328-7817",
+						"email": "lacus@protonmail.org",
+						"address": "2398 Ornare Road",
+						"postalZip": "83997",
+						"region": "Nuevo Le\u00c3\u00b3n",
+						"country": "Sweden",
+						"text": "feugiat non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer sem elit,",
+						"currency": "$30.93",
+						"alphanum": "GVP26NEH3KN",
+						"url": "https://walmart.com",
+						"latlng": "-53.8672190464, -50.55888896",
+						"text1": "eu odio tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et, lacinia",
+						"text2": "nibh lacinia orci, consectetuer euismod est arcu ac orci.",
+						"$header": "Allegra Benton",
+						"$subheader": "(831) 328-7817",
+						"$description": "feugiat non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer sem elit,",
+						"$date": "2026-03-14",
+						"$flagged": false,
+						"$imagecirc": "avatars/5.jpg"
+					},
+					{
+						"name": "Zia Short",
+						"registered": "2025-10-01",
+						"active": true,
+						"company": "Montes Foundation",
+						"phone": "1-173-552-6862",
+						"email": "nunc.ullamcorper.velit@outlook.com",
+						"address": "Ap #433-8962 Aliquet Rd.",
+						"postalZip": "TM4Z 7SZ",
+						"region": "Viken",
+						"country": "Belgium",
+						"text": "mi felis, adipiscing fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh",
+						"currency": "$84.73",
+						"alphanum": "DKQ99DUU7DW",
+						"url": "http://reddit.com",
+						"latlng": "23.0525257728, -82.4641754112",
+						"text1": "Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet,",
+						"text2": "vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur vel lectus.",
+						"$header": "Zia Short",
+						"$subheader": "1-173-552-6862",
+						"$description": "mi felis, adipiscing fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh",
+						"$date": "2025-10-01",
+						"$flagged": true,
+						"$imagecirc": "avatars/6.jpg"
+					},
+					{
+						"name": "Basil Drake",
+						"registered": "2025-06-04",
+						"active": true,
+						"company": "Purus Ac Foundation",
+						"phone": "(763) 845-9585",
+						"email": "nullam.lobortis@google.couk",
+						"address": "9851 Ipsum. Ave",
+						"postalZip": "456168",
+						"region": "Santa Catarina",
+						"country": "Philippines",
+						"text": "lorem ac risus. Morbi metus. Vivamus euismod urna. Nullam lobortis quam a felis ullamcorper viverra. Maecenas iaculis aliquet diam. Sed",
+						"currency": "$75.56",
+						"alphanum": "MSJ64NJG5SA",
+						"url": "https://pinterest.com",
+						"latlng": "-80.5207527424, -109.9404212224",
+						"text1": "faucibus leo, in lobortis tellus justo sit amet nulla. Donec non justo. Proin non massa non ante",
+						"text2": "erat, in consectetuer ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et",
+						"$header": "Basil Drake",
+						"$subheader": "(763) 845-9585",
+						"$description": "lorem ac risus. Morbi metus. Vivamus euismod urna. Nullam lobortis quam a felis ullamcorper viverra. Maecenas iaculis aliquet diam. Sed",
+						"$date": "2025-06-04",
+						"$flagged": true,
+						"$imagecirc": "avatars/7.jpg"
+					},
+					{
+						"name": "Reed Meyer",
+						"registered": "2024-04-10",
+						"active": true,
+						"company": "Enim Nec LLC",
+						"phone": "1-885-463-6202",
+						"email": "commodo.ipsum@aol.com",
+						"address": "Ap #870-783 Risus St.",
+						"postalZip": "1685-6899",
+						"region": "Queensland",
+						"country": "Nigeria",
+						"text": "eu, ligula. Aenean euismod mauris eu elit. Nulla facilisi. Sed neque. Sed eget lacus. Mauris non dui nec urna suscipit",
+						"currency": "$50.60",
+						"alphanum": "FGT07LRP4DZ",
+						"url": "https://zoom.us",
+						"latlng": "-57.2170232832, 127.5545342976",
+						"text1": "Donec at arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Donec",
+						"text2": "magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu",
+						"$header": "Reed Meyer",
+						"$subheader": "1-885-463-6202",
+						"$description": "eu, ligula. Aenean euismod mauris eu elit. Nulla facilisi. Sed neque. Sed eget lacus. Mauris non dui nec urna suscipit",
+						"$date": "2024-04-10",
+						"$flagged": true,
+						"$imagecirc": "avatars/8.jpg"
+					},
+					{
+						"name": "Branden Moss",
+						"registered": "2024-04-08",
+						"active": false,
+						"company": "Duis LLC",
+						"phone": "1-541-258-4571",
+						"email": "rutrum.magna.cras@hotmail.edu",
+						"address": "Ap #365-3712 Non Street",
+						"postalZip": "8275",
+						"region": "Sachsen",
+						"country": "Singapore",
+						"text": "fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae odio sagittis semper. Nam tempor diam dictum sapien. Aenean",
+						"currency": "$47.74",
+						"alphanum": "IEU26KLU8OP",
+						"url": "http://baidu.com",
+						"latlng": "-68.6543633408, -26.415094784",
+						"text1": "dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam gravida molestie arcu.",
+						"text2": "consectetuer rhoncus. Nullam velit dui, semper et, lacinia vitae, sodales",
+						"$header": "Branden Moss",
+						"$subheader": "1-541-258-4571",
+						"$description": "fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae odio sagittis semper. Nam tempor diam dictum sapien. Aenean",
+						"$date": "2024-04-08",
+						"$flagged": false,
+						"$imagecirc": "avatars/9.jpg"
+					},
+					{
+						"name": "Rebecca Austin",
+						"registered": "2025-01-26",
+						"active": false,
+						"company": "Eget Magna Corporation",
+						"phone": "(409) 706-8425",
+						"email": "nulla.eu@protonmail.edu",
+						"address": "Ap #254-9781 Sit Street",
+						"postalZip": "85435-74063",
+						"region": "Saratov Oblast",
+						"country": "Ukraine",
+						"text": "id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus non, lacinia at, iaculis quis, pede. Praesent eu dui.",
+						"currency": "$48.18",
+						"alphanum": "GAR51UBS3VV",
+						"url": "https://pinterest.com",
+						"latlng": "-60.137871872, -166.8309602304",
+						"text1": "euismod enim. Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula.",
+						"text2": "luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis",
+						"$header": "Rebecca Austin",
+						"$subheader": "(409) 706-8425",
+						"$description": "id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus non, lacinia at, iaculis quis, pede. Praesent eu dui.",
+						"$date": "2025-01-26",
+						"$flagged": false,
+						"$imagecirc": "avatars/10.jpg"
+					},
+					{
+						"name": "Indigo Calderon",
+						"registered": "2024-12-21",
+						"active": true,
+						"company": "At Auctor Associates",
+						"phone": "1-855-271-5225",
+						"email": "ornare.facilisis@yahoo.ca",
+						"address": "Ap #146-8783 In St.",
+						"postalZip": "968398",
+						"region": "Agder",
+						"country": "Brazil",
+						"text": "risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam",
+						"currency": "$99.13",
+						"alphanum": "VLO03IFQ2DC",
+						"url": "http://google.com",
+						"latlng": "-22.7403374592, 140.2241051648",
+						"text1": "semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In mi pede, nonummy ut, molestie in, tempus",
+						"text2": "orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus.",
+						"$header": "Indigo Calderon",
+						"$subheader": "1-855-271-5225",
+						"$description": "risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam",
+						"$date": "2024-12-21",
+						"$flagged": true,
+						"$imagecirc": "avatars/11.jpg"
+					},
+					{
+						"name": "Len Richard",
+						"registered": "2024-12-12",
+						"active": false,
+						"company": "Semper Corporation",
+						"phone": "1-647-481-5639",
+						"email": "vel@google.net",
+						"address": "P.O. Box 466, 5198 Enim. Rd.",
+						"postalZip": "3466-8541",
+						"region": "South Gyeongsang",
+						"country": "Costa Rica",
+						"text": "dictum sapien. Aenean massa. Integer vitae nibh. Donec est mauris, rhoncus id, mollis nec, cursus a, enim. Suspendisse aliquet, sem",
+						"currency": "$45.18",
+						"alphanum": "SBG98JWJ4CR",
+						"url": "http://ebay.com",
+						"latlng": "72.0203420672, -145.374477824",
+						"text1": "quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at arcu. Vestibulum ante",
+						"text2": "Integer sem elit, pharetra ut, pharetra sed, hendrerit",
+						"$header": "Len Richard",
+						"$subheader": "1-647-481-5639",
+						"$description": "dictum sapien. Aenean massa. Integer vitae nibh. Donec est mauris, rhoncus id, mollis nec, cursus a, enim. Suspendisse aliquet, sem",
+						"$date": "2024-12-12",
+						"$flagged": false,
+						"$imagecirc": "avatars/12.jpg"
+					},
+					{
+						"name": "Eliana Lowery",
+						"registered": "2025-02-14",
+						"active": false,
+						"company": "Rhoncus Id Associates",
+						"phone": "1-378-769-2529",
+						"email": "lacus@yahoo.edu",
+						"address": "P.O. Box 873, 2267 A, Rd.",
+						"postalZip": "56922",
+						"region": "Boyac\u00c3\u00a1",
+						"country": "France",
+						"text": "vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo.",
+						"currency": "$15.01",
+						"alphanum": "MKB44INW6PG",
+						"url": "https://instagram.com",
+						"latlng": "88.0423453696, 28.1850553344",
+						"text1": "sapien. Aenean massa. Integer vitae nibh. Donec est mauris, rhoncus id, mollis nec, cursus a, enim. Suspendisse",
+						"text2": "lorem semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis",
+						"$header": "Eliana Lowery",
+						"$subheader": "1-378-769-2529",
+						"$description": "vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo.",
+						"$date": "2025-02-14",
+						"$flagged": false,
+						"$imagecirc": "avatars/13.jpg"
+					},
+					{
+						"name": "Charde Sexton",
+						"registered": "2025-10-22",
+						"active": true,
+						"company": "Et Pede Corp.",
+						"phone": "1-165-121-5772",
+						"email": "ligula.donec@icloud.com",
+						"address": "916-1692 Neque Av.",
+						"postalZip": "00475",
+						"region": "Viken",
+						"country": "Norway",
+						"text": "elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum.",
+						"currency": "$61.50",
+						"alphanum": "JRZ04LYI6GT",
+						"url": "http://netflix.com",
+						"latlng": "50.096820224, 110.6795305984",
+						"text1": "lobortis, nisi nibh lacinia orci, consectetuer euismod est arcu ac orci. Ut semper pretium neque. Morbi quis",
+						"text2": "mauris a nunc. In at pede. Cras vulputate",
+						"$header": "Charde Sexton",
+						"$subheader": "1-165-121-5772",
+						"$description": "elit, dictum eu, eleifend nec, malesuada ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum.",
+						"$date": "2025-10-22",
+						"$flagged": true,
+						"$imagecirc": ""
+					},
+					{
+						"name": "Grady Mccullough",
+						"registered": "2024-09-15",
+						"active": false,
+						"company": "Leo In Lobortis PC",
+						"phone": "1-323-192-3570",
+						"email": "vestibulum.ante.ipsum@hotmail.edu",
+						"address": "961-7311 Interdum. St.",
+						"postalZip": "68-86",
+						"region": "Rostov Oblast",
+						"country": "Peru",
+						"text": "et malesuada fames ac turpis egestas. Aliquam fringilla cursus purus. Nullam scelerisque neque sed sem egestas blandit. Nam nulla magna,",
+						"currency": "$98.14",
+						"alphanum": "SEI56IUM9VP",
+						"url": "https://netflix.com",
+						"latlng": "-26.96021504, 14.4399466496",
+						"text1": "elementum sem, vitae aliquam eros turpis non enim. Mauris quis turpis vitae purus gravida sagittis. Duis gravida.",
+						"text2": "augue scelerisque mollis. Phasellus libero mauris, aliquam eu, accumsan",
+						"$header": "Grady Mccullough",
+						"$subheader": "1-323-192-3570",
+						"$description": "et malesuada fames ac turpis egestas. Aliquam fringilla cursus purus. Nullam scelerisque neque sed sem egestas blandit. Nam nulla magna,",
+						"$date": "2024-09-15",
+						"$flagged": false,
+						"$imagecirc": ""
+					},
+					{
+						"name": "Francis Richmond",
+						"registered": "2025-07-05",
+						"active": false,
+						"company": "Tempor Incorporated",
+						"phone": "1-636-571-4344",
+						"email": "lorem.sit@hotmail.couk",
+						"address": "Ap #322-9289 Mauris Street",
+						"postalZip": "621587",
+						"region": "Goi\u00c3\u00a1s",
+						"country": "Colombia",
+						"text": "Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in,",
+						"currency": "$45.09",
+						"alphanum": "PXW78XEC4ST",
+						"url": "http://facebook.com",
+						"latlng": "19.9298055168, -127.1352946688",
+						"text1": "non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer",
+						"text2": "pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien,",
+						"$header": "Francis Richmond",
+						"$subheader": "1-636-571-4344",
+						"$description": "Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in,",
+						"$date": "2025-07-05",
+						"$flagged": false,
+						"$imagecirc": ""
+					},
+					{
+						"name": "Fritz Cantrell",
+						"registered": "2026-02-22",
+						"active": true,
+						"company": "Morbi Metus Corporation",
+						"phone": "(314) 163-6448",
+						"email": "faucibus.lectus.a@aol.net",
+						"address": "P.O. Box 485, 3480 Donec St.",
+						"postalZip": "T9R 2L8",
+						"region": "Tr\u00c3  Vinh",
+						"country": "Philippines",
+						"text": "Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus. Donec egestas. Aliquam",
+						"currency": "$65.14",
+						"alphanum": "XYR64VMJ4ZP",
+						"url": "https://cnn.com",
+						"latlng": "-39.4241666048, -79.0078007296",
+						"text1": "nibh enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis natoque penatibus et magnis dis",
+						"text2": "ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et",
+						"$header": "Fritz Cantrell",
+						"$subheader": "(314) 163-6448",
+						"$description": "Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus. Donec egestas. Aliquam",
+						"$date": "2026-02-22",
+						"$flagged": true,
+						"$imagecirc": ""
+					},
+					{
+						"name": "Arden Brooks",
+						"registered": "2025-09-27",
+						"active": false,
+						"company": "Cum Sociis Natoque Incorporated",
+						"phone": "1-622-165-6082",
+						"email": "ante.bibendum@protonmail.ca",
+						"address": "P.O. Box 438, 664 Ante Rd.",
+						"postalZip": "50613",
+						"region": "Lim\u00c3\u00b3n",
+						"country": "Colombia",
+						"text": "tellus. Phasellus elit pede, malesuada vel, venenatis vel, faucibus id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus",
+						"currency": "$44.42",
+						"alphanum": "OUY16LZE3LW",
+						"url": "https://twitter.com",
+						"latlng": "69.104523264, 14.2243709952",
+						"text1": "iaculis quis, pede. Praesent eu dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus",
+						"text2": "magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut",
+						"$header": "Arden Brooks",
+						"$subheader": "1-622-165-6082",
+						"$description": "tellus. Phasellus elit pede, malesuada vel, venenatis vel, faucibus id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus",
+						"$date": "2025-09-27",
+						"$flagged": false,
+						"$imagecirc": ""
+					},
+					{
+						"name": "Tad Herman",
+						"registered": "2025-09-05",
+						"active": true,
+						"company": "Neque Corporation",
+						"phone": "1-472-308-5281",
+						"email": "eget.metus@aol.couk",
+						"address": "668-1430 Massa. Road",
+						"postalZip": "5167",
+						"region": "South Island",
+						"country": "Spain",
+						"text": "aliquam eu, accumsan sed, facilisis vitae, orci. Phasellus dapibus quam quis diam. Pellentesque habitant morbi tristique senectus et netus et",
+						"currency": "$19.79",
+						"alphanum": "XKL06YPC3OM",
+						"url": "https://zoom.us",
+						"latlng": "-13.6448137216, -94.1531966464",
+						"text1": "ac orci. Ut semper pretium neque. Morbi quis urna. Nunc quis arcu vel quam dignissim pharetra. Nam",
+						"text2": "urna, nec luctus felis purus ac tellus. Suspendisse sed dolor.",
+						"$header": "Tad Herman",
+						"$subheader": "1-472-308-5281",
+						"$description": "aliquam eu, accumsan sed, facilisis vitae, orci. Phasellus dapibus quam quis diam. Pellentesque habitant morbi tristique senectus et netus et",
+						"$date": "2025-09-05",
+						"$flagged": true,
+						"$imagecirc": ""
+					},
+					{
+						"name": "Dalton Kemp Rams",
+						"registered": "2025-05-25",
+						"active": true,
+						"company": "Ac Arcu Nunc Ltd",
+						"phone": "1-815-717-3585",
+						"email": "non.feugiat.nec@protonmail.edu",
+						"address": "P.O. Box 388, 4707 Sapien. Street",
+						"postalZip": "41104",
+						"region": "Gaziantep",
+						"country": "Ireland",
+						"text": "eget, dictum placerat, augue. Sed molestie. Sed id risus quis diam luctus lobortis. Class aptent taciti sociosqu ad litora torquent",
+						"currency": "$72.55",
+						"alphanum": "YDC84IKJ5HE",
+						"url": "http://nytimes.com",
+						"latlng": "-53.8123685888, -12.3619889152",
+						"text1": "tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque.",
+						"text2": "dolor. Fusce feugiat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+						"$header": "Dalton Kemp Rams",
+						"$subheader": "1-815-717-3585",
+						"$description": "eget, dictum placerat, augue. Sed molestie. Sed id risus quis diam luctus lobortis. Class aptent taciti sociosqu ad litora torquent",
+						"$date": "2025-05-25",
+						"$flagged": true,
+						"$imagecirc": ""
+					},
+					{
+						"name": "Noelle Workman",
+						"registered": "2024-07-02",
+						"active": true,
+						"company": "Eu Nibh Ltd",
+						"phone": "1-760-548-5546",
+						"email": "morbi.quis@aol.ca",
+						"address": "185-797 Nullam Ave",
+						"postalZip": "645089",
+						"region": "Lanarkshire",
+						"country": "Belgium",
+						"text": "tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In",
+						"currency": "$81.74",
+						"alphanum": "ISC50PTU2JB",
+						"url": "http://pinterest.com",
+						"latlng": "-27.9171096576, 103.9023556608",
+						"text1": "cursus, diam at pretium aliquet, metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus elit",
+						"text2": "enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie",
+						"$header": "Noelle Workman",
+						"$subheader": "1-760-548-5546",
+						"$description": "tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In",
+						"$date": "2024-07-02",
+						"$flagged": true,
+						"$imagecirc": ""
+					},
+					{
+						"name": "Brett Frank",
+						"registered": "2025-08-14",
+						"active": false,
+						"company": "In Scelerisque Corporation",
+						"phone": "(653) 494-8366",
+						"email": "faucibus.orci@protonmail.net",
+						"address": "P.O. Box 904, 5844 Adipiscing St.",
+						"postalZip": "31555",
+						"region": "Kocaeli",
+						"country": "Nigeria",
+						"text": "Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc interdum feugiat. Sed nec metus facilisis lorem tristique",
+						"currency": "$42.44",
+						"alphanum": "PVN42LON8CK",
+						"url": "http://reddit.com",
+						"latlng": "66.3192117248, 161.232950272",
+						"text1": "fringilla purus mauris a nunc. In at pede. Cras vulputate velit eu sem. Pellentesque ut ipsum ac",
+						"text2": "accumsan sed, facilisis vitae, orci. Phasellus dapibus quam quis",
+						"$header": "Brett Frank",
+						"$subheader": "(653) 494-8366",
+						"$description": "Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc interdum feugiat. Sed nec metus facilisis lorem tristique",
+						"$date": "2025-08-14",
+						"$flagged": false,
+						"$imagecirc": ""
+					},
+					{
+						"name": "Aaron Kirk",
+						"registered": "2025-03-28",
+						"active": false,
+						"company": "Gravida Corp.",
+						"phone": "1-896-882-6136",
+						"email": "aliquam.ultrices@outlook.com",
+						"address": "979-7738 Mattis Avenue",
+						"postalZip": "38107",
+						"region": "J\u00c3\u00b6nk\u00c3\u00b6pings l\u00c3\u00a4n",
+						"country": "Indonesia",
+						"text": "Sed eu eros. Nam consequat dolor vitae dolor. Donec fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae",
+						"currency": "$94.37",
+						"alphanum": "BYW02CXT1SH",
+						"url": "http://walmart.com",
+						"latlng": "56.0534920192, 125.0969469952",
+						"text1": "ante. Nunc mauris sapien, cursus in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu enim. Etiam",
+						"text2": "metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus",
+						"$header": "Aaron Kirk",
+						"$subheader": "1-896-882-6136",
+						"$description": "Sed eu eros. Nam consequat dolor vitae dolor. Donec fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae",
+						"$date": "2025-03-28",
+						"$flagged": false,
+						"$imagecirc": ""
+					},
+					{
+						"name": "Chelsea Harmon",
+						"registered": "2025-08-07",
+						"active": false,
+						"company": "Integer Sem Corp.",
+						"phone": "1-272-372-9110",
+						"email": "ut.nisi.a@aol.edu",
+						"address": "722-5217 Cursus Street",
+						"postalZip": "XB3 5BE",
+						"region": "Saarland",
+						"country": "Netherlands",
+						"text": "eu, euismod ac, fermentum vel, mauris. Integer sem elit, pharetra ut, pharetra sed, hendrerit a, arcu. Sed et libero. Proin",
+						"currency": "$53.02",
+						"alphanum": "PLQ53CQG1LF",
+						"url": "https://youtube.com",
+						"latlng": "86.8722148352, 149.1657669632",
+						"text1": "eu erat semper rutrum. Fusce dolor quam, elementum at, egestas a, scelerisque sed, sapien. Nunc pulvinar arcu",
+						"text2": "fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem magna",
+						"$header": "Chelsea Harmon",
+						"$subheader": "1-272-372-9110",
+						"$description": "eu, euismod ac, fermentum vel, mauris. Integer sem elit, pharetra ut, pharetra sed, hendrerit a, arcu. Sed et libero. Proin",
+						"$date": "2025-08-07",
+						"$flagged": false,
+						"$imagecirc": ""
+					}
+					/**/
+				]
+			}
 		</script>
 		<title>Starfid</title>
 		<link rel="icon" href="data:,">
@@ -705,8 +734,7 @@
 			#searchForm {display:none;height:4vh;animation:showSearch .2s forwards;background-color:var(--bCol);margin:.5vh 0vh 2vh 0vh;padding:1vh;border-radius:1vh}
 			#searchForm input {display:none;width:95%;margin:auto 1vh;border:none;outline:0;background-color:var(--bCol); font-size: var(--fnBg);color:var(--dt)}
 
-			#magnify {margin-right:4vh;}
-			#compose {margin-right:0;}
+			#compose {margin-left:4vh;}
 
 			#rows label {border-top:solid 1px var(--bCol);}
 			#rows input:checked + label {color:white;border-radius:1vh;animation:listSel 0.7s forwards;}
@@ -787,6 +815,8 @@
 			.slider.round {border-radius: 24px;}
 			.slider {background-color: #CECCC7;position: absolute;cursor: pointer;top: 0;left: 0;right: 0;bottom: 0;-webkit-transition: .4s;transition: .4s;}
 			.slider::before {position: absolute;content: "";height: 16px;width: 16px;left: 4px;bottom: 4px;background-color: white!important;transition: .4s;}
+
+			#noData {text-align:center;margin-top:40vh}
 
 			@keyframes listSel {from {background-color:transparent;}to {background-color:var(--hg);}}
 			@keyframes menuSel {from {background-color:transparent;}to {background-color:var(--bCol);}}
@@ -995,36 +1025,20 @@
 			<header class="task">
 				<div class="valign">
 					<svg viewbox="0 0 100 100" class="button" id='backButton'>
-						<polygon points="50,10 10,50" />
-						<polygon points="10,50 50,90" />
+						<polygon points="50,10 10,50" /><polygon points="10,50 50,90" />
 					</svg>
 					<span id="backLabel">Back</span>
 					<svg viewbox="0 0 100 100" class="button delete" id="delButton">
-						<polygon points="33,10 68,10 68,20 33,20" />
-						<polygon points="20,20 80,20 75,90 25,90" />
-						<polygon points="10,20 90,20" />
-						<polygon points="33,30 39,80" />
-						<polygon points="50,30 50,80" />
-						<polygon points="67,30 62,80" />
+						<polygon points="33,10 68,10 68,20 33,20" /><polygon points="20,20 80,20 75,90 25,90" /><polygon points="10,20 90,20" /><polygon points="33,30 39,80" /><polygon points="50,30 50,80" /><polygon points="67,30 62,80" />
 					</svg>
 					<svg viewbox="0 0 100 100" class="button save" id="saveButton">
-						<polygon points="10,90 90,90 90,25 75,10 10,10" />
-						<polygon points="30,10 30,35 70,35 70,10" />
-						<polygon points="20,90 20,50 80,50 80,90" />
-						<polygon points="59,17 62,17 62,28 59,28" />
+						<polygon points="10,90 90,90 90,25 75,10 10,10" /><polygon points="30,10 30,35 70,35 70,10" /><polygon points="20,90 20,50 80,50 80,90" /><polygon points="59,17 62,17 62,28 59,28" />
 					</svg>
 				</div>
 
 				<dl class="alRight">
-					<svg viewbox="0 0 100 100" class="button valign" onclick="location.reload()">
-						<polygon points="10,10 10,90" />
-						<polygon points="10,90 60,90" />
-						<polygon points="60,90 60,70" />
-						<polygon points="60,30 60,10" />
-						<polygon points="60,10 10,10" />
-						<polygon points="30,50 97,50" />
-						<polygon points="83,35 97,50" />
-						<polygon points="83,65 97,50" />
+					<svg viewbox="0 0 100 100" class="button valign" id="signOut" onclick="location.reload()">
+						<polygon points="10,10 10,90" /><polygon points="10,90 60,90" /><polygon points="60,90 60,70" /><polygon points="60,30 60,10" /><polygon points="60,10 10,10" /><polygon points="30,50 97,50" /><polygon points="83,35 97,50" /><polygon points="83,65 97,50" />
 					</svg>
 				</dl>
 				
@@ -1040,7 +1054,7 @@
 </html>
 <script type="text/javascript">
 	let str = "";
-	data.forEach((row,index) => {
+	list.data.forEach((row,index) => {
 		let checked = index<1?"tabindex='1' checked autofocus":"";
 		let header = row['$header'];
 		let flagged = row['$flagged']?"&#9873;":"&#9872;";
@@ -1099,6 +1113,15 @@
 	});
 	document.querySelector('#dualSection aside fieldset').innerHTML += str;
 
+	if(list.data.length<1){
+		["magnify","delButton","saveButton","preview"].forEach(butt => {
+			if(document.querySelector('#'+butt)){
+				document.querySelector('#'+butt).style.display = "none";
+			}
+		});
+		document.querySelector('#rows div').innerHTML = "<div id=\"noData\">No data available</div>";
+	}
+
 	let 	preview	= document.querySelector('#preview'),	selected,	
 	width 	= parseInt(window.innerWidth),
 	isPhone	= width < 975?true:false,
@@ -1110,9 +1133,9 @@
 				txt.value = '';
 				(isPhone) && txt.setAttribute('placeholder','');
 			}
-			txt.parentNode.dataset.replicatedValue = txt.value;
+			txt.parentNode.dataset.clone = txt.value;
 			txt.addEventListener('input',()=>{
-				txt.parentNode.dataset.replicatedValue = txt.value;
+				txt.parentNode.dataset.clone = txt.value;
 			});
 			txt.addEventListener('blur',()=>{
 				window.scrollTo(0,0);
@@ -1121,7 +1144,7 @@
 				setTimeout(()=>{window.scrollTo(0,0);},70);
 			});
 		});
-	},
+	};
 	killPop = () => {
 		document.body.style.backgroundColor = bg;
 		document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
@@ -1129,6 +1152,7 @@
 			del.parentNode.removeChild(del);
 		});
 	};
+	
 	setPreview = (el) => {
 		let circ = el.getElementsByTagName('div')[0];
 		preview.innerHTML = circ.innerHTML;
@@ -1141,29 +1165,28 @@
 			window.scrollTo(0,0);
 			document.querySelector('#main').scrollTo(0,0);
 		},10);
-
 		
 		let id = el.dataset.id;
-		let row = data[id];
+		let row = list.data[id];
 		let str = "";
 		for (let key in row) {
 			if (row.hasOwnProperty(key) && key.substr(0,1)!="$") {
 				str += "<div>";
 					str += "<label for=\"f"+id+"\">"+key+"</label>";
 					
-					if(row[key] == true|| row[key] == false){
+					if(list.type[key]=="boolean"){
 						checked = row[key]?" checked":"";
 						str += "<label class=\"switch\">";
 						str += "<input class=\"toggle\" type=\"checkbox\" id=\"f"+id+"\" name=\""+key+"\""+checked+">";
 						str += "<span class=\"slider round\"></span>";
 						str += "</label>";
 					}
-					else if(/^\d{4}\-\d{2}\-\d{2}$/.test(row[key])){
+					else if(list.type[key]=="date"){
 						str += "<input type=\"date\" value=\""+row[key]+"\">";
 					}
 					else {
 						str += "<div class=\"wrap\">";
-						str += "<textarea row=\"1\" oninput=\"this.parentNode.dataset.replicatedValue = this.value\" autocorrect=\"off\" rows=\"1\" id=\"f"+id+"\" name=\""+key+"\">"+row[key]+"</textarea>";
+						str += "<textarea row=\"1\" oninput=\"this.parentNode.dataset.clone = this.value\" autocorrect=\"off\" rows=\"1\" id=\"f"+id+"\" name=\""+key+"\">"+row[key]+"</textarea>";
 						str += "</div>";
 					}
 					
@@ -1172,14 +1195,14 @@
 		}
 		document.querySelector('#entries').innerHTML = str;
 		expand('textarea');
-	},
+	};
 	navToggle = () => {
 		var checked = document.getElementById("navToggle").checked;
 		document.getElementById("rows").style.display = checked?"none":"block";
 		[...document.querySelectorAll("#compose,#magnify")].forEach(svg=>{
 			svg.style.visibility = checked?"hidden":"visible";
 		});
-	},
+	};
 	cancelSearch = () => {
 		var sf = document.getElementById("searchForm").style;
 		var si = document.querySelector("#searchForm input");
@@ -1264,7 +1287,6 @@
 			else {
 				showingSf();
 			}
-
 		}
 	});
 
@@ -1358,11 +1380,42 @@
 		
 		tmp += "<div class='entries'>";
 			tmp += "<h1>"+document.getElementsByTagName('h1')[0].innerHTML+"</h1>";
+			
 			tmp += "<label id='circ' for='img'>";
 			tmp += "<input type='file' name='img' id='img' style='display:none;' onchange='previewImage(event)'/>";
-			tmp += "<svg viewbox='0 0 100 100' id='camera'><polygon points='10,80 90,80 90,30 70,30 60,20 40,20 30,30 10,30' /><circle cx='50' cy='53' r='15' /><polygon points='70,40 71,40' /></svg></label>";
-			tmp += document.getElementById('entries').innerHTML;
+			tmp += "<svg viewbox='0 0 100 100' id='camera'><polygon points='10,80 90,80 90,30 70,30 60,20 40,20 30,30 10,30' /><circle cx='50' cy='53' r='15' /><polygon points='70,40 71,40' /></svg>";
+			tmp += "</label>";
+			
+			if(list.data.length<1){
+				Object.keys(list.type).forEach(li => {
+					if(li.substr(0,1)!="$"){
+						tmp += "<div>";
+						tmp += "<label for=\"f0\">"+li+"</label>";
+						
+						if(list.type[li]=="boolean"){
+							tmp += "<label class=\"switch\">";
+							tmp += "<input class=\"toggle\" type=\"checkbox\" id=\"f0\" name=\""+li+"\">";
+							tmp += "<span class=\"slider round\"></span>";
+							tmp += "</label>";
+						}
+						else if(list.type[li]=="date"){
+							tmp += "<input id=\"f0\" type=\"date\" value=\"xx\">";
+						}
+						else {
+							tmp += "<div class=\"wrap\">";
+							tmp += "<textarea row=\"1\" oninput=\"this.parentNode.dataset.clone = this.value\" autocorrect=\"off\" rows=\"1\" id=\"f0\" name=\""+li+"\"></textarea>";
+							tmp += "</div>";
+						}
+						
+						tmp += "</div>";
+					}
+				});
+			}
+			else {
+				tmp += document.getElementById('entries').innerHTML;
+			}
 		tmp += "</div>";
+
 		pop.innerHTML = tmp;
 		pop.id = "pop";
 		document.body.appendChild(pop);
@@ -1402,7 +1455,6 @@
 					document.getElementById('camera').style.display = "none";
 				}
 			};
-
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
