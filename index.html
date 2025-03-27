@@ -708,7 +708,7 @@
 			#microphone {visibility:hidden}
 			aside, #leftPart{border-right:solid 1px var(--bCol);}
 			aside fieldset > div:last-of-type > label:last-of-type {margin-bottom:20vh}
-			#entries > div:last-of-type {margin-bottom:12vh;}
+			#entries > div:last-of-type, #pop > .entries > div:last-of-type {margin-bottom:12vh;}
 
 			.valign, .circ {display: flex; align-items: center;text-align:center}
 			.alRight, label dl dd {justify-content: right;text-align:right;}
@@ -784,7 +784,7 @@
 
 			.wrap {display: grid;}
 			.wrap > textarea {border: none;margin:0;padding:0;background-color:transparent;color:var(--dt);resize: none;overflow: hidden;}
-			.wrap::after {content: attr(data-replicated-value) " ";white-space: pre-wrap;visibility: hidden;}
+			.wrap::after {content: attr(data-clone) " ";white-space: pre-wrap;visibility: hidden;}
 			.wrap > textarea, .wrap::after {box-sizing: content-box;font:var(--fnBg);grid-area: 1 / 1 / 2 / 2;}
 
 			#pop > div:first-of-type {padding-bottom:2vh;display:flex;justify-content:space-between;color:var(--hg);font-size:var(--fnBg);}
@@ -792,11 +792,10 @@
 			#pop .entries {height:70vh;overflow-y:scroll;scrollbar-width: none}
 			#pop h1 {padding:0 0 2vh 0;margin:0}
 			#circ {
-				background-color:rgb(165,169,175);display:flex;background-size: cover!important;background-position:center;background-repeat: no-repeat;
+				background-color:var(--dd);display:flex;background-size: cover!important;background-position:center;background-repeat: no-repeat;
 				cursor:pointer;text-align:center;width:6vw;height:6vw;border-radius:6vw;padding:0;margin:0 auto;
-				background: linear-gradient(180deg, rgba(165,169,175,1) 50%, rgba(130,132,135,1) 100%);justify-content: center;
 			}
-			#circ svg {width:4vh;display:flex;margin:auto;align-items:center;text-align:center;}
+			#circ svg {stroke:var(--dt);width:4vh;display:flex;margin:auto;align-items:center;text-align:center;}
 			#pop {
 				animation:slideUp .17s forwards ease-out;
 				position:absolute;z-index:3;
@@ -897,9 +896,9 @@
 				.switch {margin-top:0;}
 				input[type='date']{width:150px;padding:0;margin:0;}
 				
-				aside fieldset > div:last-of-type > label:last-of-type {margin-bottom:60vh}
-				#entries > div:last-of-type {margin-bottom:54vh;}
-				#rows label:last-child {margin-bottom:60vh}
+				aside fieldset > div:last-of-type > label:last-of-type {margin-bottom:70vh}
+				#entries > div:last-of-type, #pop > .entries > div:last-of-type {margin-bottom:64vh;}
+				#rows label:last-child {margin-bottom:70vh}
 
 				@keyframes navStart {
 					from {padding-top:0;opacity:0.2}
