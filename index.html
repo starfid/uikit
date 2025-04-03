@@ -8,8 +8,8 @@
 				"Transactions": ["Checkout", "Checkin", "Monitoring", "Failed"],
 				"Management": ["Roles", "Staff"]
 			};
-			const xorders = {
-				"access": "Airbus A330",
+			const _orders = {
+				"access": "",
 				"items": [
 					{
 						"$id": "1",
@@ -733,9 +733,9 @@
 		<meta content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no,user-scalable=0,viewport-fit=cover" name="viewport">
 		<style>
 			:root {
-				--bg	:#FAFAF9;	--bgMob	:#F0F0F6;	--bCol	:#EEEDEB;
-				--borL	:#E2E3E6;	--borT	:#D5D6D9;	--dt	:#181617;	--fnH1	:3.45vh;
-				--dd	:#858584;	--hg	:#0063E2;	--fnBg	:2.3vh;		--fnSm	:2vh;
+				--bg	:#FFFFFF;	--bgMob	:#F0F0F6;	--bCol	:#EEEDEB;	--borL	:#E2E3E6;
+				--borT	:#D5D6D9;	--dt	:#181617;	--fnH1	:3.45vh;	--dd	:#858584;
+				--hg	:#0063E2;	--fnBg	:2.3vh;		--fnSm	:2vh;
 			}
 			::-webkit-scrollbar {display: none;}
 			html {-webkit-tap-highlight-color: transparent;}
@@ -869,10 +869,10 @@
 
 			.switch {margin-top:4px;position: relative;display:inline-block;width:50px;height:24px;}
 			.switch input {border: none!important;outline:0}
-			.switch input:checked + .slider::before {transform: translateX(26px)!important;background-color: #0069D9;}
+			.switch input:checked + .slider::before {transform: translateX(26px)!important;background-color:var(--hg);}
 			.slider.round::before {border-radius: 50%;}
-			.switch input:focus + .slider {box-shadow: 0 0 1px #0069D9;}
-			.switch input:checked + .slider {background-color: #0069D9;}
+			.switch input:focus + .slider {box-shadow: 0 0 1px var(--hg);}
+			.switch input:checked + .slider {background-color: var(--hg);}
 			.slider.round {border-radius: 24px;}
 			.slider {background-color: #CECCC7;position: absolute;cursor: pointer;top: 0;left: 0;right: 0;bottom: 0;-webkit-transition: .4s;transition: .4s;}
 			.slider::before {position: absolute;content: "";height: 16px;width: 16px;left: 4px;bottom: 4px;background-color: white!important;transition: .4s;}
@@ -914,7 +914,7 @@
 				#dualSection {grid-template-columns: 17vw 32.8vw;}
 				.button {font-size:4vh;}
 			}
-			@media (max-width:1180px) {
+			@media (max-width: 1180px) {
 				:root {--bg:#FFFFFF; --bCol:#F8F7F6;}
 				input[type="date"] {background: transparent;/*margin-left:-1vh*/;color:var(--dt);text-align:left;}
 				input::-webkit-date-and-time-value {text-align: left;padding-left:0!important;margin-left:0!important}
@@ -1192,6 +1192,7 @@
 			}
 		});
 		document.querySelector('#trolley h2').innerHTML = document.querySelector("#searchForm input").value = orders.access;
+		if(orders.access.length<1){document.querySelector('#trolley h2').innerHTML = "&nbsp;";}
 		if(document.getElementById("searchForm").style.display!="flex"){
 			showSearch();
 		}
