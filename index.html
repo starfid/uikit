@@ -4,7 +4,7 @@
 		<script>
 			const nav = {
 				"Products": ["Catalogs", "Items", "Types"],
-				"Users": ["Divisions", "Units", "Members"],
+				"Users": ["Members","Divisions", "Units"],
 				"Transactions": ["Checkout", "Checkin", "Monitoring", "Failed"],
 				"Management": ["Roles", "Staff"]
 			};
@@ -806,7 +806,11 @@
 				background-color: var(--dd)!important;
 			}
 			label dl {display:grid;grid-template-columns: auto auto;}
-			#rows label, #trolley label, .menus div label/*, #preview*/ {cursor:pointer;display:flex;padding:1.5vh 2vh;}
+
+			#rows label, #trolley label {display:flex}
+			#rows label, #trolley label, .menus div label {cursor:pointer;padding:1.5vh 2vh;}
+			.menus div label {display:block;}
+
 			.circ + div, label div:nth-child(2) {width:100%}
 
 			#rows input:checked + label,
@@ -921,13 +925,18 @@
 				#leftPart .task {margin-left:0;border-left:0}
 				.task svg {stroke:var(--hg);}
 				.task h1 {padding: 0 0 0 4vh;color:var(--hg)}
-				#compose {/*margin-right:4vh;*/}
 				#leftPart .task label label {display:block}
 				#leftPart .task label label svg {vertical-align: middle;}
 
 				aside {border-right:0}
-				.menus {font-size:var(--fnBg);padding: .7vh 4vh 4vh 4vh;}
-				.menus label svg{height:var(--fnBg);padding-top:0.5px}
+				.group {color:var(--dd);font-weight:bolder}
+				.menus {font-size:var(--fnBg);padding: .7vh 4vh 4vh 4vh;margin-bottom:70vh}
+				.menus .group {animation:navStart .3s forwards}
+				.menus .group:not(:first-of-type) {margin-top:2vh;}
+				.menus div {display:grid;grid-template-columns:1fr 1fr;gap:2vh}
+				.menus div label {font-weight:bolderx;border:solid 1px var(--borL);border-radius:1vh;padding-top:6.1vh;background-color:var(--bCol);color:var(--dd)!important}
+				.menus input:checked + label {background-color:var(--hg);color:white!important}
+				
 				.button {margin-right:0;font-size:5vh;}
 				#rightPart .button {margin-right:4.5vh;}
 				.blackFlag {fill:#0063E2;stroke:var(--hg)}
@@ -949,14 +958,13 @@
 				
 				label {padding:0;}
 				input[type='checkbox'],input[type='radio'] {display:none}
-				.menus .group {animation:navStart .3s forwards}
-				/*.entries div {grid-template-columns: 22% auto;}*/
+				
 				.entries > div label {text-align:left}
 				#circ {width:9vh;height:9vh;border-radius:9vh;}
 				.switch {margin-top:0;}
 				input[type='date']{width:150px;padding:0;margin:0;}
 				
-				aside fieldset > div:last-of-type > label:last-of-type {margin-bottom:70vh}
+				aside fieldset > div:last-of-type > label:last-of-type {margin-bottom:0}
 				#entries > div:last-of-type, #pop > .entries > div:last-of-type {margin-bottom:64vh;}
 				#rows label:last-child {margin-bottom:70vh}
 				#trolley label:last-child {margin-bottom:63vh}
@@ -980,7 +988,7 @@
 					67% {zoom:0.9;padding:.5vh 3vh 0 3vh;margin:-1vh auto auto auto}
 					100% {zoom:0.9;padding:0vh 3vh 0 3vh;margin:-300vh auto auto auto}
 				}
-
+				@keyframes menuSel {from {background-color:transparent;}to {background-color:var(--hg);}}
 			}
 			@media (max-width:974px) {
 				aside,#rows,#detail,#pop,#trolley {width:100vw}
